@@ -24,43 +24,43 @@ a{text-decoration:none;color:inherit;}
 .hero{
   position:relative;
   overflow:hidden;
-  background:#ffffff;
   padding:28px 156px 88px;
 }
 
-.hero-bg{
+.floating-shapes{
   position:absolute;
-  inset:0;
-  z-index:0;
-  overflow:hidden;
+  top:0;
+  left:0;
+  width:100%;
+  pointer-events:none;
 }
 
 /* Decorative brand shapes echoing the elemento.svg pill */
 .brand-shape{
   position:absolute;
   border-radius:20px;
-  background:linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0.08));
+  background:rgba(255,255,255,0.3);
 }
 .shape-1{
   width:120px; height:46px;
-  top:14%; right:6%;
+  top:14vh; right:6%;
   transform:rotate(-18deg);
-  background:linear-gradient(135deg, var(--orange), #ff8a4c);
-  opacity:0.85;
+  background:var(--orange);
+  opacity:0.425;
   animation: shapeFloat1 14s ease-in-out infinite;
 }
 .shape-2{
   width:70px; height:28px;
-  top:38%; left:4%;
-  background:linear-gradient(135deg, var(--pink), #ff5c9a);
-  opacity:0.7;
+  top:38vh; left:4%;
+  background:var(--pink);
+  opacity:0.35;
   animation: shapeFloat2 17s ease-in-out infinite;
 }
 .shape-3{
   width:90px; height:34px;
-  bottom:22%; right:20%;
-  background:linear-gradient(135deg, var(--gold), #ffd166);
-  opacity:0.55;
+  top:62vh; right:20%;
+  background:var(--gold);
+  opacity:0.275;
   animation: shapeFloat3 20s ease-in-out infinite;
 }
 
@@ -617,29 +617,28 @@ a{text-decoration:none;color:inherit;}
 .product{
   position:relative;
   padding:40px 156px 56px;
-  background:#ffffff;
   overflow:hidden;
 }
 
-.product .shape-p1{
+.shape-p1{
   width:70px; height:26px;
-  top:10px; left:5%;
-  background:linear-gradient(135deg, var(--red), #f16565);
-  opacity:0.5;
+  top:104vh; left:5%;
+  background:var(--red);
+  opacity:0.25;
   animation: shapeFloat2 16s ease-in-out infinite;
 }
-.product .shape-p2{
+.shape-p2{
   width:56px; height:22px;
-  top:40%; right:2%;
-  background:linear-gradient(135deg, var(--purple), #a970f5);
-  opacity:0.45;
+  top:124vh; right:2%;
+  background:var(--purple);
+  opacity:0.225;
   animation: shapeFloat3 19s ease-in-out infinite;
 }
-.product .shape-p3{
+.shape-p3{
   width:64px; height:24px;
-  bottom:24px; left:14%;
-  background:linear-gradient(135deg, var(--gold), #ffd166);
-  opacity:0.4;
+  top:144vh; left:14%;
+  background:var(--gold);
+  opacity:0.2;
   animation: shapeFloat1 15s ease-in-out infinite;
 }
 
@@ -672,7 +671,7 @@ a{text-decoration:none;color:inherit;}
   content:"";
   position:absolute;
   inset:-30px;
-  background:rgba(26,86,219,0.18);
+  background:rgba(26,86,219,0.05);
   filter:blur(30px);
   z-index:0;
 }
