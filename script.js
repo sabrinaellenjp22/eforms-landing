@@ -21,3 +21,20 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 })();
+
+(function () {
+  var tabs = document.querySelectorAll(".feature-row[data-tab]");
+  var panels = document.querySelectorAll(".product-styles[data-panel]");
+  if (!tabs.length || !panels.length) return;
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      var target = tab.getAttribute("data-tab");
+
+      tabs.forEach(function (t) { t.classList.toggle("is-active", t === tab); });
+      panels.forEach(function (p) {
+        p.classList.toggle("is-active", p.getAttribute("data-panel") === target);
+      });
+    });
+  });
+})();
