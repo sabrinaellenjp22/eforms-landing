@@ -151,6 +151,22 @@ a{text-decoration:none;color:inherit;}
 .btn-pink{ background:var(--pink); color:#fff; }
 .btn-white{ background:#fff; color:var(--dark); }
 .btn-blue{ background:var(--blue); color:#fff; }
+.btn-outline-blue{
+  background:transparent;
+  color:var(--blue);
+  border:1.6px solid var(--blue);
+}
+.btn-outline-blue:hover{ background:var(--blue); color:#fff; }
+
+/* Header for interior pages (no hero/parallax) */
+.subpage-header{
+  position:relative;
+  z-index:50;
+  padding:28px 156px;
+  background:#fff;
+  border-bottom:1px solid #EEF1F6;
+}
+.nav-pill a.is-current{ color:var(--blue); font-weight:700; }
 
 /* Hero content */
 .hero-content{
@@ -1812,6 +1828,13 @@ a{text-decoration:none;color:inherit;}
 }
 .problem-bar[data-color="green"]{ background:var(--green); }
 .problem-bar[data-color="orange"]{ background:var(--orange); }
+.problem-card-title{
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:-0.3px;
+  color:var(--slate);
+  text-align:center;
+}
 .problem-desc{
   font-size:14px;
   line-height:1.6;
@@ -2022,52 +2045,204 @@ a{text-decoration:none;color:inherit;}
 .customize-preview .product-phone-frame{ transition:none; }
 
 /* ============================================================
-   Section 6 — Prova Social
+   Principais Funcionalidades — Bento Grid
+   ============================================================ */
+.sec-features{
+  position:relative;
+  overflow:hidden;
+  padding:76px 156px;
+  background:#F5F7FB;
+  text-align:center;
+}
+/* 4 columns × 2 rows. The two horizontal previews (Builder, Offline) take
+   double width, so each row fills exactly: 2+1+1 and 1+2+1 — in DOM order. */
+.features-bento{
+  margin-top:40px;
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:18px;
+  text-align:left;
+}
+.feature-tile-lg{ grid-column:span 2; }
+.feature-tile-wide{ grid-column:span 2; }
+.feature-tile{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:16px;
+  border:1px solid transparent;
+  border-radius:22px;
+  padding:26px 24px;
+  box-shadow:0 14px 34px rgba(15,23,42,0.10);
+  transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+/* Wide tiles lay the icon beside the copy so the extra width carries content */
+.feature-tile-lg, .feature-tile-wide{
+  flex-direction:row;
+  align-items:center;
+  gap:22px;
+}
+.feature-tile:hover{
+  transform:translateY(-4px);
+  border-color:rgba(255,255,255,0.4);
+  box-shadow:0 22px 46px rgba(15,23,42,0.18);
+}
+.ft-copy{ display:flex; flex-direction:column; gap:6px; }
+.feature-tile h3{
+  font-size:16px;
+  font-weight:800;
+  letter-spacing:-0.3px;
+  color:#fff;
+}
+.feature-tile p{
+  font-size:13px;
+  line-height:1.5;
+  color:rgba(255,255,255,0.88);
+}
+/* Circle badge — a lighter tint of the card's own colour, white glyph */
+.ft-icon{
+  width:52px; height:52px;
+  border-radius:50%;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  background:rgba(255,255,255,0.18);
+  border:1px solid rgba(255,255,255,0.22);
+}
+.ft-icon svg{ width:25px; height:25px; }
+
+/* Solid brand-colour cards with white copy on top.
+   Gold is darkened from #B78600 to #8A6500 — the brand gold only reaches 3.2:1
+   against white text, which fails WCAG AA; this shade hits ~5.3:1. */
+.feature-tile[data-accent="purple"]{ background:var(--purple); }
+.feature-tile[data-accent="gold"]{ background:#8A6500; }
+.feature-tile[data-accent="pink"]{ background:var(--pink); }
+.feature-tile[data-accent="green"]{ background:var(--green); }
+.feature-tile[data-accent="blue"]{ background:var(--blue); }
+.feature-tile[data-accent="orange"]{ background:var(--orange); }
+.shape-fe1{ width:88px; height:32px; top:7%; right:5%; transform:rotate(-12deg); background:var(--blue); opacity:0.26; animation: shapeFloat1 16s ease-in-out infinite; }
+.shape-fe2{ width:64px; height:24px; bottom:9%; left:4%; background:var(--pink); opacity:0.28; animation: shapeFloat2 19s ease-in-out infinite; }
+
+/* ============================================================
+   Banner comercial — slot reservado
+   ============================================================ */
+.sec-banner{ padding:64px 156px; background:#fff; }
+.banner-slot{
+  min-height:200px;
+  border-radius:24px;
+  background:linear-gradient(135deg, #F5F7FB 0%, #EEF3FE 100%);
+  border:1px solid #E5EAF3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.banner-placeholder{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  color:#9CA3AF;
+}
+.banner-placeholder-icon{
+  width:44px; height:44px;
+  border-radius:14px;
+  background:#fff;
+  border:1px solid #E5EAF3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#B0B6C2;
+}
+.banner-placeholder-icon svg{ width:22px; height:22px; }
+.banner-placeholder-text{
+  font-size:12.5px;
+  font-weight:600;
+  letter-spacing:0.3px;
+}
+.banner-slot > img,
+.banner-slot > a,
+.banner-slot > picture{ width:100%; height:100%; display:block; object-fit:cover; }
+
+/* ============================================================
+   Section 6 — Confiabilidade Comprovada
    ============================================================ */
 .sec-social{
   padding:100px 156px;
   background:#fff;
-  text-align:center;
 }
-.social-bento{
-  margin-top:56px;
+.social-shell{
   display:grid;
-  grid-template-columns:1.3fr 1fr;
-  grid-template-rows:1fr 1fr;
-  gap:20px;
-  text-align:left;
+  grid-template-columns:1fr 1fr;
+  gap:56px;
+  align-items:center;
+}
+.social-visual{
+  position:relative;
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 25px 60px rgba(15,23,42,0.14);
+}
+.social-visual img{ width:100%; height:440px; object-fit:cover; display:block; }
+.social-visual-badge{
+  position:absolute;
+  left:18px; bottom:18px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(255,255,255,0.94);
+  backdrop-filter:blur(6px);
+  border-radius:16px;
+  padding:10px 16px;
+  font-size:12.5px;
+  font-weight:600;
+  color:var(--slate);
+  box-shadow:0 10px 24px rgba(15,23,42,0.16);
+}
+.social-visual-dot{
+  width:8px; height:8px;
+  border-radius:50%;
+  background:var(--green);
+  flex-shrink:0;
+  animation: pulseRing 2.2s ease-out infinite;
+}
+.social-stats-list{
+  margin-top:32px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
 }
 .social-stat{
   position:relative;
   display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:8px;
+  align-items:center;
+  gap:18px;
   border:1px solid transparent;
-  border-radius:24px;
-  padding:32px 30px;
+  border-radius:20px;
+  padding:22px 24px;
   transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
 }
-.social-stat-hero{ grid-column:1; grid-row:1 / 3; gap:12px; }
-.social-stat:nth-child(2){ grid-column:2; grid-row:1; }
-.social-stat:nth-child(3){ grid-column:2; grid-row:2; }
 .social-stat[data-color="blue"]{ background:#EBF1FE; }
 .social-stat[data-color="pink"]{ background:#FDEEF5; }
 .social-stat[data-color="green"]{ background:#E9F7F0; }
 .social-stat:hover{
-  transform:translateY(-4px);
+  transform:translateY(-3px);
   box-shadow:0 18px 34px rgba(15,23,42,0.08);
 }
 .social-stat[data-color="blue"]:hover{ border-color:var(--blue); }
 .social-stat[data-color="pink"]:hover{ border-color:var(--pink); }
 .social-stat[data-color="green"]:hover{ border-color:var(--green); }
+.social-stat-body{ display:flex; flex-direction:column; gap:2px; }
 .social-stat strong{
-  font-size:44px;
+  font-size:36px;
   font-weight:800;
   color:var(--slate);
   letter-spacing:-1px;
+  line-height:1.1;
+  font-variant-numeric:tabular-nums;
 }
-.social-stat-hero strong{ font-size:64px; }
 .social-stat span{
   font-size:13px;
   line-height:1.5;
@@ -2462,6 +2637,23 @@ a{text-decoration:none;color:inherit;}
   color:#5C6577;
 }
 
+/* Closing CTA on interior pages */
+.sec-subcta{ padding:0 156px 100px; }
+.subcta-card{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg, var(--blue), #12409e);
+  border-radius:28px;
+  padding:48px 56px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;
+  box-shadow:0 40px 80px rgba(26,86,219,0.25);
+}
+.subcta-copy{ position:relative; z-index:1; max-width:600px; }
+.subcta-btn{ position:relative; z-index:1; flex-shrink:0; }
+
 /* Anchor targets clear the fixed navbar */
 #conheca, #como-usar, #plano{ scroll-margin-top:96px; }
 
@@ -2508,7 +2700,8 @@ a{text-decoration:none;color:inherit;}
 
 /* Cap content width on ultrawide screens so lines don't over-stretch (scoped — hero/product untouched) */
 @media (min-width: 1560px){
-  .sec-problem, .sec-offline, .sec-customize, .sec-social, .sec-quotes, .sec-pricing, .sec-faq, .sec-footer{
+  .sec-problem, .sec-offline, .sec-customize, .sec-social, .sec-quotes, .sec-pricing, .sec-faq, .sec-footer,
+  .sec-features, .sec-banner, .sec-subcta, .subpage-header{
     padding-left:calc((100% - 1240px) / 2);
     padding-right:calc((100% - 1240px) / 2);
   }
@@ -2524,8 +2717,16 @@ a{text-decoration:none;color:inherit;}
 }
 
 @media (max-width: 1200px){
-  .sec-problem, .sec-offline, .sec-customize, .sec-social, .sec-quotes, .sec-pricing, .sec-faq{ padding-left:40px; padding-right:40px; }
+  .sec-problem, .sec-offline, .sec-customize, .sec-social, .sec-quotes, .sec-pricing, .sec-faq,
+  .sec-features, .sec-banner{ padding-left:40px; padding-right:40px; }
+  .sec-subcta{ padding-left:40px; padding-right:40px; }
+  .subpage-header{ padding-left:40px; padding-right:40px; }
   .sec-footer{ padding-left:40px; padding-right:40px; }
+  .features-bento{ grid-template-columns:repeat(2, 1fr); }
+  .feature-tile-lg, .feature-tile-wide{ grid-column:span 2; }
+  .social-shell{ grid-template-columns:1fr; gap:36px; }
+  .social-visual img{ height:300px; }
+  .subcta-card{ flex-direction:column; align-items:flex-start; }
   .quotes-grid{ grid-template-columns:1fr; }
   .pricing-card{ flex-direction:column; align-items:stretch; }
   .pricing-panel{ width:100%; }
@@ -2543,8 +2744,6 @@ a{text-decoration:none;color:inherit;}
   .customize-bento{ grid-template-columns:1fr; grid-template-rows:auto; }
   .customize-tile-image{ grid-column:1; grid-row:auto; min-height:320px; }
   .customize-tile-swatches, .customize-tile-phone{ grid-column:1; grid-row:auto; }
-  .social-bento{ grid-template-columns:1fr; grid-template-rows:auto; }
-  .social-stat-hero, .social-stat:nth-child(2), .social-stat:nth-child(3){ grid-column:1; grid-row:auto; }
   .faq-shell{ grid-template-columns:1fr; gap:32px; }
   .faq-aside{ position:static; }
   .faq-image img{ height:220px; }
@@ -2556,10 +2755,19 @@ a{text-decoration:none;color:inherit;}
 
 /* Mobile — scale down oversized type and tighten padding */
 @media (max-width: 720px){
-  .sec-problem, .sec-offline, .sec-customize, .sec-social, .sec-quotes, .sec-pricing, .sec-faq{
+  .sec-problem, .sec-offline, .sec-customize, .sec-social, .sec-quotes, .sec-pricing, .sec-faq,
+  .sec-features{
     padding-top:64px; padding-bottom:64px;
     padding-left:20px; padding-right:20px;
   }
+  .sec-banner{ padding:48px 20px; }
+  .sec-subcta{ padding:0 20px 64px; }
+  .subpage-header{ padding:20px; }
+  .subcta-card{ padding:32px 24px; }
+  .features-bento{ grid-template-columns:1fr; }
+  .feature-tile-lg, .feature-tile-wide{ grid-column:auto; flex-direction:row; }
+  .social-visual img{ height:220px; }
+  .social-stat strong{ font-size:30px; }
   .sec-footer{ padding:64px 20px 32px; }
   .sec-title{ font-size:32px; letter-spacing:-0.6px; }
   .sec-subtitle{ font-size:15px; }
@@ -2572,8 +2780,6 @@ a{text-decoration:none;color:inherit;}
   .pricing-card{ padding:36px 24px; }
   .pricing-value{ font-size:52px; }
   .pricing-includes{ grid-template-columns:1fr; }
-  .social-stat strong{ font-size:34px; }
-  .social-stat-hero strong{ font-size:44px; }
   .quote-card{ padding:26px 22px; }
   .faq-image img{ height:180px; }
 }
@@ -2604,11 +2810,11 @@ a{text-decoration:none;color:inherit;}
 .social-stat-icon{
   width:44px; height:44px;
   border-radius:50%;
+  flex-shrink:0;
   display:flex;
   align-items:center;
   justify-content:center;
   color:#fff;
-  margin-bottom:4px;
 }
 .social-stat-icon svg{ width:20px; height:20px; }
 .social-stat[data-color="blue"] .social-stat-icon{ background:var(--blue); }
