@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>eForms — Eficiência na coleta e organização de dados</title>
+<meta name="description" content="Formulários digitais 100% offline para operação de campo. Colete dados com assinatura digital, geolocalização e fotos mesmo sem internet — tudo sincroniza sozinho quando o sinal volta.">
+<link rel="icon" href="assets/isotipo.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="eForms — Eficiência na coleta e organização de dados">
+<meta property="og:description" content="Formulários digitais 100% offline para operação de campo, com assinatura digital, geolocalização e sincronização automática.">
+<meta property="og:image" content="assets/hero.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -20,9 +27,9 @@
   <header class="navbar">
     <img src="assets/logo-colorida.svg" alt="eForms" class="logo">
     <nav class="nav-pill">
-      <a href="#">Conheça o eForms</a>
-      <a href="#">Plano</a>
-      <a href="#">Como usar</a>
+      <a href="#conheca">Conheça o eForms</a>
+      <a href="#plano">Plano</a>
+      <a href="#como-usar">Como usar</a>
     </nav>
     <div class="nav-actions">
       <a href="#" class="btn btn-pink">Acessar</a>
@@ -146,7 +153,7 @@
   </div>
 </section>
 
-<section class="sec-problem">
+<section class="sec-problem" id="conheca">
   <span class="brand-shape shape-pr1" aria-hidden="true"></span>
   <span class="brand-shape shape-pr2" aria-hidden="true"></span>
 
@@ -258,7 +265,7 @@
   </div>
 </section>
 
-<section class="product">
+<section class="product" id="como-usar">
   <span class="brand-shape shape-p1" aria-hidden="true"></span>
   <span class="brand-shape shape-p2" aria-hidden="true"></span>
   <span class="brand-shape shape-p3" aria-hidden="true"></span>
@@ -545,13 +552,17 @@
     <div class="customize-tile-swatches">
       <span class="customize-tile-label">Escolha sua cor de identidade</span>
       <div class="customize-swatches" id="customizeSwatches" role="group" aria-label="Escolha uma cor de identidade">
-        <button type="button" class="swatch is-active" data-accent="pink" style="--sw:var(--pink)" aria-label="Rosa"></button>
-        <button type="button" class="swatch" data-accent="blue" style="--sw:var(--blue)" aria-label="Azul"></button>
-        <button type="button" class="swatch" data-accent="green" style="--sw:var(--green)" aria-label="Verde"></button>
-        <button type="button" class="swatch" data-accent="gold" style="--sw:var(--gold)" aria-label="Dourado"></button>
-        <button type="button" class="swatch" data-accent="purple" style="--sw:var(--purple)" aria-label="Roxo"></button>
-        <button type="button" class="swatch" data-accent="orange" style="--sw:var(--orange)" aria-label="Laranja"></button>
+        <button type="button" class="swatch is-active" data-accent="pink" data-sector="SESMT" style="--sw:var(--pink)" aria-label="Rosa — SESMT"></button>
+        <button type="button" class="swatch" data-accent="blue" data-sector="Operacional" style="--sw:var(--blue)" aria-label="Azul — Operacional"></button>
+        <button type="button" class="swatch" data-accent="green" data-sector="Logística" style="--sw:var(--green)" aria-label="Verde — Logística"></button>
+        <button type="button" class="swatch" data-accent="gold" data-sector="Qualidade" style="--sw:var(--gold)" aria-label="Dourado — Qualidade"></button>
+        <button type="button" class="swatch" data-accent="purple" data-sector="Manutenção" style="--sw:var(--purple)" aria-label="Roxo — Manutenção"></button>
+        <button type="button" class="swatch" data-accent="orange" data-sector="Inspeção" style="--sw:var(--orange)" aria-label="Laranja — Inspeção"></button>
       </div>
+      <span class="customize-active" id="customizeActive" data-accent="pink" aria-live="polite">
+        <span class="customize-active-dot"></span>
+        Perfil: <strong>SESMT</strong>
+      </span>
     </div>
 
     <div class="customize-tile-phone">
@@ -727,13 +738,13 @@
   </div>
 
   <div class="quotes-cta">
-    <a href="#" class="btn btn-blue">Quero esses resultados na minha operação
+    <a href="#plano" class="btn btn-pink">Quero esses resultados na minha operação
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </div>
 </section>
 
-<section class="sec-pricing">
+<section class="sec-pricing" id="plano">
   <div class="pricing-card">
     <span class="product-blob blob-price-a" aria-hidden="true"></span>
     <span class="product-blob blob-price-b" aria-hidden="true"></span>

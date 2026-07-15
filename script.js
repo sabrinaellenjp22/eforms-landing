@@ -39,17 +39,17 @@
   });
 })();
 
-/* FAQ accordion — opening one item closes the previously open one */
+/* Problem demos idle while the section is off screen.
+   Animations run by default, so nothing breaks if this never executes. */
 (function () {
-  var items = document.querySelectorAll(".faq-item");
-  if (!items.length) return;
+  var sec = document.querySelector(".sec-problem");
+  if (!sec || !("IntersectionObserver" in window)) return;
 
-  items.forEach(function (item) {
-    item.addEventListener("toggle", function () {
-      if (!item.open) return;
-      items.forEach(function (other) {
-        if (other !== item && other.open) other.open = false;
-      });
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      sec.classList.toggle("is-paused", !entry.isIntersecting);
     });
-  });
+  }, { threshold: 0.2 });
+
+  io.observe(sec);
 })();

@@ -2280,7 +2280,7 @@ a{text-decoration:none;color:inherit;}
   display:grid;
   grid-template-columns:0.82fr 1.18fr;
   gap:56px;
-  align-items:start;
+  align-items:center;
 }
 .faq-aside{ position:sticky; top:100px; }
 .faq-image{
@@ -2462,6 +2462,50 @@ a{text-decoration:none;color:inherit;}
   color:#5C6577;
 }
 
+/* Anchor targets clear the fixed navbar */
+#conheca, #como-usar, #plano{ scroll-margin-top:96px; }
+
+/* Problem demos idle while the section is off screen.
+   Default is running so animations still work if the observer never runs. */
+.sec-problem.is-paused .problem-demo,
+.sec-problem.is-paused .problem-demo *{ animation-play-state:paused; }
+
+/* Live sector profile chip in the customize picker */
+.customize-active{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  align-self:flex-start;
+  padding:8px 14px;
+  border-radius:20px;
+  background:#F5F7FB;
+  border:1px solid #E5E7EB;
+  font-size:13px;
+  color:#6B7280;
+}
+.customize-active strong{ color:var(--slate); font-weight:700; }
+.customize-active-dot{
+  width:9px; height:9px;
+  border-radius:50%;
+  flex-shrink:0;
+  background:var(--pink);
+  transition:background .25s ease;
+}
+.customize-active[data-accent="pink"] .customize-active-dot{ background:var(--pink); }
+.customize-active[data-accent="blue"] .customize-active-dot{ background:var(--blue); }
+.customize-active[data-accent="green"] .customize-active-dot{ background:var(--green); }
+.customize-active[data-accent="gold"] .customize-active-dot{ background:var(--gold); }
+.customize-active[data-accent="purple"] .customize-active-dot{ background:var(--purple); }
+.customize-active[data-accent="orange"] .customize-active-dot{ background:var(--orange); }
+
+/* Visible keyboard focus */
+:focus-visible{
+  outline:3px solid var(--blue);
+  outline-offset:3px;
+  border-radius:4px;
+}
+.sec-footer :focus-visible{ outline-color:#fff; }
+
 /* Cap content width on ultrawide screens so lines don't over-stretch (scoped — hero/product untouched) */
 @media (min-width: 1560px){
   .sec-problem, .sec-offline, .sec-customize, .sec-social, .sec-quotes, .sec-pricing, .sec-faq, .sec-footer{
@@ -2508,6 +2552,30 @@ a{text-decoration:none;color:inherit;}
   .footer-col{ align-items:center; }
   .footer-col-contact{ align-items:center; }
   .footer-cta{ align-self:center; }
+}
+
+/* Mobile — scale down oversized type and tighten padding */
+@media (max-width: 720px){
+  .sec-problem, .sec-offline, .sec-customize, .sec-social, .sec-quotes, .sec-pricing, .sec-faq{
+    padding-top:64px; padding-bottom:64px;
+    padding-left:20px; padding-right:20px;
+  }
+  .sec-footer{ padding:64px 20px 32px; }
+  .sec-title{ font-size:32px; letter-spacing:-0.6px; }
+  .sec-subtitle{ font-size:15px; }
+  .offline-title-line1{ font-size:26px; letter-spacing:-0.4px; }
+  .offline-title-line2{ font-size:46px; letter-spacing:-1.4px; }
+  .offline-wifi, .offline-wifi svg{ width:84px; height:84px; }
+  .offline-phone-mock{ width:170px; height:340px; }
+  .offline-bar{ width:140px; height:12px; }
+  .problem-image img{ height:180px; }
+  .pricing-card{ padding:36px 24px; }
+  .pricing-value{ font-size:52px; }
+  .pricing-includes{ grid-template-columns:1fr; }
+  .social-stat strong{ font-size:34px; }
+  .social-stat-hero strong{ font-size:44px; }
+  .quote-card{ padding:26px 22px; }
+  .faq-image img{ height:180px; }
 }
 
 /* ============================================================
