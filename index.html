@@ -145,11 +145,10 @@
     </div>
 
     <div class="hero-cta">
-      <span class="pill-dark">Recrutamento ilimitado a partir de <strong>R$ 299/Mês.</strong></span>
-      <a href="#" class="btn btn-pink">Saiba Mais
+      <a href="como-podemos-ajudar.html" class="btn btn-outline-blue">Entenda como podemos te ajudar
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a href="como-podemos-ajudar.html" class="btn btn-outline-blue">Entenda como podemos te ajudar
+      <a href="#" class="btn btn-pink">Saiba Mais
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
@@ -158,45 +157,46 @@
 </section>
 
 <section class="sec-offline">
-  <span class="brand-shape shape-of1" aria-hidden="true"></span>
-
-  <div class="offline-head">
-    <h2 class="offline-title">
-      <span class="offline-title-line1"><span class="offline-title-accent">Sinal caiu?</span> Sua operação</span>
-      <span class="offline-title-line2">não para.</span>
-    </h2>
-  </div>
-
-  <div class="offline-stage">
-    <span class="offline-bar" aria-hidden="true"></span>
-
-    <span class="offline-wifi">
-      <svg viewBox="0 0 296 296" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M147.956 246.595H148.079M24.6593 108.75C58.5672 78.4214 102.464 61.6545 147.956 61.6545C193.448 61.6545 237.344 78.4214 271.252 108.75M61.6483 158.549C84.6959 135.958 115.683 123.304 147.956 123.304C180.229 123.304 211.216 135.958 234.263 158.549M104.802 202.566C116.326 191.27 131.819 184.943 147.956 184.943C164.092 184.943 179.586 191.27 191.11 202.566" stroke="currentColor" stroke-width="32.966" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </span>
-
-    <div class="offline-card offline-card-pink">
-      <strong>Operação 100% Offline nativa.</strong>
-      <span>Sincronize e vá para o campo sem preocupações.</span>
-    </div>
-
-    <div class="offline-phone-tile">
-      <div class="offline-phone-mock">
-        <div class="offline-phone-notch"></div>
+  <div class="offline-grid">
+    <!-- Aparelho: tela laranja da marca, com o badge de sincronização no canto -->
+    <div class="offline-device">
+      <div class="offline-device-frame">
+        <span class="offline-device-notch" aria-hidden="true"></span>
+        <div class="offline-device-screen">
+          <img src="assets/logo-branca.svg" alt="eForms" class="offline-device-logo">
+          <span class="offline-device-line"></span>
+          <span class="offline-device-line"></span>
+          <span class="offline-device-line w-60"></span>
+        </div>
       </div>
-      <span class="offline-sync-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 11-3-6.7M21 3v6h-6"/></svg>
+      <span class="offline-device-sync" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 010 12h-3"/></svg>
       </span>
     </div>
 
-    <div class="offline-card offline-card-light">
-      <p>Os dados coletados nunca são perdidos; eles ficam armazenados de forma segura no dispositivo móvel e são enviados automaticamente para a nuvem assim que uma conexão é restabelecida.</p>
-      <p>Isso garante segurança jurídica com <strong>assinatura digital nativa</strong> e comprovação via <strong>geolocalização</strong>.</p>
+    <!-- Cards: o do meio destacado em verde -->
+    <div class="offline-cards">
+      <div class="offline-card">
+        <p>Os dados coletados <strong>nunca são perdidos</strong>; eles ficam armazenados de forma segura no dispositivo móvel e são enviados automaticamente para a nuvem do eForms assim que uma conexão é restabelecida.</p>
+      </div>
+
+      <div class="offline-card offline-card-hl">
+        <strong>Operação 100% Offline nativa.</strong>
+        <p>Sincronize e vá para o campo <strong>sem preocupações</strong>.</p>
+      </div>
+
+      <div class="offline-card">
+        <p>Isso garante segurança jurídica com <strong>assinatura digital nativa</strong> e comprovação via <strong>geolocalização</strong>.</p>
+      </div>
     </div>
 
-    <div class="offline-photo">
-      <img src="assets/hero.png" alt="Profissional utilizando o eForms em campo, sem depender de internet">
+    <!-- Banner: foto + degradê laranja da marca, com o título por cima -->
+    <div class="offline-banner">
+      <img src="assets/offline-banner.jpg" alt="Profissional registrando dados pelo celular em campo, sem depender de sinal">
+      <h2 class="offline-banner-title">
+        <span class="offline-banner-lead">Sinal caiu?</span>
+        <span class="offline-banner-sub">Sua operação <strong>não para</strong></span>
+      </h2>
     </div>
   </div>
 </section>
@@ -461,8 +461,6 @@
         </div>
       </div>
     </div>
-
-    <img src="assets/isotipo.svg" alt="" class="product-wordmark">
   </div>
   </div>
 </section>
@@ -471,94 +469,72 @@
   <span class="brand-shape shape-cu1" aria-hidden="true"></span>
   <span class="brand-shape shape-cu2" aria-hidden="true"></span>
 
-  <div class="sec-heading">
-    <span class="sec-kicker">Personalize seu formulário</span>
-    <h2 class="sec-title">Crie do seu jeito. Personalize cores,<br>campos e fluxos em minutos.</h2>
-    <p class="sec-subtitle">Com um Construtor intuitivo de arrastar e soltar (drag-and-drop), o eForms permite configurar a aparência visual, logotipos, ícones representativos e regras de privacidade (público ou privado por senha) sem escrever uma única linha de código.</p>
-  </div>
-
-  <div class="customize-bento">
-    <div class="customize-tile-image">
-      <div class="hero-gallery" id="heroGallery"></div>
-      <span class="customize-floating-tag ctag-1" data-color="pink">SESMT</span>
-      <span class="customize-floating-tag ctag-2" data-color="blue">Operacional</span>
-      <span class="customize-floating-tag ctag-3" data-color="green">Logística</span>
+  <div class="customize-grid">
+    <div class="customize-col customize-col-left">
+    <div class="customize-copy">
+      <span class="sec-kicker">Personalize seu formulário</span>
+      <h2 class="sec-title"><span class="cz-accent">Crie do seu jeito.</span> Personalize campos e fluxos em minutos.</h2>
+      <p class="sec-subtitle">Com um Construtor intuitivo de arrastar e soltar (drag-and-drop), o eForms permite configurar a aparência visual, logotipos, ícones representativos e regras de privacidade (público ou privado por senha) sem escrever uma única linha de código.</p>
     </div>
 
-    <div class="customize-tile-swatches">
-      <span class="customize-tile-label">Escolha sua cor de identidade</span>
-      <div class="customize-swatches" id="customizeSwatches" role="group" aria-label="Escolha uma cor de identidade">
-        <button type="button" class="swatch is-active" data-accent="pink" data-sector="SESMT" style="--sw:var(--pink)" aria-label="Rosa — SESMT"></button>
-        <button type="button" class="swatch" data-accent="blue" data-sector="Operacional" style="--sw:var(--blue)" aria-label="Azul — Operacional"></button>
-        <button type="button" class="swatch" data-accent="green" data-sector="Logística" style="--sw:var(--green)" aria-label="Verde — Logística"></button>
-        <button type="button" class="swatch" data-accent="gold" data-sector="Qualidade" style="--sw:var(--gold)" aria-label="Dourado — Qualidade"></button>
-        <button type="button" class="swatch" data-accent="purple" data-sector="Manutenção" style="--sw:var(--purple)" aria-label="Roxo — Manutenção"></button>
-        <button type="button" class="swatch" data-accent="orange" data-sector="Inspeção" style="--sw:var(--orange)" aria-label="Laranja — Inspeção"></button>
-      </div>
-      <span class="customize-active" id="customizeActive" data-accent="pink" aria-live="polite">
-        <span class="customize-active-dot"></span>
-        Perfil: <strong>SESMT</strong>
-      </span>
+    <!-- Card de imagem: troque o src pelo print do construtor -->
+    <div class="customize-shot" id="customizeShot">
+      <span class="cz-shot-text">Imagem do construtor</span>
+    </div>
     </div>
 
-    <div class="customize-tile-phone">
-      <div class="customize-preview" data-accent="pink" id="customizePreview">
-        <div class="product-phone">
-          <div class="product-phone-frame">
-            <div class="pp-topbar">
-              <img src="assets/logo-colorida.svg" alt="eForms" class="pp-logo">
-            </div>
+    <div class="customize-col customize-col-right">
+    <!-- Preview interativo: clicar numa cor recolore os formulários ao lado -->
+    <div class="customize-picker" data-accent="blue" id="customizePreview">
+      <span class="cz-picker-label">Escolha sua cor</span>
 
-            <div class="pp-search">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-              <span class="mock-rect w2"></span>
-              <span class="pp-search-filter">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16M7 12h10M10 19h4"/></svg>
-              </span>
-            </div>
-
-            <div class="pp-banner">
-              <span class="pp-banner-menu">
-                <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>
-              </span>
-              <svg class="pp-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l4 3 5-6 5 6 4-3-2 10H5L3 8z"/></svg>
-            </div>
-
-            <div class="pp-info">
-              <span class="mock-rect w3"></span>
-              <div class="pp-tags">
-                <span class="pp-tag pp-tag-accent"></span>
-                <span class="pp-tag pp-tag-accent"></span>
-              </div>
-            </div>
-
-            <a href="#" class="pp-btn pp-btn-primary">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span class="mock-rect pp-btn-rect"></span>
-            </a>
-
-            <div class="pp-item">
-              <div class="pp-item-thumb"></div>
-              <div class="pp-item-info">
-                <span class="mock-rect w3"></span>
-                <div class="pp-tags">
-                  <span class="pp-tag"></span>
-                  <span class="pp-tag"></span>
-                </div>
-                <span class="pp-link">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  <span class="mock-rect pp-link-rect"></span>
-                </span>
-              </div>
-            </div>
-
-            <a href="#" class="pp-btn pp-btn-dark">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
-              <span class="mock-rect pp-btn-rect"></span>
-            </a>
-          </div>
-        </div>
+      <div class="cz-swatches" id="customizeSwatches" role="group" aria-label="Escolha a cor da sua marca">
+        <button type="button" class="cz-swatch is-active" data-accent="blue" style="--sw:var(--blue)" aria-label="Azul"></button>
+        <button type="button" class="cz-swatch" data-accent="purple" style="--sw:var(--purple)" aria-label="Roxo"></button>
+        <button type="button" class="cz-swatch" data-accent="red" style="--sw:var(--red)" aria-label="Vermelho"></button>
+        <button type="button" class="cz-swatch" data-accent="pink" style="--sw:var(--pink)" aria-label="Rosa"></button>
+        <button type="button" class="cz-swatch" data-accent="green" style="--sw:var(--green)" aria-label="Verde"></button>
+        <button type="button" class="cz-swatch" data-accent="orange" style="--sw:var(--orange)" aria-label="Laranja"></button>
+        <button type="button" class="cz-swatch" data-accent="gold" style="--sw:var(--gold)" aria-label="Dourado"></button>
+        <button type="button" class="cz-swatch" data-accent="dark" style="--sw:var(--dark)" aria-label="Grafite"></button>
       </div>
+
+      <div class="cz-forms">
+        <article class="cz-form is-active">
+          <span class="cz-form-menu" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>
+          </span>
+          <span class="cz-form-thumb" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="M8 8l4-4 4 4"/><path d="M4 20h16"/></svg>
+          </span>
+          <strong class="cz-form-title">Formulário Teste</strong>
+          <span class="cz-form-tag">Categoria</span>
+          <span class="cz-form-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+            Acessar Formulário
+          </span>
+        </article>
+
+        <article class="cz-form">
+          <span class="cz-form-menu" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>
+          </span>
+          <span class="cz-form-thumb" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="M8 8l4-4 4 4"/><path d="M4 20h16"/></svg>
+          </span>
+          <strong class="cz-form-title">Formulário Teste</strong>
+          <span class="cz-form-tag">Categoria</span>
+          <span class="cz-form-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+            Acessar Formulário
+          </span>
+        </article>
+      </div>
+    </div>
+
+    <div class="customize-brand">
+      <h3 class="cz-brand-title">Sua marca,<br>Suas cores.</h3>
+    </div>
     </div>
   </div>
 </section>
@@ -826,48 +802,47 @@
     <aside class="faq-aside">
       <div class="sec-heading">
         <span class="sec-kicker">Dúvidas frequentes</span>
-        <h2 class="sec-title">Perguntas frequentes.</h2>
+        <h2 class="sec-title">Perguntas<br>frequentes.</h2>
         <p class="sec-subtitle">Tudo o que você precisa saber antes de digitalizar a coleta de dados da sua operação.</p>
       </div>
-      <div class="faq-image">
-        <img src="assets/hero-notebook.jpg" alt="Equipe consultando os dados coletados no painel do eForms">
-        <div class="faq-image-badge">
-          <span class="faq-image-badge-dot"></span>
-          Ainda com dúvidas? <strong>Fale conosco.</strong>
+      <div class="faq-support">
+        <span class="faq-support-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </span>
+        <div class="faq-support-copy">
+          <strong>Ainda tem dúvidas?</strong>
+          <span>Nosso time responde em minutos.</span>
         </div>
+        <a href="#" class="btn btn-pink faq-support-btn">Fale com um especialista</a>
       </div>
     </aside>
 
     <div class="faq-list">
     <details class="faq-item" open>
       <summary>
-        <span class="faq-icon" data-color="blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg></span>
         <span class="faq-q">Como funciona a coleta em locais totalmente sem internet?</span>
-        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        <span class="faq-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
       </summary>
       <p>O eForms opera 100% offline. Todos os dados, fotos e assinaturas ficam salvos criptografados no aparelho e sincronizam sozinhos quando o sinal voltar.</p>
     </details>
     <details class="faq-item">
       <summary>
-        <span class="faq-icon" data-color="pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg></span>
         <span class="faq-q">Posso exportar os dados coletados para planilhas ou relatórios?</span>
-        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        <span class="faq-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
       </summary>
       <p>Sim, todos os registros de campo são centralizados no painel web para fácil exportação imediata em formatos de planilha ou PDF.</p>
     </details>
     <details class="faq-item">
       <summary>
-        <span class="faq-icon" data-color="gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>
         <span class="faq-q">Como é feita a cobrança das licenças?</span>
-        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        <span class="faq-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
       </summary>
       <p>O modelo é flexível e baseado em assinatura mensal de R$ 70,00 por usuário ativo, sem taxas de setup abusivas.</p>
     </details>
     <details class="faq-item">
       <summary>
-        <span class="faq-icon" data-color="green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-4 4-3-3-6 6"/></svg></span>
         <span class="faq-q">O aplicativo está disponível para quais dispositivos?</span>
-        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        <span class="faq-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
       </summary>
       <p>A aplicação móvel possui total mobilidade voltada para operação de campo, sincronizando perfeitamente com o ecossistema web da Orbytis.</p>
     </details>
@@ -909,7 +884,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="gallery.js"></script>
 <script src="script.js"></script>
 <script src="parallax.js"></script>
 <script src="customize.js"></script>
