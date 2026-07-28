@@ -83,18 +83,3 @@
 
   nums.forEach(function (el) { io.observe(el); });
 })();
-
-/* Problem demos idle while the section is off screen.
-   Animations run by default, so nothing breaks if this never executes. */
-(function () {
-  var sec = document.querySelector(".sec-problem");
-  if (!sec || !("IntersectionObserver" in window)) return;
-
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      sec.classList.toggle("is-paused", !entry.isIntersecting);
-    });
-  }, { threshold: 0.2 });
-
-  io.observe(sec);
-})();
