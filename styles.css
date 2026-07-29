@@ -700,6 +700,12 @@ a{text-decoration:none;color:inherit;}
 
 @media (max-width: 640px){
   .hero-panels{ flex-direction:column; }
+  /* Itens flex não encolhem abaixo do próprio conteúdo por padrão — força
+     a cadeia toda a respeitar a largura real da tela em vez do min-content. */
+  .panel-left, .panel-right{ min-width:0; width:100%; }
+  .mock-web, .mock-phone{ min-width:0; max-width:100%; height:360px; }
+  .mock-phone{ max-width:240px; margin:0 auto; }
+  .mock-web-body, .mock-sidebar, .mock-dropzone{ min-width:0; }
 }
 
 @media (max-width: 760px){
@@ -1501,6 +1507,7 @@ a{text-decoration:none;color:inherit;}
 }
 
 @media (max-width: 640px){
+  .product{ padding-left:20px; padding-right:20px; }
   .product-styles{ grid-template-columns:1fr; }
   .product-card{ padding:32px 24px; }
   .product-title{ font-size:26px; }
@@ -2434,6 +2441,9 @@ a{text-decoration:none;color:inherit;}
   .pricing-features{ grid-template-columns:1fr 1fr; gap:24px 16px; }
   .faq-support{ padding:32px 24px; }
   .quote-card{ padding:26px 22px; }
+  /* Tag/título/subtítulo alinhados à esquerda no mobile, como nas demais sections —
+     conteúdo interno dos cards (bento, depoimentos, etc.) não é afetado por essa classe. */
+  .sec-heading-center{ text-align:left; align-items:flex-start; }
 
   /* Carrossel automático: os 3 cards dividem a mesma célula do grid e se
      revezam via fade, sem JS. Cada card ocupa 1/3 do ciclo de 12s. */
