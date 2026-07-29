@@ -23,6 +23,26 @@
 })();
 
 (function () {
+  var toggle = document.querySelector(".nav-toggle");
+  var navbar = document.querySelector(".navbar");
+  if (!toggle || !navbar) return;
+
+  function closeMenu() {
+    navbar.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+  }
+
+  toggle.addEventListener("click", function () {
+    var isOpen = navbar.classList.toggle("is-open");
+    toggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  navbar.querySelectorAll(".nav-pill a, .nav-actions a").forEach(function (link) {
+    link.addEventListener("click", closeMenu);
+  });
+})();
+
+(function () {
   var tabs = document.querySelectorAll(".feature-row[data-tab]");
   var panels = document.querySelectorAll(".product-styles[data-panel]");
   if (!tabs.length || !panels.length) return;
