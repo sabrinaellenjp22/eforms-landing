@@ -10,6 +10,9 @@
     var mosaic = document.querySelector(".hero-stage-mosaic");
     var tint = document.querySelector(".hero-bg-tint");
     if (!title || !mosaic) return;
+    // O truque de sobreposição (title/mosaic na mesma célula) só existe no
+    // layout desktop; no mobile o CSS já empilha os dois normalmente.
+    if (window.innerWidth <= 1200) return;
 
     var peekOffset = mosaic.offsetHeight * 0.65;
     gsap.set(mosaic, { y: peekOffset, scale: 0.92 });
