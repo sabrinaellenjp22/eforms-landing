@@ -1,5 +1,39 @@
 (function () {
+  // Mobile não usa o pin/scale do GSAP (quebra o layout empilhado), mas ganha
+  // uma entrada leve: o preview nasce um pouco abaixo e sobe suavemente quando
+  // entra na viewport — um "parallax" seguro, sem prender o scroll.
+  function initMobileReveal() {
+    if (window.innerWidth > 760) return;
+    var media = document.querySelector(".hero-media");
+    if (!media || media.dataset.revealInit) return;
+    media.dataset.revealInit = "1";
+    var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+
+    media.style.transform = "translateY(28px)";
+    media.style.opacity = "0";
+    media.style.transition = "transform .7s cubic-bezier(.2,.7,.3,1), opacity .7s ease";
+
+    if (!("IntersectionObserver" in window)) {
+      media.style.transform = "none";
+      media.style.opacity = "1";
+      return;
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        media.style.transform = "translateY(0)";
+        media.style.opacity = "1";
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.2 });
+    io.observe(media);
+  }
+
   function init() {
+    initMobileReveal();
+
     if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
       window.setTimeout(init, 150);
       return;

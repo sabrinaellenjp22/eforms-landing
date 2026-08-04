@@ -43,57 +43,63 @@
 })();
 
 (function () {
-  var tabs = document.querySelectorAll(".feature-row[data-tab]");
-  var panels = document.querySelectorAll(".product-styles[data-panel]");
-  var productRight = document.querySelector(".product-right");
-  if (!tabs.length || !panels.length || !productRight) return;
+  var roots = document.querySelectorAll("[data-tabs-root]");
+  if (!roots.length) return;
 
   var MOBILE_BP = 1200;
-  var isMobileLayout = null;
 
-  function panelFor(tab) {
-    var target = tab.getAttribute("data-tab");
-    for (var i = 0; i < panels.length; i++) {
-      if (panels[i].getAttribute("data-panel") === target) return panels[i];
-    }
-    return null;
-  }
+  roots.forEach(function (root) {
+    var tabs = root.querySelectorAll(".feature-row[data-tab]");
+    var panels = root.querySelectorAll(".product-styles[data-panel]");
+    var productRight = root.querySelector(".product-right");
+    if (!tabs.length || !panels.length || !productRight) return;
 
-  // No mobile o preview vira "sanfona": sai da coluna fixa (.product-right) e
-  // passa a viver logo depois do row clicado, dentro de .product-features.
-  function placeInline(tab) {
-    var panel = panelFor(tab);
-    if (panel) tab.insertAdjacentElement("afterend", panel);
-  }
+    var isMobileLayout = null;
 
-  function syncLayout() {
-    var shouldBeMobile = window.innerWidth <= MOBILE_BP;
-    if (shouldBeMobile === isMobileLayout) return;
-    isMobileLayout = shouldBeMobile;
-    if (isMobileLayout) {
-      tabs.forEach(function (t) {
-        if (t.classList.contains("is-active")) placeInline(t);
-      });
-    } else {
-      panels.forEach(function (p) { productRight.appendChild(p); });
-    }
-  }
-
-  tabs.forEach(function (tab) {
-    tab.addEventListener("click", function () {
+    function panelFor(tab) {
       var target = tab.getAttribute("data-tab");
+      for (var i = 0; i < panels.length; i++) {
+        if (panels[i].getAttribute("data-panel") === target) return panels[i];
+      }
+      return null;
+    }
 
-      tabs.forEach(function (t) { t.classList.toggle("is-active", t === tab); });
-      panels.forEach(function (p) {
-        p.classList.toggle("is-active", p.getAttribute("data-panel") === target);
+    // No mobile o preview vira "sanfona": sai da coluna fixa (.product-right) e
+    // passa a viver logo depois do row clicado, dentro de .product-features.
+    function placeInline(tab) {
+      var panel = panelFor(tab);
+      if (panel) tab.insertAdjacentElement("afterend", panel);
+    }
+
+    function syncLayout() {
+      var shouldBeMobile = window.innerWidth <= MOBILE_BP;
+      if (shouldBeMobile === isMobileLayout) return;
+      isMobileLayout = shouldBeMobile;
+      if (isMobileLayout) {
+        tabs.forEach(function (t) {
+          if (t.classList.contains("is-active")) placeInline(t);
+        });
+      } else {
+        panels.forEach(function (p) { productRight.appendChild(p); });
+      }
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        var target = tab.getAttribute("data-tab");
+
+        tabs.forEach(function (t) { t.classList.toggle("is-active", t === tab); });
+        panels.forEach(function (p) {
+          p.classList.toggle("is-active", p.getAttribute("data-panel") === target);
+        });
+
+        if (isMobileLayout) placeInline(tab);
       });
-
-      if (isMobileLayout) placeInline(tab);
     });
-  });
 
-  syncLayout();
-  window.addEventListener("resize", syncLayout);
+    syncLayout();
+    window.addEventListener("resize", syncLayout);
+  });
 })();
 
 /* Animated stat counters — run once when the section scrolls into view.
