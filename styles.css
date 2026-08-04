@@ -2182,6 +2182,7 @@ a{text-decoration:none;color:inherit;}
   padding:130px 156px;
   text-align:center;
 }
+.sec-why .sec-subtitle{ max-width:780px; }
 .why-grid{
   margin-top:40px;
   display:grid;
