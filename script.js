@@ -22,9 +22,7 @@
   onScroll();
 })();
 
-/* FAQ — accordion controlado por JS (não usa <details>/<summary> nativos,
-   que tinham um bug de fechamento reportado em alguns navegadores). Cada
-   item é independente; abrir um não fecha os outros. */
+/* FAQ — accordion exclusivo: abrir uma pergunta fecha as outras para manter padrão de altura constante */
 (function () {
   var items = document.querySelectorAll(".faq-item");
   if (!items.length) return;
@@ -33,8 +31,22 @@
     var btn = item.querySelector(".faq-summary");
     if (!btn) return;
     btn.addEventListener("click", function () {
-      var isOpen = item.classList.toggle("is-open");
-      btn.setAttribute("aria-expanded", String(isOpen));
+      var isCurrentlyOpen = item.classList.contains("is-open");
+
+      // Se for abrir o item atual, fecha todos os outros itens abertos
+      if (!isCurrentlyOpen) {
+        items.forEach(function (other) {
+          if (other !== item && other.classList.contains("is-open")) {
+            other.classList.remove("is-open");
+            var otherBtn = other.querySelector(".faq-summary");
+            if (otherBtn) otherBtn.setAttribute("aria-expanded", "false");
+          }
+        });
+      }
+
+      var newState = !isCurrentlyOpen;
+      item.classList.toggle("is-open", newState);
+      btn.setAttribute("aria-expanded", String(newState));
     });
   });
 })();
