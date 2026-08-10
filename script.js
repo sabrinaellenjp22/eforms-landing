@@ -22,6 +22,23 @@
   onScroll();
 })();
 
+/* FAQ — accordion controlado por JS (não usa <details>/<summary> nativos,
+   que tinham um bug de fechamento reportado em alguns navegadores). Cada
+   item é independente; abrir um não fecha os outros. */
+(function () {
+  var items = document.querySelectorAll(".faq-item");
+  if (!items.length) return;
+
+  items.forEach(function (item) {
+    var btn = item.querySelector(".faq-summary");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var isOpen = item.classList.toggle("is-open");
+      btn.setAttribute("aria-expanded", String(isOpen));
+    });
+  });
+})();
+
 (function () {
   var toggle = document.querySelector(".nav-toggle");
   var navbar = document.querySelector(".navbar");
@@ -145,4 +162,44 @@
   }, { threshold: 0.6 });
 
   nums.forEach(function (el) { io.observe(el); });
+})();
+
+/* Surgimento ao rolar — fade + leve subida, uma vez por elemento.
+   Itens dentro de um [data-reveal-group] escalonam via delay pela posição
+   entre os irmãos, sem precisar calcular nada manualmente no HTML. */
+(function () {
+  var els = document.querySelectorAll("[data-reveal]");
+  if (!els.length) return;
+
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduced || !("IntersectionObserver" in window)) {
+    els.forEach(function (el) { el.classList.add("is-visible"); });
+    return;
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      var el = entry.target;
+      var group = el.closest("[data-reveal-group]");
+      if (group) {
+        var siblings = Array.prototype.filter.call(group.children, function (c) {
+          return c.hasAttribute("data-reveal");
+        });
+        el.style.transitionDelay = (siblings.indexOf(el) * 80) + "ms";
+      }
+      el.classList.add("is-visible");
+      io.unobserve(el);
+    });
+  }, { threshold: 0.15, rootMargin: "0px 0px -60px 0px" });
+
+  // Espera o navegador pintar o estado escondido pelo menos uma vez antes de
+  // observar — sem isso, elementos já visíveis no primeiro frame (ex: logo
+  // abaixo da hero) disparam o "is-visible" antes de existir um "escondido"
+  // pintado pra transicionar a partir dele, e aparecem sem fade nenhum.
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      els.forEach(function (el) { io.observe(el); });
+    });
+  });
 })();
