@@ -2020,26 +2020,28 @@ a{text-decoration:none;color:inherit;}
   display:flex;
   align-items:center;
   gap:12px;
-  border:2px solid transparent;
+  border:1px solid transparent;
   border-radius:var(--radius-md);
   padding:12px 18px;
-  box-shadow:var(--shadow-sm);
+  box-shadow:var(--shadow-md);
   transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease, opacity .6s cubic-bezier(.2,.7,.3,1);
 }
-.social-stat[data-color="blue"]{ background:#EBF1FE; border-color:var(--blue); }
-.social-stat[data-color="pink"]{ background:#FDEEF5; border-color:var(--pink); }
-.social-stat[data-color="green"]{ background:#E9F7F0; border-color:var(--green); }
-.social-stat[data-color="orange"]{ background:#FFF7ED; border-color:var(--orange); }
-.social-stat[data-color="gold"]{ background:#FFFBEB; border-color:#8A6500; }
+/* Cards com cor sólida, igual ao bento de "Principais funcionalidades" */
+.social-stat[data-color="blue"]{ background:var(--blue); }
+.social-stat[data-color="pink"]{ background:var(--pink); }
+.social-stat[data-color="green"]{ background:var(--green); }
+.social-stat[data-color="orange"]{ background:var(--orange); }
+.social-stat[data-color="gold"]{ background:#8A6500; }
 .social-stat:hover{
   transform:translateY(-4px);
-  box-shadow:var(--shadow-md);
+  border-color:rgba(255,255,255,0.4);
+  box-shadow:var(--shadow-hover);
 }
 .social-stat-body{ display:flex; flex-direction:column; gap:1px; }
 .social-stat strong{
   font-size:24px;
   font-weight:800;
-  color:var(--slate);
+  color:#fff;
   letter-spacing:-0.5px;
   line-height:1.1;
   font-variant-numeric:tabular-nums;
@@ -2047,7 +2049,7 @@ a{text-decoration:none;color:inherit;}
 .social-stat span{
   font-size:12.5px;
   line-height:1.35;
-  color:#6B7280;
+  color:rgba(255,255,255,0.88);
 }
 .social-logos-card{
   margin-top:96px;
@@ -2636,11 +2638,8 @@ a{text-decoration:none;color:inherit;}
   align-items:center;
   justify-content:center;
   color:#fff;
+  background:rgba(255,255,255,0.16);
+  border:1px solid rgba(255,255,255,0.22);
 }
 .social-stat-icon svg{ width:17px; height:17px; stroke:#fff; }
-.social-stat[data-color="blue"] .social-stat-icon{ background:var(--blue); }
-.social-stat[data-color="pink"] .social-stat-icon{ background:var(--pink); }
-.social-stat[data-color="green"] .social-stat-icon{ background:var(--green); }
-.social-stat[data-color="orange"] .social-stat-icon{ background:var(--orange); }
-.social-stat[data-color="gold"] .social-stat-icon{ background:#8A6500; }
 
