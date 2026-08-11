@@ -81,9 +81,27 @@
     var tabs = root.querySelectorAll(".feature-row[data-tab]");
     var panels = root.querySelectorAll(".product-styles[data-panel]");
     var productRight = root.querySelector(".product-right");
+    var productFeatures = root.querySelector(".product-features");
     if (!tabs.length || !panels.length || !productRight) return;
 
+    // Nas Problemáticas os textos de cada aba têm tamanhos diferentes; sem
+    // travar a altura do painel direito na altura do menu (sempre com as
+    // mesmas 5 linhas), o card inteiro cresce/encolhe ao trocar de aba.
+    var lockHeight = root.closest(".sec-problematicas") !== null;
+
     var isMobileLayout = null;
+    var phoneSlot = root.parentElement && root.parentElement.querySelector(".product-phone-slot");
+    var phoneSlotImg = phoneSlot && phoneSlot.querySelector("img");
+
+    // Troca a imagem ao lado do card quando a aba clicada define data-image
+    // (hoje só usado nas Problemáticas — nas outras abas o atributo não existe,
+    // então isso não faz nada).
+    function syncImage(tab) {
+      var src = tab.getAttribute("data-image");
+      if (!src || !phoneSlotImg) return;
+      phoneSlotImg.src = src;
+      phoneSlotImg.alt = tab.getAttribute("data-image-alt") || phoneSlotImg.alt;
+    }
 
     function panelFor(tab) {
       var target = tab.getAttribute("data-tab");
@@ -100,17 +118,43 @@
       if (panel) tab.insertAdjacentElement("afterend", panel);
     }
 
+    // Trava a altura direto na caixa de vidro (em vez de depender da cadeia de
+    // porcentagem flex > grid > flex, que nem sempre propaga a altura entre
+    // esses layouts encadeados) — assim ela sempre bate com o menu, e a foto
+    // ao lado trava na altura total do card (não só do "stretch" do flex).
+    function syncPanelHeight() {
+      if (!lockHeight || !productFeatures) return;
+      if (isMobileLayout) {
+        productRight.style.removeProperty("height");
+        panels.forEach(function (p) {
+          var innerPanel = p.querySelector(".problem-panel");
+          if (innerPanel) innerPanel.style.removeProperty("height");
+        });
+        if (phoneSlot) phoneSlot.style.removeProperty("height");
+        return;
+      }
+      var h = productFeatures.offsetHeight + "px";
+      productRight.style.height = h;
+      panels.forEach(function (p) {
+        var innerPanel = p.querySelector(".problem-panel");
+        if (innerPanel) innerPanel.style.height = h;
+      });
+      if (phoneSlot) phoneSlot.style.height = root.offsetHeight + "px";
+    }
+
     function syncLayout() {
       var shouldBeMobile = window.innerWidth <= MOBILE_BP;
-      if (shouldBeMobile === isMobileLayout) return;
-      isMobileLayout = shouldBeMobile;
-      if (isMobileLayout) {
-        tabs.forEach(function (t) {
-          if (t.classList.contains("is-active")) placeInline(t);
-        });
-      } else {
-        panels.forEach(function (p) { productRight.appendChild(p); });
+      if (shouldBeMobile !== isMobileLayout) {
+        isMobileLayout = shouldBeMobile;
+        if (isMobileLayout) {
+          tabs.forEach(function (t) {
+            if (t.classList.contains("is-active")) placeInline(t);
+          });
+        } else {
+          panels.forEach(function (p) { productRight.appendChild(p); });
+        }
       }
+      syncPanelHeight();
     }
 
     tabs.forEach(function (tab) {
@@ -121,6 +165,7 @@
         panels.forEach(function (p) {
           p.classList.toggle("is-active", p.getAttribute("data-panel") === target);
         });
+        syncImage(tab);
 
         if (isMobileLayout) placeInline(tab);
       });
@@ -129,6 +174,85 @@
     syncLayout();
     window.addEventListener("resize", syncLayout);
   });
+})();
+
+/* Tag "Personalize sua marca" — a cor da tag e a screenshot do mockup trocam
+   juntas, no mesmo timer, pra ficarem sempre sincronizadas. */
+(function () {
+  var kicker = document.querySelector(".customize-copy .sec-kicker");
+  var frame = document.querySelector(".laptop-shot-frame");
+  if (!kicker || !frame) return;
+  var layers = frame.querySelectorAll(".laptop-shot");
+  if (layers.length < 2) return;
+
+  var steps = [
+    { color: "var(--blue)",   src: "assets/customize-preview.png" },
+    { color: "var(--red)",    src: "assets/customize-preview-red.jpg" },
+    { color: "var(--green)",  src: "assets/customize-preview-green.jpg" },
+    { color: "var(--gold)",   src: "assets/customize-preview-gold.jpg" },
+    { color: "var(--purple)", src: "assets/customize-preview-purple.jpg" },
+    { color: "var(--pink)",   src: "assets/customize-preview-pink.jpg" },
+    { color: "var(--orange)", src: "assets/customize-preview-orange.jpg" },
+    { color: "var(--slate)",  src: "assets/customize-preview-slate.jpg" }
+  ];
+
+  // Pré-carrega tudo uma vez, pra nenhuma troca depender de rede no meio do ciclo.
+  steps.forEach(function (s) { var im = new Image(); im.src = s.src; });
+
+  var index = 0;
+  var activeLayer = layers[0];
+  var hiddenLayer = layers[1];
+
+  // Estado inicial (azul) já é o que está nas duas camadas — só marca a cor da tag.
+  kicker.style.background = steps[0].color;
+
+  window.setInterval(function () {
+    index = (index + 1) % steps.length;
+    var step = steps[index];
+
+    kicker.style.background = step.color;
+    hiddenLayer.src = step.src;
+    hiddenLayer.classList.add("is-active");
+    activeLayer.classList.remove("is-active");
+
+    var swap = activeLayer;
+    activeLayer = hiddenLayer;
+    hiddenLayer = swap;
+  }, 2800);
+})();
+
+/* Dock de ícones — aumenta o item sob o mouse e os vizinhos próximos
+   (estilo dock do macOS), com tamanho decrescendo pela distância no índice. */
+(function () {
+  var dock = document.querySelector(".dock-nav");
+  if (!dock) return;
+  var items = dock.querySelectorAll(".dock-item");
+  if (!items.length) return;
+
+  var SIZE = { base: 64, far: 72, close: 84, active: 96 };
+
+  function sizeFor(distance) {
+    if (distance === 0) return SIZE.active;
+    if (distance === 1) return SIZE.close;
+    if (distance === 2) return SIZE.far;
+    return SIZE.base;
+  }
+
+  function apply(hoveredIndex) {
+    items.forEach(function (item, i) {
+      var size = hoveredIndex === -1 ? SIZE.base : sizeFor(Math.abs(i - hoveredIndex));
+      item.style.width = size + "px";
+      item.style.height = size + "px";
+      item.classList.toggle("is-active", i === hoveredIndex);
+    });
+  }
+
+  items.forEach(function (item, i) {
+    item.addEventListener("mouseenter", function () { apply(i); });
+  });
+  dock.addEventListener("mouseleave", function () { apply(-1); });
+
+  apply(-1);
 })();
 
 /* Animated stat counters — run once when the section scrolls into view.
