@@ -1593,6 +1593,64 @@ a{text-decoration:none;color:inherit;}
   margin-top:72px;
 }
 
+/* Modal do preview de "Produto e funcionamento" no mobile (ver script.js) —
+   só abre via JS, então não precisa de media query aqui: no desktop o modal
+   nunca ganha a classe is-open. */
+.preview-modal{
+  position:fixed;
+  inset:0;
+  z-index:300;
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+}
+.preview-modal.is-open{ display:flex; }
+.preview-modal-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(15,23,42,0.6);
+}
+.preview-modal-panel{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-height:82vh;
+  overflow-y:auto;
+  background:var(--blue);
+  border-radius:24px 24px 0 0;
+  padding:20px 20px 28px;
+  box-shadow:0 -20px 50px rgba(0,0,0,0.35);
+}
+.preview-modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:16px;
+}
+.preview-modal-title{
+  color:#fff;
+  font-size:16px;
+  font-weight:800;
+}
+.preview-modal-close{
+  width:32px; height:32px;
+  flex-shrink:0;
+  border-radius:50%;
+  background:rgba(255,255,255,0.14);
+  border:none;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+.preview-modal-close svg{ width:16px; height:16px; }
+/* Dentro do modal o painel ativo já é o único filho, então perde o piso
+   alto de altura pensado pra caber ao lado do menu no desktop. */
+.preview-modal-body .product-styles.is-active{ min-height:0; }
+body.preview-modal-lock{ overflow:hidden; }
+
 @media (max-width: 1200px){
   .product{ padding:56px 40px 96px; }
   .sec-problematicas{ padding:56px 40px 96px; }
@@ -1605,10 +1663,14 @@ a{text-decoration:none;color:inherit;}
   /* No mobile o script.js move o preview ativo pra dentro de .product-features,
      logo abaixo do row clicado — aqui só cuidamos do respiro dessa versão "inline". */
   .product-right{ margin-top:0; }
+  /* Produto e funcionamento não usa mais essa coluna no mobile — os previews
+     abrem no modal (ver .preview-modal), então ela fica sem conteúdo visível. */
+  .product .product-right{ display:none; }
   /* Sem o -10px: o preview inline precisa alinhar com a largura visível dos
-     botões do menu (que já compensam esse respiro com padding próprio). */
-  .product-features .product-styles.is-active{ margin:20px 0 24px; min-height:260px; overflow-y:auto; }
-  .component-list-preview, .records-preview{ max-height:260px; }
+     botões do menu (que já compensam esse respiro com padding próprio).
+     Isso só é usado nas Problemáticas — no Produto e funcionamento os
+     previews abrem num modal à parte (ver .preview-modal). */
+  .product-features .product-styles.is-active{ margin:20px 0 24px; overflow-y:auto; }
 }
 
 @media (max-width: 900px){
@@ -2611,20 +2673,27 @@ a{text-decoration:none;color:inherit;}
   .sec-subcta{ padding:0 20px 64px; }
   .subpage-header{ padding:20px; }
   .subcta-card{ padding:32px 24px; }
-  /* Carrossel de 1 card por vez, controlado por JS via transform (ver script.js)
-     — nada de overflow/scroll nativo, então não dá pra arrastar o card (nem pros
-     lados nem, principalmente, pra cima). Avança sozinho e também pelos pontos. */
+  /* Carrossel de 1 card por vez, com sobreposição (crossfade) igual ao preview
+     do notebook em "Personalize sua marca" — os 6 cards ficam empilhados no
+     mesmo lugar, só o ativo fica visível e em fluxo normal (é ele quem define
+     a altura do container). Nada de scroll/drag nativo. Avança sozinho e
+     também pelos pontos. */
   .mobile-break{ display:inline; }
-  .features-carousel{ overflow:hidden; padding:10px 0; }
-  .features-bento{
-    display:flex;
-    grid-template-columns:none;
-    transition:transform .5s cubic-bezier(.4,0,.2,1);
-  }
+  .features-carousel{ overflow:hidden; }
+  .features-bento{ display:block; position:relative; }
   .feature-tile, .feature-tile-lg, .feature-tile-wide{
     grid-column:auto;
-    flex:0 0 100%;
     width:100%;
+    position:absolute;
+    inset:0;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .6s ease-in-out;
+  }
+  .feature-tile.is-active{
+    position:relative;
+    opacity:1;
+    pointer-events:auto;
   }
   .features-dots{ display:flex; justify-content:center; gap:8px; margin-top:20px; }
   .features-dot{

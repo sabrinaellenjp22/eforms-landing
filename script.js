@@ -88,15 +88,36 @@
     // travar a altura do painel direito na altura do menu (sempre com as
     // mesmas 5 linhas), o card inteiro cresce/encolhe ao trocar de aba.
     var lockHeight = root.closest(".sec-problematicas") !== null;
-    // No mobile, só o Produto e funcionamento trava altura (pedido à parte) —
-    // os 4 previews (builder/componentes/estilos/registros) variam muito de
-    // altura entre si, então o card azul "pulava" ao trocar de aba.
-    var lockMobileHeight = root.closest(".product") !== null;
+    // No Produto e funcionamento os previews (builder/componentes/estilos/
+    // registros) variam demais de altura entre si — em vez de tentar encaixar
+    // isso "sanfonado" dentro do menu (o que sempre sobrava/cortava espaço),
+    // no mobile eles abrem num modal por cima, com altura livre e scroll.
+    var useModal = root.closest(".product") !== null;
 
     var isMobileLayout = null;
     var phoneSlot = root.parentElement && root.parentElement.querySelector(".product-phone-slot");
     var phoneSlotImg = phoneSlot && phoneSlot.querySelector("img");
     var hasTabImages = Array.prototype.some.call(tabs, function (t) { return t.hasAttribute("data-image"); });
+
+    var modal = useModal ? document.querySelector(".preview-modal") : null;
+    var modalBody = modal && modal.querySelector(".preview-modal-body");
+    var modalTitle = modal && modal.querySelector(".preview-modal-title");
+
+    function openModal(tab) {
+      var panel = panelFor(tab);
+      if (!modal || !modalBody || !panel) return;
+      modalBody.appendChild(panel);
+      var label = tab.querySelector(".feature-copy strong");
+      if (modalTitle) modalTitle.textContent = label ? label.textContent : "";
+      modal.classList.add("is-open");
+      document.body.classList.add("preview-modal-lock");
+    }
+
+    function closeModal() {
+      if (!modal) return;
+      modal.classList.remove("is-open");
+      document.body.classList.remove("preview-modal-lock");
+    }
 
     // Troca a imagem ao lado do card quando a aba clicada define data-image
     // (hoje só usado nas Problemáticas — nas outras abas o atributo não existe,
@@ -133,20 +154,13 @@
       if (innerPanel) innerPanel.insertBefore(phoneSlot, innerPanel.firstChild);
     }
 
-    // Soma só a altura dos botões do menu (sem nenhum preview encaixado no
-    // meio) — no mobile o preview ativo vive dentro de .product-features, logo
-    // productFeatures.offsetHeight já incluiria o próprio preview que estamos
-    // tentando travar, virando referência circular.
-    function menuOnlyHeight() {
-      var sum = 0;
-      tabs.forEach(function (t) { sum += t.offsetHeight; });
-      return sum;
-    }
-
     // Trava a altura direto na caixa de vidro (em vez de depender da cadeia de
     // porcentagem flex > grid > flex, que nem sempre propaga a altura entre
     // esses layouts encadeados) — assim ela sempre bate com o menu, e a foto
     // ao lado trava na altura total do card (não só do "stretch" do flex).
+    // Só roda no desktop — no mobile ninguém mais precisa de altura travada:
+    // Problemáticas fica com o texto no tamanho natural, e o Produto e
+    // funcionamento abre num modal com altura livre (ver useModal acima).
     function syncPanelHeight() {
       if (!productFeatures) return;
 
@@ -154,13 +168,9 @@
         productRight.style.removeProperty("height");
         if (phoneSlot) phoneSlot.style.removeProperty("height");
         panels.forEach(function (p) {
-          if (lockMobileHeight) {
-            p.style.height = menuOnlyHeight() + "px";
-          } else {
-            p.style.removeProperty("height");
-            var innerPanel = p.querySelector(".problem-panel");
-            if (innerPanel) innerPanel.style.removeProperty("height");
-          }
+          p.style.removeProperty("height");
+          var innerPanel = p.querySelector(".problem-panel");
+          if (innerPanel) innerPanel.style.removeProperty("height");
         });
         return;
       }
@@ -180,13 +190,16 @@
       if (shouldBeMobile !== isMobileLayout) {
         isMobileLayout = shouldBeMobile;
         if (isMobileLayout) {
-          tabs.forEach(function (t) {
-            if (t.classList.contains("is-active")) {
-              placeInline(t);
-              placeImageInline(t);
-            }
-          });
+          if (!useModal) {
+            tabs.forEach(function (t) {
+              if (t.classList.contains("is-active")) {
+                placeInline(t);
+                placeImageInline(t);
+              }
+            });
+          }
         } else {
+          closeModal();
           panels.forEach(function (p) { productRight.appendChild(p); });
           if (hasTabImages && phoneSlot) root.parentElement.appendChild(phoneSlot);
         }
@@ -205,11 +218,22 @@
         syncImage(tab);
 
         if (isMobileLayout) {
-          placeInline(tab);
-          placeImageInline(tab);
+          if (useModal) {
+            openModal(tab);
+          } else {
+            placeInline(tab);
+            placeImageInline(tab);
+          }
         }
       });
     });
+
+    if (modal) {
+      var closeBtn = modal.querySelector(".preview-modal-close");
+      var backdrop = modal.querySelector(".preview-modal-backdrop");
+      if (closeBtn) closeBtn.addEventListener("click", closeModal);
+      if (backdrop) backdrop.addEventListener("click", closeModal);
+    }
 
     syncLayout();
     window.addEventListener("resize", syncLayout);
@@ -309,11 +333,11 @@
   apply(-1);
 })();
 
-/* Carrossel de "Principais funcionalidades" no mobile — 1 card por vez, movido
-   por transform (não por scroll/drag nativo, pra não dar pra arrastar o card
-   pra cima nem soltar ele "livre" no meio de dois). Avança sozinho por timer,
-   e clicar num ponto também navega e reinicia o timer. No desktop (grid) não
-   faz nada — segue sem transform. */
+/* Carrossel de "Principais funcionalidades" no mobile — 1 card por vez, com
+   sobreposição (crossfade), mesma linguagem do preview do notebook em
+   "Personalize sua marca". Nada de scroll/drag nativo. Avança sozinho por
+   timer, e clicar num ponto também navega e reinicia o timer. No desktop
+   (grid) as classes "is-active" não têm efeito nenhum via CSS. */
 (function () {
   var track = document.querySelector(".features-bento");
   var dots = document.querySelectorAll(".features-dot");
@@ -326,7 +350,7 @@
   var timer = null;
 
   function render() {
-    track.style.transform = mqMobile.matches ? "translateX(-" + (index * 100) + "%)" : "";
+    tiles.forEach(function (tile, i) { tile.classList.toggle("is-active", i === index); });
     dots.forEach(function (dot, i) { dot.classList.toggle("is-active", i === index); });
   }
 
