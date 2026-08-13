@@ -1570,6 +1570,15 @@ a{text-decoration:none;color:inherit;}
 @media (min-width: 1201px){
   .sec-problematicas .product-styles.is-active{ height:100%; min-height:0; overflow:hidden; }
 }
+/* No mobile o JS move a foto pra dentro do painel, acima do texto — enquadramento
+   mais largo/curto que o recorte retrato usado quando ela fica ao lado do card. */
+.problem-panel .product-phone-slot{
+  width:100%;
+  height:auto;
+  aspect-ratio:16/10;
+  align-self:stretch;
+  margin-bottom:20px;
+}
 .problem-panel p{
   font-size:16px;
   line-height:1.7;

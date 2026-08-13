@@ -92,6 +92,7 @@
     var isMobileLayout = null;
     var phoneSlot = root.parentElement && root.parentElement.querySelector(".product-phone-slot");
     var phoneSlotImg = phoneSlot && phoneSlot.querySelector("img");
+    var hasTabImages = Array.prototype.some.call(tabs, function (t) { return t.hasAttribute("data-image"); });
 
     // Troca a imagem ao lado do card quando a aba clicada define data-image
     // (hoje só usado nas Problemáticas — nas outras abas o atributo não existe,
@@ -116,6 +117,16 @@
     function placeInline(tab) {
       var panel = panelFor(tab);
       if (panel) tab.insertAdjacentElement("afterend", panel);
+    }
+
+    // Só nas Problemáticas (tabs com data-image): no mobile a foto entra
+    // dentro do próprio painel, acima do texto, logo abaixo do item clicado —
+    // assim a troca de imagem fica visível sem precisar rolar até o fim do menu.
+    function placeImageInline(tab) {
+      if (!hasTabImages || !phoneSlot) return;
+      var panel = panelFor(tab);
+      var innerPanel = panel && panel.querySelector(".problem-panel");
+      if (innerPanel) innerPanel.insertBefore(phoneSlot, innerPanel.firstChild);
     }
 
     // Trava a altura direto na caixa de vidro (em vez de depender da cadeia de
@@ -148,10 +159,14 @@
         isMobileLayout = shouldBeMobile;
         if (isMobileLayout) {
           tabs.forEach(function (t) {
-            if (t.classList.contains("is-active")) placeInline(t);
+            if (t.classList.contains("is-active")) {
+              placeInline(t);
+              placeImageInline(t);
+            }
           });
         } else {
           panels.forEach(function (p) { productRight.appendChild(p); });
+          if (hasTabImages && phoneSlot) root.parentElement.appendChild(phoneSlot);
         }
       }
       syncPanelHeight();
@@ -167,7 +182,10 @@
         });
         syncImage(tab);
 
-        if (isMobileLayout) placeInline(tab);
+        if (isMobileLayout) {
+          placeInline(tab);
+          placeImageInline(tab);
+        }
       });
     });
 
