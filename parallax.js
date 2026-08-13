@@ -31,26 +31,30 @@
     io.observe(media);
   }
 
-  // Versão mobile do parallax: sem pin nem sobreposição (o CSS já empilha
-  // título e preview normalmente), só o texto do hero (título+subtítulo)
-  // desaparecendo suavemente conforme rola, acompanhando o scroll (scrub).
+  // Versão mobile do parallax: sem o truque de sobreposição do desktop (título
+  // e mosaico na mesma célula do grid — só existe em coluna dupla), mas com
+  // um efeito parecido: o preview fica "preso" na tela (pin) enquanto o texto
+  // desliza pra cima e desaparece por baixo dele, junto com o degradê azul
+  // que também só existia no desktop.
   function initMobileTitleFade() {
     var text = document.querySelector(".hero-text");
+    var media = document.querySelector(".hero-media");
+    var tint = document.querySelector(".hero-bg-tint");
     if (!text) return;
     var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) return;
 
-    gsap.to(text, {
-      autoAlpha: 0,
-      y: -30,
-      ease: "none",
+    var tl = gsap.timeline({
       scrollTrigger: {
         trigger: ".hero",
         start: "top top",
-        end: "+=" + Math.round(window.innerHeight * 0.5),
-        scrub: true
+        end: "+=" + Math.round(window.innerHeight * 0.6),
+        scrub: true,
+        pin: media || false
       }
-    });
+    }).to(text, { autoAlpha: 0, y: -30, ease: "none" }, 0);
+
+    if (tint) tl.to(tint, { opacity: 1, ease: "none" }, 0);
   }
 
   function init() {

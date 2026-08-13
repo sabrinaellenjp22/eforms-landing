@@ -353,14 +353,12 @@
 
 /* Carrossel de "Principais funcionalidades" no mobile — 1 card por vez, com
    sobreposição (crossfade), mesma linguagem do preview do notebook em
-   "Personalize sua marca". Nada de scroll/drag nativo. Avança sozinho por
-   timer, e as setas nas laterais também navegam e reiniciam o timer. No
-   desktop (grid) as classes "is-active" não têm efeito nenhum via CSS. */
+   "Personalize sua marca". Nada de scroll/drag/botão manual: avança sozinho
+   por timer. No desktop (grid) as classes "is-active" não têm efeito
+   nenhum via CSS. */
 (function () {
   var track = document.querySelector(".features-bento");
   var tiles = document.querySelectorAll(".feature-tile");
-  var prevBtn = document.querySelector(".features-arrow-prev");
-  var nextBtn = document.querySelector(".features-arrow-next");
   if (!track || !tiles.length) return;
 
   var mqMobile = window.matchMedia("(max-width: 720px)");
@@ -387,9 +385,6 @@
     if (!mqMobile.matches || mqReduced.matches) return;
     timer = setInterval(function () { goTo(index + 1); }, 4500);
   }
-
-  if (prevBtn) prevBtn.addEventListener("click", function () { goTo(index - 1); startAuto(); });
-  if (nextBtn) nextBtn.addEventListener("click", function () { goTo(index + 1); startAuto(); });
 
   function onBreakpointChange() {
     index = 0;

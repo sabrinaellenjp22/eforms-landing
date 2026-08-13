@@ -732,7 +732,7 @@ a{text-decoration:none;color:inherit;}
   /* Sem tampa de max-width: preenche a mesma largura de conteúdo do resto da
      LP (100% do .hero, que já tem os 20px de margem padrão), mantendo a
      proporção do mock via aspect-ratio em vez de altura fixa. */
-  .mock-phone{ width:100%; max-width:none; aspect-ratio:280/480; height:auto; margin:0 auto; }
+  .mock-phone{ width:100%; max-width:none; aspect-ratio:280/360; height:auto; margin:0 auto; }
 }
 
 @media (max-width: 760px){
@@ -1665,7 +1665,10 @@ body.preview-modal-lock{ overflow:hidden; }
   .product-styles{ grid-template-columns:1fr 1fr; }
   .product-shell{ flex-direction:column; }
   .product-phone{ width:230px; align-self:center; }
-  .product-phone-slot{ width:230px; height:260px; align-self:center; }
+  .product-phone-slot{ width:230px; height:190px; align-self:center; }
+  /* Menos distância entre a foto e o card azul, só no Produto e funcionamento
+     (Problemáticas não usa essa foto solta — a dela some no mobile). */
+  .product .product-shell{ gap:24px; }
   /* No mobile o script.js move o preview ativo pra dentro de .product-features,
      logo abaixo do row clicado — aqui só cuidamos do respiro dessa versão "inline". */
   .product-right{ margin-top:0; }
@@ -1695,7 +1698,7 @@ body.preview-modal-lock{ overflow:hidden; }
   .product-styles[data-panel="styles"]{ grid-template-columns:1fr 1fr; }
   .product-card{ padding:32px 24px; }
   .product-title{ font-size:26px; }
-  .product-phone-slot{ width:100%; height:auto; aspect-ratio:230/260; align-self:stretch; }
+  .product-phone-slot{ width:100%; height:auto; aspect-ratio:230/190; align-self:stretch; }
 }
 
 /* ===== Integrações — grade estática de logos, sem interação ===== */
@@ -2692,44 +2695,34 @@ body.preview-modal-lock{ overflow:hidden; }
   .mobile-break{ display:inline; }
   .features-carousel{ position:relative; }
   .features-bento{ display:block; position:relative; }
-  .feature-tile, .feature-tile-lg, .feature-tile-wide{
+  /* Selector com ".features-carousel" na frente (em vez de só ".feature-tile")
+     de propósito: precisa ganhar em especificidade de [data-reveal].is-visible
+     (que o sistema de "aparecer ao rolar" adiciona a TODOS os 6 cards assim que
+     entram na viewport, já que ficam empilhados na mesma posição). Sem isso o
+     opacity:1 do reveal vencia o opacity:0 daqui pros cards inativos, e os 6
+     ficavam visíveis ao mesmo tempo — sempre mostrando por cima o último do
+     DOM ("Administração de Categorias e Usuários"), travado, sem reagir a nada. */
+  .features-carousel .feature-tile,
+  .features-carousel .feature-tile-lg,
+  .features-carousel .feature-tile-wide{
     grid-column:auto;
     width:100%;
+    min-height:220px;
     position:absolute;
     inset:0;
     opacity:0;
     pointer-events:none;
     transition:opacity .6s ease-in-out;
   }
-  /* transform:none anula o translateY(28px) que [data-reveal] (base, no topo
-     do CSS) deixa aplicado até o IntersectionObserver disparar — sem isso o
-     card ativo nascia deslocado pra baixo e o canto arredondado de baixo
-     saía cortado pelo overflow, virando um "quadrado cinza". */
-  .feature-tile.is-active{
+  /* transform:none anula o translateY(28px) que [data-reveal] deixa aplicado
+     até o IntersectionObserver disparar — sem isso o card ativo nascia
+     deslocado pra baixo e o canto arredondado de baixo saía cortado. */
+  .features-carousel .feature-tile.is-active{
     position:relative;
     opacity:1;
     pointer-events:auto;
     transform:none;
   }
-  .features-arrow{
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
-    width:34px; height:34px;
-    border-radius:50%;
-    background:#fff;
-    border:none;
-    box-shadow:var(--shadow-md);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--blue);
-    cursor:pointer;
-    z-index:2;
-  }
-  .features-arrow svg{ width:16px; height:16px; }
-  .features-arrow-prev{ left:-14px; }
-  .features-arrow-next{ right:-14px; }
   .sec-customize{ padding-top:48px; padding-bottom:48px; }
   .social-logos-card{ margin-left:-20px; margin-right:-20px; margin-bottom:-64px; padding-left:20px; padding-right:20px; }
   .social-logos-set{ gap:28px; }
