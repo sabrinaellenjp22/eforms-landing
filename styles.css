@@ -1605,7 +1605,9 @@ a{text-decoration:none;color:inherit;}
   /* No mobile o script.js move o preview ativo pra dentro de .product-features,
      logo abaixo do row clicado — aqui só cuidamos do respiro dessa versão "inline". */
   .product-right{ margin-top:0; }
-  .product-features .product-styles.is-active{ margin:20px -10px 24px; min-height:260px; }
+  /* Sem o -10px: o preview inline precisa alinhar com a largura visível dos
+     botões do menu (que já compensam esse respiro com padding próprio). */
+  .product-features .product-styles.is-active{ margin:20px 0 24px; min-height:260px; overflow-y:auto; }
   .component-list-preview, .records-preview{ max-height:260px; }
 }
 
@@ -2205,6 +2207,7 @@ a{text-decoration:none;color:inherit;}
   text-align:center;
 }
 .sec-why .sec-subtitle{ max-width:780px; }
+.mobile-break{ display:none; }
 .why-grid{
   margin-top:28px;
   display:grid;
@@ -2608,22 +2611,20 @@ a{text-decoration:none;color:inherit;}
   .sec-subcta{ padding:0 20px 64px; }
   .subpage-header{ padding:20px; }
   .subcta-card{ padding:32px 24px; }
-  /* Carrossel de 1 card por vez via scroll-snap nativo (sem lib) — os pontos
-     abaixo navegam clicando, e destacam o card centralizado ao arrastar. */
+  /* Carrossel de 1 card por vez, controlado por JS via transform (ver script.js)
+     — nada de overflow/scroll nativo, então não dá pra arrastar o card (nem pros
+     lados nem, principalmente, pra cima). Avança sozinho e também pelos pontos. */
+  .mobile-break{ display:inline; }
+  .features-carousel{ overflow:hidden; padding:10px 0; }
   .features-bento{
     display:flex;
     grid-template-columns:none;
-    overflow-x:auto;
-    scroll-snap-type:x mandatory;
-    scrollbar-width:none;
-    margin-left:-20px; margin-right:-20px;
-    padding-left:20px; padding-right:20px;
+    transition:transform .5s cubic-bezier(.4,0,.2,1);
   }
-  .features-bento::-webkit-scrollbar{ display:none; }
   .feature-tile, .feature-tile-lg, .feature-tile-wide{
     grid-column:auto;
-    flex:0 0 calc(100% - 20px);
-    scroll-snap-align:center;
+    flex:0 0 100%;
+    width:100%;
   }
   .features-dots{ display:flex; justify-content:center; gap:8px; margin-top:20px; }
   .features-dot{

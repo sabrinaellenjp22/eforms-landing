@@ -88,6 +88,10 @@
     // travar a altura do painel direito na altura do menu (sempre com as
     // mesmas 5 linhas), o card inteiro cresce/encolhe ao trocar de aba.
     var lockHeight = root.closest(".sec-problematicas") !== null;
+    // No mobile, só o Produto e funcionamento trava altura (pedido à parte) —
+    // os 4 previews (builder/componentes/estilos/registros) variam muito de
+    // altura entre si, então o card azul "pulava" ao trocar de aba.
+    var lockMobileHeight = root.closest(".product") !== null;
 
     var isMobileLayout = null;
     var phoneSlot = root.parentElement && root.parentElement.querySelector(".product-phone-slot");
@@ -129,21 +133,39 @@
       if (innerPanel) innerPanel.insertBefore(phoneSlot, innerPanel.firstChild);
     }
 
+    // Soma só a altura dos botões do menu (sem nenhum preview encaixado no
+    // meio) — no mobile o preview ativo vive dentro de .product-features, logo
+    // productFeatures.offsetHeight já incluiria o próprio preview que estamos
+    // tentando travar, virando referência circular.
+    function menuOnlyHeight() {
+      var sum = 0;
+      tabs.forEach(function (t) { sum += t.offsetHeight; });
+      return sum;
+    }
+
     // Trava a altura direto na caixa de vidro (em vez de depender da cadeia de
     // porcentagem flex > grid > flex, que nem sempre propaga a altura entre
     // esses layouts encadeados) — assim ela sempre bate com o menu, e a foto
     // ao lado trava na altura total do card (não só do "stretch" do flex).
     function syncPanelHeight() {
-      if (!lockHeight || !productFeatures) return;
+      if (!productFeatures) return;
+
       if (isMobileLayout) {
         productRight.style.removeProperty("height");
-        panels.forEach(function (p) {
-          var innerPanel = p.querySelector(".problem-panel");
-          if (innerPanel) innerPanel.style.removeProperty("height");
-        });
         if (phoneSlot) phoneSlot.style.removeProperty("height");
+        panels.forEach(function (p) {
+          if (lockMobileHeight) {
+            p.style.height = menuOnlyHeight() + "px";
+          } else {
+            p.style.removeProperty("height");
+            var innerPanel = p.querySelector(".problem-panel");
+            if (innerPanel) innerPanel.style.removeProperty("height");
+          }
+        });
         return;
       }
+
+      if (!lockHeight) return;
       var h = productFeatures.offsetHeight + "px";
       productRight.style.height = h;
       panels.forEach(function (p) {
@@ -287,31 +309,59 @@
   apply(-1);
 })();
 
-/* Carrossel de "Principais funcionalidades" no mobile — o swipe já funciona
-   sozinho via scroll-snap (CSS puro), aqui só sincroniza os pontinhos: clicar
-   navega até o card, e o IntersectionObserver marca o card centralizado. */
+/* Carrossel de "Principais funcionalidades" no mobile — 1 card por vez, movido
+   por transform (não por scroll/drag nativo, pra não dar pra arrastar o card
+   pra cima nem soltar ele "livre" no meio de dois). Avança sozinho por timer,
+   e clicar num ponto também navega e reinicia o timer. No desktop (grid) não
+   faz nada — segue sem transform. */
 (function () {
   var track = document.querySelector(".features-bento");
   var dots = document.querySelectorAll(".features-dot");
   var tiles = document.querySelectorAll(".feature-tile");
   if (!track || !dots.length || !tiles.length) return;
 
+  var mqMobile = window.matchMedia("(max-width: 720px)");
+  var mqReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var index = 0;
+  var timer = null;
+
+  function render() {
+    track.style.transform = mqMobile.matches ? "translateX(-" + (index * 100) + "%)" : "";
+    dots.forEach(function (dot, i) { dot.classList.toggle("is-active", i === index); });
+  }
+
+  function goTo(i) {
+    index = (i + tiles.length) % tiles.length;
+    render();
+  }
+
+  function stopAuto() {
+    if (timer) clearInterval(timer);
+    timer = null;
+  }
+
+  function startAuto() {
+    stopAuto();
+    if (!mqMobile.matches || mqReduced.matches) return;
+    timer = setInterval(function () { goTo(index + 1); }, 4500);
+  }
+
   dots.forEach(function (dot, i) {
     dot.addEventListener("click", function () {
-      tiles[i].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      goTo(i);
+      startAuto();
     });
   });
 
-  if (!("IntersectionObserver" in window)) return;
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      var index = Array.prototype.indexOf.call(tiles, entry.target);
-      dots.forEach(function (dot, i) { dot.classList.toggle("is-active", i === index); });
-    });
-  }, { root: track, threshold: 0.6 });
+  function onBreakpointChange() {
+    index = 0;
+    render();
+    startAuto();
+  }
+  if (mqMobile.addEventListener) mqMobile.addEventListener("change", onBreakpointChange);
 
-  tiles.forEach(function (tile) { io.observe(tile); });
+  render();
+  startAuto();
 })();
 
 /* Animated stat counters — run once when the section scrolls into view.
