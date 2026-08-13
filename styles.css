@@ -1578,6 +1578,7 @@ a{text-decoration:none;color:inherit;}
   aspect-ratio:16/10;
   align-self:stretch;
   margin-bottom:20px;
+  box-shadow:none;
 }
 .problem-panel p{
   font-size:16px;
