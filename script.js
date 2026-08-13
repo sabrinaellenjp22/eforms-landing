@@ -104,6 +104,8 @@
     var modalBody = modal && modal.querySelector(".preview-modal-body");
     var modalTitle = modal && modal.querySelector(".preview-modal-title");
 
+    var modalOpenerTab = null;
+
     function openModal(tab) {
       var panel = panelFor(tab);
       if (!modal || !modalBody || !panel) return;
@@ -114,13 +116,22 @@
       var label = tab.querySelector(".feature-copy strong");
       if (modalTitle) modalTitle.textContent = label ? label.textContent : "";
       modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
       document.body.classList.add("preview-modal-lock");
+      modalOpenerTab = tab;
+      var closeBtn = modal.querySelector(".preview-modal-close");
+      if (closeBtn) closeBtn.focus();
     }
 
     function closeModal() {
-      if (!modal) return;
+      if (!modal || !modal.classList.contains("is-open")) return;
       modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
       document.body.classList.remove("preview-modal-lock");
+      if (modalOpenerTab) {
+        modalOpenerTab.focus();
+        modalOpenerTab = null;
+      }
     }
 
     // Troca a imagem ao lado do card quando a aba clicada define data-image
@@ -237,6 +248,9 @@
       var backdrop = modal.querySelector(".preview-modal-backdrop");
       if (closeBtn) closeBtn.addEventListener("click", closeModal);
       if (backdrop) backdrop.addEventListener("click", closeModal);
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeModal();
+      });
     }
 
     syncLayout();
