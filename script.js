@@ -103,8 +103,28 @@
     var modal = useModal ? modalHost.querySelector(".preview-modal") : null;
     var modalBody = modal && modal.querySelector(".preview-modal-body");
     var modalTitle = modal && modal.querySelector(".preview-modal-title");
+    var modalNext = modal && modal.querySelector(".preview-modal-next");
 
     var modalOpenerTab = null;
+
+    var nextIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>';
+    var closeIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>';
+
+    // No último item do menu, o botão "Próximo" vira "Fechar" (rótulo e ícone
+    // trocam de verdade, não só a função) — assim não fica um botão que faz
+    // coisas diferentes sem avisar visualmente.
+    function updateModalNext(tab) {
+      if (!modalNext) return;
+      var idx = Array.prototype.indexOf.call(tabs, tab);
+      var nextTab = tabs[idx + 1];
+      if (nextTab) {
+        modalNext.innerHTML = "Próximo " + nextIcon;
+        modalNext.onclick = function () { nextTab.click(); };
+      } else {
+        modalNext.innerHTML = "Fechar " + closeIcon;
+        modalNext.onclick = closeModal;
+      }
+    }
 
     function openModal(tab) {
       var panel = panelFor(tab);
@@ -115,6 +135,7 @@
       placeImageInline(tab);
       var label = tab.querySelector(".feature-copy strong");
       if (modalTitle) modalTitle.textContent = label ? label.textContent : "";
+      updateModalNext(tab);
       modal.classList.add("is-open");
       modal.setAttribute("aria-hidden", "false");
       document.body.classList.add("preview-modal-lock");

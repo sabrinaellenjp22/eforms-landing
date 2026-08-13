@@ -31,28 +31,33 @@
     io.observe(media);
   }
 
-  // Versão mobile do parallax: sem o truque de sobreposição do desktop (título
-  // e mosaico na mesma célula do grid — só existe em coluna dupla), mas com
-  // um efeito parecido: o preview fica "preso" na tela (pin) enquanto o texto
-  // desliza pra cima e desaparece por baixo dele, junto com o degradê azul
-  // que também só existia no desktop.
+  // Versão mobile do parallax: sem pin (travar o scroll pra um elemento que
+  // não está no topo da tela é frágil — tentei e o preview pulava pra baixo).
+  // Em vez disso, o preview sobe de verdade por cima do texto via transform
+  // (translateY até a posição do texto), enquanto o texto desaparece — puro
+  // scrub ligado ao scroll, sem prender nada.
   function initMobileTitleFade() {
     var text = document.querySelector(".hero-text");
     var media = document.querySelector(".hero-media");
     var tint = document.querySelector(".hero-bg-tint");
-    if (!text) return;
+    if (!text || !media) return;
     var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) return;
+
+    // Distância entre o topo do texto e o topo do preview — é quanto o
+    // preview precisa subir pra cobrir exatamente onde o texto está.
+    var moveDistance = media.getBoundingClientRect().top - text.getBoundingClientRect().top;
 
     var tl = gsap.timeline({
       scrollTrigger: {
         trigger: ".hero",
         start: "top top",
         end: "+=" + Math.round(window.innerHeight * 0.6),
-        scrub: true,
-        pin: media || false
+        scrub: true
       }
-    }).to(text, { autoAlpha: 0, y: -30, ease: "none" }, 0);
+    })
+      .to(text, { autoAlpha: 0, y: -30, ease: "none" }, 0)
+      .to(media, { y: -moveDistance, ease: "none" }, 0);
 
     if (tint) tl.to(tint, { opacity: 1, ease: "none" }, 0);
   }

@@ -1652,6 +1652,23 @@ a{text-decoration:none;color:inherit;}
   cursor:pointer;
 }
 .preview-modal-close svg{ width:16px; height:16px; }
+.preview-modal-next{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:100%;
+  margin-top:20px;
+  padding:14px;
+  border-radius:16px;
+  border:none;
+  background:rgba(255,255,255,0.16);
+  color:#fff;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+}
+.preview-modal-next svg{ width:16px; height:16px; }
 /* Dentro do modal o painel ativo já é o único filho, então perde o piso
    alto de altura pensado pra caber ao lado do menu no desktop. */
 .preview-modal-body .product-styles.is-active{ min-height:0; }
