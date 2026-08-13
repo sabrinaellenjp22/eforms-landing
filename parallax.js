@@ -39,6 +39,7 @@
   function initMobileTitleFade() {
     var text = document.querySelector(".hero-text");
     var media = document.querySelector(".hero-media");
+    var cta = document.querySelector(".hero-cta");
     var tint = document.querySelector(".hero-bg-tint");
     if (!text || !media) return;
     var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -58,6 +59,11 @@
     })
       .to(text, { autoAlpha: 0, y: -30, ease: "none" }, 0)
       .to(media, { y: -moveDistance, ease: "none" }, 0);
+
+    // Os botões sobem junto com o preview, na mesma distância — sem isso eles
+    // ficavam parados no lugar de origem enquanto o preview subia, abrindo um
+    // vão enorme entre os dois (o transform não empurra o resto do layout).
+    if (cta) tl.to(cta, { y: -moveDistance, ease: "none" }, 0);
 
     if (tint) tl.to(tint, { opacity: 1, ease: "none" }, 0);
   }

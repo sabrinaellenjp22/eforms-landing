@@ -736,7 +736,10 @@ a{text-decoration:none;color:inherit;}
 }
 
 @media (max-width: 760px){
-  .hero{ padding:20px 20px 0; }
+  /* min-height:auto (em vez do 100vh do desktop) + padding-bottom fixo: sem
+     isso sobrava espaço vazio embaixo do conteúdo, e os botões, quando
+     encostavam no fim, ficavam colados na borda sem respiro nenhum. */
+  .hero{ min-height:auto; padding:20px 20px 48px; }
   .navbar{ flex-wrap:wrap; }
   .navbar.is-fixed{ padding:16px 20px; }
   .nav-toggle{ display:flex; }
@@ -1627,17 +1630,30 @@ a{text-decoration:none;color:inherit;}
 }
 .preview-modal-blue .preview-modal-panel{ background:var(--blue); }
 .preview-modal-pink .preview-modal-panel{ background:var(--pink); }
+/* Problemáticas: altura fixa (não só um teto) pra todos os itens abrirem no
+   mesmo tamanho, em vez de cada um esticar até o próprio conteúdo — e a foto
+   dentro fica mais baixa, senão ela sozinha já tomava quase a tela toda. */
+.preview-modal-pink .preview-modal-panel{ height:58vh; max-height:460px; }
+.preview-modal-pink .preview-modal-body .product-phone-slot{ height:150px; aspect-ratio:auto; margin-bottom:14px; }
 .preview-modal-head{
+  position:relative;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:16px;
+  justify-content:flex-end;
+  min-height:32px;
   margin-bottom:16px;
 }
+/* Título centralizado de verdade (não só no espaço sobrando ao lado do botão
+   de fechar): ocupa a largura toda por cima, o botão fica por cima dele. */
 .preview-modal-title{
+  position:absolute;
+  left:0;
+  right:0;
+  text-align:center;
   color:#fff;
   font-size:16px;
   font-weight:800;
+  pointer-events:none;
 }
 .preview-modal-close{
   width:32px; height:32px;
