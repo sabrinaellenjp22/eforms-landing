@@ -287,6 +287,33 @@
   apply(-1);
 })();
 
+/* Carrossel de "Principais funcionalidades" no mobile — o swipe já funciona
+   sozinho via scroll-snap (CSS puro), aqui só sincroniza os pontinhos: clicar
+   navega até o card, e o IntersectionObserver marca o card centralizado. */
+(function () {
+  var track = document.querySelector(".features-bento");
+  var dots = document.querySelectorAll(".features-dot");
+  var tiles = document.querySelectorAll(".feature-tile");
+  if (!track || !dots.length || !tiles.length) return;
+
+  dots.forEach(function (dot, i) {
+    dot.addEventListener("click", function () {
+      tiles[i].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    });
+  });
+
+  if (!("IntersectionObserver" in window)) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      var index = Array.prototype.indexOf.call(tiles, entry.target);
+      dots.forEach(function (dot, i) { dot.classList.toggle("is-active", i === index); });
+    });
+  }, { root: track, threshold: 0.6 });
+
+  tiles.forEach(function (tile) { io.observe(tile); });
+})();
+
 /* Animated stat counters — run once when the section scrolls into view.
    The final values are already in the HTML, so if this never runs
    (no JS, no IntersectionObserver, reduced motion) the numbers stay correct. */

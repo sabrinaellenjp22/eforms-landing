@@ -676,6 +676,17 @@
     </article>
   </div>
 
+  <!-- Só visível no mobile (≤720px): .features-bento vira carrossel de 1 card
+       por vez (scroll-snap nativo, sem lib), esses pontos navegam por ele. -->
+  <div class="features-dots" role="tablist" aria-label="Navegar pelas funcionalidades">
+    <button type="button" class="features-dot is-active" aria-label="Card 1"></button>
+    <button type="button" class="features-dot" aria-label="Card 2"></button>
+    <button type="button" class="features-dot" aria-label="Card 3"></button>
+    <button type="button" class="features-dot" aria-label="Card 4"></button>
+    <button type="button" class="features-dot" aria-label="Card 5"></button>
+    <button type="button" class="features-dot" aria-label="Card 6"></button>
+  </div>
+
   <div class="inline-cta" data-reveal>
     <p>Tudo isso rodando na sua operação em poucos dias.</p>
     <a href="https://wa.me/5583993378336?text=Quero%20saber%20mais%20sobre%20o%20eForms." class="btn btn-pink" target="_blank" rel="noopener">Agendar uma conversa
