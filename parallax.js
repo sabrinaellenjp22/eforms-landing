@@ -31,6 +31,28 @@
     io.observe(media);
   }
 
+  // Versão mobile do parallax: sem pin nem sobreposição (o CSS já empilha
+  // título e preview normalmente), só o texto do hero (título+subtítulo)
+  // desaparecendo suavemente conforme rola, acompanhando o scroll (scrub).
+  function initMobileTitleFade() {
+    var text = document.querySelector(".hero-text");
+    if (!text) return;
+    var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+
+    gsap.to(text, {
+      autoAlpha: 0,
+      y: -30,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "+=" + Math.round(window.innerHeight * 0.5),
+        scrub: true
+      }
+    });
+  }
+
   function init() {
     initMobileReveal();
 
@@ -40,13 +62,15 @@
     }
     gsap.registerPlugin(ScrollTrigger);
 
+    if (window.innerWidth <= 1200) {
+      initMobileTitleFade();
+      return;
+    }
+
     var title = document.querySelector(".hero-stage-title");
     var mosaic = document.querySelector(".hero-stage-mosaic");
     var tint = document.querySelector(".hero-bg-tint");
     if (!title || !mosaic) return;
-    // O truque de sobreposição (title/mosaic na mesma célula) só existe no
-    // layout desktop; no mobile o CSS já empilha os dois normalmente.
-    if (window.innerWidth <= 1200) return;
 
     var peekOffset = mosaic.offsetHeight * 0.65;
     gsap.set(mosaic, { y: peekOffset, scale: 0.92 });

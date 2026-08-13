@@ -88,18 +88,19 @@
     // travar a altura do painel direito na altura do menu (sempre com as
     // mesmas 5 linhas), o card inteiro cresce/encolhe ao trocar de aba.
     var lockHeight = root.closest(".sec-problematicas") !== null;
-    // No Produto e funcionamento os previews (builder/componentes/estilos/
-    // registros) variam demais de altura entre si — em vez de tentar encaixar
-    // isso "sanfonado" dentro do menu (o que sempre sobrava/cortava espaço),
-    // no mobile eles abrem num modal por cima, com altura livre e scroll.
-    var useModal = root.closest(".product") !== null;
+    // Nas duas sections, os previews variam demais de altura entre as abas —
+    // em vez de tentar encaixar isso "sanfonado" dentro do menu (sempre
+    // sobrava ou cortava espaço), no mobile eles abrem num modal por cima,
+    // com altura livre e scroll próprio.
+    var modalHost = root.closest(".sec-problematicas") || root.closest(".product");
+    var useModal = modalHost !== null;
 
     var isMobileLayout = null;
     var phoneSlot = root.parentElement && root.parentElement.querySelector(".product-phone-slot");
     var phoneSlotImg = phoneSlot && phoneSlot.querySelector("img");
     var hasTabImages = Array.prototype.some.call(tabs, function (t) { return t.hasAttribute("data-image"); });
 
-    var modal = useModal ? document.querySelector(".preview-modal") : null;
+    var modal = useModal ? modalHost.querySelector(".preview-modal") : null;
     var modalBody = modal && modal.querySelector(".preview-modal-body");
     var modalTitle = modal && modal.querySelector(".preview-modal-title");
 
@@ -107,6 +108,9 @@
       var panel = panelFor(tab);
       if (!modal || !modalBody || !panel) return;
       modalBody.appendChild(panel);
+      // Nas Problemáticas isso também traz a foto do item pra dentro do
+      // modal, acima do texto (mesma função usada antes no modo inline).
+      placeImageInline(tab);
       var label = tab.querySelector(".feature-copy strong");
       if (modalTitle) modalTitle.textContent = label ? label.textContent : "";
       modal.classList.add("is-open");
@@ -336,13 +340,14 @@
 /* Carrossel de "Principais funcionalidades" no mobile — 1 card por vez, com
    sobreposição (crossfade), mesma linguagem do preview do notebook em
    "Personalize sua marca". Nada de scroll/drag nativo. Avança sozinho por
-   timer, e clicar num ponto também navega e reinicia o timer. No desktop
-   (grid) as classes "is-active" não têm efeito nenhum via CSS. */
+   timer, e as setas nas laterais também navegam e reiniciam o timer. No
+   desktop (grid) as classes "is-active" não têm efeito nenhum via CSS. */
 (function () {
   var track = document.querySelector(".features-bento");
-  var dots = document.querySelectorAll(".features-dot");
   var tiles = document.querySelectorAll(".feature-tile");
-  if (!track || !dots.length || !tiles.length) return;
+  var prevBtn = document.querySelector(".features-arrow-prev");
+  var nextBtn = document.querySelector(".features-arrow-next");
+  if (!track || !tiles.length) return;
 
   var mqMobile = window.matchMedia("(max-width: 720px)");
   var mqReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -351,7 +356,6 @@
 
   function render() {
     tiles.forEach(function (tile, i) { tile.classList.toggle("is-active", i === index); });
-    dots.forEach(function (dot, i) { dot.classList.toggle("is-active", i === index); });
   }
 
   function goTo(i) {
@@ -370,12 +374,8 @@
     timer = setInterval(function () { goTo(index + 1); }, 4500);
   }
 
-  dots.forEach(function (dot, i) {
-    dot.addEventListener("click", function () {
-      goTo(i);
-      startAuto();
-    });
-  });
+  if (prevBtn) prevBtn.addEventListener("click", function () { goTo(index - 1); startAuto(); });
+  if (nextBtn) nextBtn.addEventListener("click", function () { goTo(index + 1); startAuto(); });
 
   function onBreakpointChange() {
     index = 0;

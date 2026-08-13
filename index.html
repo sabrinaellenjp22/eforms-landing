@@ -253,6 +253,20 @@
   </div>
   </div>
 
+  <!-- Mobile: cada item do menu de Problematicas abre aqui (foto + texto). -->
+  <div class="preview-modal preview-modal-pink" aria-hidden="true">
+    <div class="preview-modal-backdrop"></div>
+    <div class="preview-modal-panel" role="dialog" aria-modal="true">
+      <div class="preview-modal-head">
+        <strong class="preview-modal-title"></strong>
+        <button type="button" class="preview-modal-close" aria-label="Fechar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="preview-modal-body"></div>
+    </div>
+  </div>
+
   <div class="inline-cta" data-reveal>
     <p>Reconheceu algum desses problemas na sua operação?</p>
     <a href="https://wa.me/5583993378336?text=Quero%20saber%20mais%20sobre%20o%20eForms." class="btn btn-pink" target="_blank" rel="noopener">Falar com especialista
@@ -555,7 +569,7 @@
 
   <!-- Mobile: os previews de "Produto e funcionamento" abrem aqui em vez de
        encaixar dentro do menu (o conteudo varia demais de altura entre si). -->
-  <div class="preview-modal" aria-hidden="true">
+  <div class="preview-modal preview-modal-blue" aria-hidden="true">
     <div class="preview-modal-backdrop"></div>
     <div class="preview-modal-panel" role="dialog" aria-modal="true">
       <div class="preview-modal-head">
@@ -691,17 +705,14 @@
       </div>
     </article>
   </div>
-  </div>
-
-  <!-- Só visível no mobile (≤720px): .features-bento vira carrossel de 1 card
-       por vez (scroll-snap nativo, sem lib), esses pontos navegam por ele. -->
-  <div class="features-dots" role="tablist" aria-label="Navegar pelas funcionalidades">
-    <button type="button" class="features-dot is-active" aria-label="Card 1"></button>
-    <button type="button" class="features-dot" aria-label="Card 2"></button>
-    <button type="button" class="features-dot" aria-label="Card 3"></button>
-    <button type="button" class="features-dot" aria-label="Card 4"></button>
-    <button type="button" class="features-dot" aria-label="Card 5"></button>
-    <button type="button" class="features-dot" aria-label="Card 6"></button>
+  <!-- Só existe/aparece no mobile (≤720px): .features-bento vira carrossel de
+       1 card por vez (crossfade), essas setas navegam por ele. -->
+  <button type="button" class="features-arrow features-arrow-prev" aria-label="Funcionalidade anterior">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <button type="button" class="features-arrow features-arrow-next" aria-label="Próxima funcionalidade">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
   </div>
 
   <div class="inline-cta" data-reveal>
