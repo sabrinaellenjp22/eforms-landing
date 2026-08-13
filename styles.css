@@ -1630,11 +1630,16 @@ a{text-decoration:none;color:inherit;}
 }
 .preview-modal-blue .preview-modal-panel{ background:var(--blue); }
 .preview-modal-pink .preview-modal-panel{ background:var(--pink); }
-/* Problemáticas: altura fixa (não só um teto) pra todos os itens abrirem no
-   mesmo tamanho, em vez de cada um esticar até o próprio conteúdo — e a foto
-   dentro fica mais baixa, senão ela sozinha já tomava quase a tela toda. */
-.preview-modal-pink .preview-modal-panel{ height:58vh; max-height:460px; }
-.preview-modal-pink .preview-modal-body .product-phone-slot{ height:150px; aspect-ratio:auto; margin-bottom:14px; }
+/* Problemáticas: altura fixa e igual pra todos os itens, calculada pra caber
+   o texto mais longo dos 5 SEM precisar rolar — exigir scroll só pra ler é
+   ruim de usar e machuca acessibilidade. A foto foi removida do modal no
+   mobile: era ela que tomava o espaço que devia ser do texto. */
+.preview-modal-pink .preview-modal-panel{ height:auto; max-height:92vh; }
+.preview-modal-pink .preview-modal-body .product-phone-slot{ display:none; }
+/* O balão "de vidro" (fundo translúcido, borda, padding grande) faz sentido
+   flutuando sobre o card rosa lá fora, mas dentro do modal — que já é rosa —
+   vira padding duplicado sem necessidade nenhuma; aqui é só o texto puro. */
+.preview-modal-pink .problem-panel{ background:none; border:none; padding:0; max-width:none; }
 .preview-modal-head{
   position:relative;
   display:flex;
