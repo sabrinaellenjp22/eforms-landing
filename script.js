@@ -248,6 +248,10 @@
   if (!items.length) return;
 
   var SIZE = { base: 64, far: 72, close: 84, active: 96 };
+  // Sem mouse de verdade (touch), o "magnify" não faz sentido — sem mouseleave
+  // real, o ícone tocado ficaria preso grande. Nesses dispositivos só alterna
+  // o tooltip no toque, sem redimensionar.
+  var canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   function sizeFor(distance) {
     if (distance === 0) return SIZE.active;
@@ -256,19 +260,29 @@
     return SIZE.base;
   }
 
-  function apply(hoveredIndex) {
+  function apply(activeIndex) {
     items.forEach(function (item, i) {
-      var size = hoveredIndex === -1 ? SIZE.base : sizeFor(Math.abs(i - hoveredIndex));
-      item.style.width = size + "px";
-      item.style.height = size + "px";
-      item.classList.toggle("is-active", i === hoveredIndex);
+      if (canHover) {
+        var size = activeIndex === -1 ? SIZE.base : sizeFor(Math.abs(i - activeIndex));
+        item.style.width = size + "px";
+        item.style.height = size + "px";
+      }
+      item.classList.toggle("is-active", i === activeIndex);
     });
   }
 
-  items.forEach(function (item, i) {
-    item.addEventListener("mouseenter", function () { apply(i); });
-  });
-  dock.addEventListener("mouseleave", function () { apply(-1); });
+  if (canHover) {
+    items.forEach(function (item, i) {
+      item.addEventListener("mouseenter", function () { apply(i); });
+    });
+    dock.addEventListener("mouseleave", function () { apply(-1); });
+  } else {
+    items.forEach(function (item, i) {
+      item.addEventListener("click", function () {
+        apply(item.classList.contains("is-active") ? -1 : i);
+      });
+    });
+  }
 
   apply(-1);
 })();
