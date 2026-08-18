@@ -842,9 +842,11 @@ a{text-decoration:none;color:inherit;}
   /* min-height:auto (em vez do 100vh do desktop) + padding-bottom fixo: sem
      isso sobrava espaço vazio embaixo do conteúdo, e os botões, quando
      encostavam no fim, ficavam colados na borda sem respiro nenhum. */
-  .hero{ min-height:auto; padding:calc(20px + var(--nav-h, 64px)) 20px 48px; }
+  .hero{ min-height:auto; padding:20px 20px 48px; }
   .navbar{ flex-wrap:wrap; }
-  .hero .navbar{ padding:16px 20px; left:12px; right:12px; top:10px; }
+  /* No mobile a navbar não fica fixa — some no scroll normal, sem reservar
+     espaço extra no topo da hero. */
+  .hero .navbar{ position:relative; top:auto; left:auto; right:auto; padding:16px 20px; }
   .nav-toggle{ display:flex; }
   .nav-pill{ display:none; }
   .nav-actions{ display:none; }
@@ -1756,27 +1758,26 @@ a{text-decoration:none;color:inherit;}
    flutuando sobre o card rosa lá fora, mas dentro do modal — que já é rosa —
    vira padding duplicado sem necessidade nenhuma; aqui é só o texto puro. */
 .preview-modal-pink .problem-panel{ background:none; border:none; padding:0; max-width:none; }
+/* Grid com coluna fantasma à esquerda (mesma largura do botão): centraliza o
+   título de verdade e, como não é mais posicionamento absoluto, o cabeçalho
+   cresce sozinho quando o título quebra em 2 linhas — sem sobrepor o botão. */
 .preview-modal-head{
   position:relative;
-  display:flex;
+  display:grid;
+  grid-template-columns:32px 1fr 32px;
   align-items:center;
-  justify-content:flex-end;
-  min-height:32px;
+  gap:8px;
   margin-bottom:16px;
 }
-/* Título centralizado de verdade (não só no espaço sobrando ao lado do botão
-   de fechar): ocupa a largura toda por cima, o botão fica por cima dele. */
 .preview-modal-title{
-  position:absolute;
-  left:0;
-  right:0;
+  grid-column:2;
   text-align:center;
   color:#fff;
   font-size:16px;
   font-weight:800;
-  pointer-events:none;
 }
 .preview-modal-close{
+  grid-column:3;
   width:32px; height:32px;
   flex-shrink:0;
   border-radius:50%;
@@ -1990,10 +1991,8 @@ body.preview-modal-lock{ overflow:hidden; }
   object-fit:cover;
   display:block;
   opacity:0;
-  transform:scale(1.025);
-  transition:opacity 1.4s ease-in-out, transform 1.6s ease-in-out;
 }
-.laptop-shot.is-active{ opacity:1; transform:scale(1); }
+.laptop-shot.is-active{ opacity:1; }
 .laptop-base{
   position:relative;
   height:16px;
@@ -2430,7 +2429,7 @@ body.preview-modal-lock{ overflow:hidden; }
   padding:20px 22px;
   box-shadow:var(--shadow-md);
   border:1px solid rgba(255,255,255,0.2);
-  transition:transform .3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .3s ease, border-color .3s ease;
+  transition:transform .3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .3s ease, border-color .3s ease, opacity .6s cubic-bezier(.2,.7,.3,1);
 }
 .why-card[data-color="gold"]{ background:linear-gradient(135deg, #8A6500 0%, #000000 100%); }
 .why-card[data-color="pink"]{ background:linear-gradient(135deg, var(--pink) 0%, #000000 100%); }

@@ -31,49 +31,26 @@
     io.observe(media);
   }
 
-  // Versão mobile do parallax: sem pin (travar o scroll pra um elemento que
-  // não está no topo da tela é frágil — tentei e o preview pulava pra baixo).
-  // Em vez disso, o preview sobe de verdade por cima do texto via transform
-  // (translateY até a posição do texto), enquanto o texto desaparece — puro
-  // scrub ligado ao scroll, sem prender nada.
-  function initMobileTitleFade() {
-    var text = document.querySelector(".hero-text");
-    var media = document.querySelector(".hero-media");
-    var tint = document.querySelector(".hero-bg-tint");
-    if (!text || !media) return;
-    var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
-
-    // Distância entre o topo do texto e o topo do preview — é quanto o
-    // preview precisa subir pra cobrir exatamente onde o texto está.
-    var moveDistance = media.getBoundingClientRect().top - text.getBoundingClientRect().top;
-
-    var tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".hero",
-        start: "top top",
-        end: "+=" + Math.round(window.innerHeight * 0.6),
-        scrub: true
-      }
-    })
-      .to(text, { autoAlpha: 0, y: -30, ease: "none" }, 0)
-      .to(media, { y: -moveDistance, ease: "none" }, 0);
-
-    if (tint) tl.to(tint, { opacity: 1, ease: "none" }, 0);
-  }
-
-  // Seta abaixo do subtítulo: leva até o fim do parallax (preview totalmente
-  // revelado), não direto pra próxima section — e com scroll suave, não salto
-  // instantâneo, pra dar tempo de ver a animação acontecer.
+  // Seta abaixo do subtítulo. No mobile (sem parallax) leva até o fim da
+  // própria hero, mostrando o preview já revelado sem sobrar espaço vazio
+  // embaixo. No desktop leva até o fim do parallax (preview totalmente
+  // revelado), não direto pra próxima section. Sempre com scroll suave.
   function initScrollCue() {
     var cue = document.querySelector(".hero-scroll-cue");
     if (!cue || cue.dataset.scrollCueInit) return;
     cue.dataset.scrollCueInit = "1";
     cue.addEventListener("click", function (e) {
       e.preventDefault();
-      var isMobile = window.innerWidth <= 1200;
-      var target = Math.round(window.innerHeight * (isMobile ? 0.6 : 0.9));
-      window.scrollTo({ top: target, behavior: "smooth" });
+      var hero = document.querySelector(".hero");
+      var target;
+      if (window.innerWidth <= 1200 || !hero) {
+        target = hero
+          ? Math.round(hero.offsetTop + hero.offsetHeight - window.innerHeight)
+          : Math.round(window.innerHeight * 0.6);
+      } else {
+        target = Math.round(window.innerHeight * 0.9);
+      }
+      window.scrollTo({ top: Math.max(target, 0), behavior: "smooth" });
     });
   }
 
@@ -81,16 +58,15 @@
     initMobileReveal();
     initScrollCue();
 
+    // Parallax (pin + fade do título) é só de desktop — no mobile o layout
+    // fica todo empilhado normal, sem GSAP nenhum.
+    if (window.innerWidth <= 1200) return;
+
     if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
       window.setTimeout(init, 150);
       return;
     }
     gsap.registerPlugin(ScrollTrigger);
-
-    if (window.innerWidth <= 1200) {
-      initMobileTitleFade();
-      return;
-    }
 
     var title = document.querySelector(".hero-stage-title");
     var mosaic = document.querySelector(".hero-stage-mosaic");
