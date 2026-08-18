@@ -39,7 +39,6 @@
   function initMobileTitleFade() {
     var text = document.querySelector(".hero-text");
     var media = document.querySelector(".hero-media");
-    var cta = document.querySelector(".hero-cta");
     var tint = document.querySelector(".hero-bg-tint");
     if (!text || !media) return;
     var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -60,16 +59,27 @@
       .to(text, { autoAlpha: 0, y: -30, ease: "none" }, 0)
       .to(media, { y: -moveDistance, ease: "none" }, 0);
 
-    // Os botões sobem junto com o preview, na mesma distância — sem isso eles
-    // ficavam parados no lugar de origem enquanto o preview subia, abrindo um
-    // vão enorme entre os dois (o transform não empurra o resto do layout).
-    if (cta) tl.to(cta, { y: -moveDistance, ease: "none" }, 0);
-
     if (tint) tl.to(tint, { opacity: 1, ease: "none" }, 0);
+  }
+
+  // Seta abaixo do subtítulo: leva até o fim do parallax (preview totalmente
+  // revelado), não direto pra próxima section — e com scroll suave, não salto
+  // instantâneo, pra dar tempo de ver a animação acontecer.
+  function initScrollCue() {
+    var cue = document.querySelector(".hero-scroll-cue");
+    if (!cue || cue.dataset.scrollCueInit) return;
+    cue.dataset.scrollCueInit = "1";
+    cue.addEventListener("click", function (e) {
+      e.preventDefault();
+      var isMobile = window.innerWidth <= 1200;
+      var target = Math.round(window.innerHeight * (isMobile ? 0.6 : 0.9));
+      window.scrollTo({ top: target, behavior: "smooth" });
+    });
   }
 
   function init() {
     initMobileReveal();
+    initScrollCue();
 
     if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
       window.setTimeout(init, 150);
