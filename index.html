@@ -20,9 +20,7 @@
 
 <section class="hero">
   <div class="hero-bg-tint" aria-hidden="true"></div>
-  <span class="brand-shape shape-1" aria-hidden="true"></span>
-  <span class="brand-shape shape-2" aria-hidden="true"></span>
-  <span class="brand-shape shape-3" aria-hidden="true"></span>
+  <canvas class="hero-noise-canvas" aria-hidden="true"></canvas>
 
   <header class="navbar">
     <img src="assets/logo-new.svg" alt="eForms" class="logo">
@@ -50,7 +48,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a href="#problematicas" class="btn btn-nav-outline btn-hero-secondary">Ver como funciona
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a href="#problematicas" class="hero-scroll-cue" aria-label="Ver mais">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
@@ -170,8 +168,6 @@
 </section>
 
 <section class="sec-problematicas" id="problematicas">
-  <span class="brand-shape shape-pr1" aria-hidden="true"></span>
-  <span class="brand-shape shape-pr2" aria-hidden="true"></span>
 
   <div class="sec-heading sec-heading-center" data-reveal>
     <span class="sec-kicker">Diagnóstico</span>
@@ -278,16 +274,14 @@
   </div>
 
   <div class="inline-cta" data-reveal>
-    <p>Reconheceu algum desses problemas na sua operação?</p>
-    <a href="https://wa.me/5583993378336?text=Quero%20saber%20mais%20sobre%20o%20eForms." class="btn btn-nav-red" target="_blank" rel="noopener">Falar com especialista
+    <a href="https://wa.me/5583993378336?text=Quero%20saber%20mais%20sobre%20o%20eForms." class="btn btn-nav-red" target="_blank" rel="noopener">Quero resolver esses problemas na minha operação
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </div>
 </section>
 
 <section class="sec-customize">
-  <span class="brand-shape shape-cu1" aria-hidden="true"></span>
-  <span class="brand-shape shape-cu2" aria-hidden="true"></span>
+  <canvas class="section-noise-canvas" aria-hidden="true"></canvas>
 
   <div class="customize-grid">
     <div class="customize-copy" data-reveal>
@@ -315,18 +309,15 @@
 </section>
 
 <section class="product" id="como-usar">
-  <span class="brand-shape shape-p1" aria-hidden="true"></span>
-  <span class="brand-shape shape-p2" aria-hidden="true"></span>
-  <span class="brand-shape shape-p3" aria-hidden="true"></span>
 
   <div class="product-shell">
   <div class="product-card" data-tabs-root data-reveal>
     <span class="product-blob blob-a"></span>
     <span class="product-blob blob-b"></span>
 
-    <div class="product-heading">
-      <span class="product-kicker">Como funciona</span>
-      <h2 class="product-title">O produto e funcionamento</h2>
+    <div class="sec-heading">
+      <span class="sec-kicker">Como funciona</span>
+      <h2 class="sec-title sec-title-light">O produto e funcionamento</h2>
     </div>
 
     <div class="product-body">
@@ -411,6 +402,11 @@
 
         <div class="product-styles is-single" data-panel="components">
           <div class="component-list-preview">
+            <div class="cl-topbar">
+              <img src="assets/isotipo.svg" alt="" class="cl-logo">
+              <span class="mock-rect w1"></span>
+              <span class="mock-rect w1"></span>
+            </div>
             <div class="mock-row" data-color="blue" style="--i:0">
               <span class="mock-row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v13a1 1 0 01-1 1H6a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M14 3v4h4"/></svg></span>
               <span class="mock-rect"></span>
@@ -443,6 +439,7 @@
             <div class="style-top">
               <span class="style-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span>
               <strong>Página Única</strong>
+              <img src="assets/isotipo.svg" alt="" class="style-logo">
             </div>
             <div class="style-diagram diagram-single">
               <span class="d-line"></span>
@@ -509,6 +506,7 @@
         <div class="product-styles is-single" data-panel="records">
           <div class="records-preview">
             <div class="rp-topbar">
+              <img src="assets/isotipo.svg" alt="" class="rp-logo">
               <span class="mock-rect w1 is-active"></span>
               <span class="mock-rect w1"></span>
               <span class="mock-rect w1"></span>
@@ -591,6 +589,7 @@
 </section>
 
 <section class="sec-integrations">
+  <canvas class="section-noise-canvas" aria-hidden="true"></canvas>
   <div class="sec-heading sec-heading-center" data-reveal>
     <span class="sec-kicker kicker-on-color">Sem trocar de ferramenta</span>
     <h2 class="sec-title sec-title-light">Conheça nossas integrações.</h2>
@@ -632,16 +631,13 @@
   </div>
 
   <div class="inline-cta" data-reveal>
-    <p>Veja como realizar todas as integrações.</p>
-    <a href="https://wa.me/5583993378336?text=Quero%20saber%20mais%20sobre%20o%20eForms." class="btn btn-pink" target="_blank" rel="noopener">Falar com especialista
+    <a href="https://wa.me/5583993378336?text=Quero%20saber%20mais%20sobre%20o%20eForms." class="btn btn-pink" target="_blank" rel="noopener">Quero integrar essas ferramentas na minha operação
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </div>
 </section>
 
 <section class="sec-features" id="funcionalidades">
-  <span class="brand-shape shape-fe1" aria-hidden="true"></span>
-  <span class="brand-shape shape-fe2" aria-hidden="true"></span>
 
   <div class="sec-heading sec-heading-center" data-reveal>
     <span class="sec-kicker">Principais funcionalidades</span>
@@ -715,8 +711,7 @@
   </div>
 
   <div class="inline-cta" data-reveal>
-    <p>Tudo isso rodando na sua operação em poucos dias.</p>
-    <a href="https://wa.me/5583993378336?text=Quero%20saber%20mais%20sobre%20o%20eForms." class="btn btn-nav-red" target="_blank" rel="noopener">Agendar uma conversa
+    <a href="https://wa.me/5583993378336?text=Quero%20saber%20mais%20sobre%20o%20eForms." class="btn btn-nav-red" target="_blank" rel="noopener">Quero isso rodando na minha operação em poucos dias
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </div>
@@ -737,9 +732,8 @@
 </section>
 
 <section class="sec-quotes">
-  <span class="brand-shape shape-q1" aria-hidden="true"></span>
-  <span class="brand-shape shape-q2" aria-hidden="true"></span>
 
+  <canvas class="section-noise-canvas" aria-hidden="true"></canvas>
   <div class="sec-heading sec-heading-center" data-reveal>
     <span class="sec-kicker kicker-on-color">Quem usa, aprova</span>
     <h2 class="sec-title sec-title-light">O que muda na operação de quem larga o papel.</h2>
@@ -860,11 +854,16 @@
       </div>
     </div>
   </div>
+
+  <div class="inline-cta" data-reveal>
+    <a href="https://wa.me/5583993378336?text=Quero%20saber%20mais%20sobre%20o%20eForms." class="btn btn-nav-red" target="_blank" rel="noopener">Quero trocar pro eForms agora
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
 </section>
 
 <section class="sec-faq">
-  <span class="brand-shape shape-fq1" aria-hidden="true"></span>
-  <span class="brand-shape shape-fq2" aria-hidden="true"></span>
+  <canvas class="section-noise-canvas" aria-hidden="true"></canvas>
 
   <div class="faq-shell">
   <div class="faq-mosaic" data-reveal>
@@ -936,8 +935,7 @@
   </div>
 
   <div class="inline-cta" data-reveal>
-    <p><strong>Ainda tem dúvidas?</strong> Nosso time responde em minutos.</p>
-    <a href="https://wa.me/5583993378336?text=Quero%20saber%20mais%20sobre%20o%20eForms." class="btn btn-nav-red" target="_blank" rel="noopener">Fale conosco
+    <a href="https://wa.me/5583993378336?text=Quero%20saber%20mais%20sobre%20o%20eForms." class="btn btn-nav-red" target="_blank" rel="noopener">Tirar minhas dúvidas com o time agora
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </div>

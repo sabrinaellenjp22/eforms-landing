@@ -186,6 +186,12 @@
       if (!src || !phoneSlotImg) return;
       phoneSlotImg.src = src;
       phoneSlotImg.alt = tab.getAttribute("data-image-alt") || phoneSlotImg.alt;
+
+      if (phoneSlot) {
+        phoneSlot.classList.remove("is-spinning");
+        void phoneSlot.offsetWidth; // reinicia a animação mesmo em cliques seguidos
+        phoneSlot.classList.add("is-spinning");
+      }
     }
 
     function panelFor(tab) {
@@ -335,15 +341,27 @@
   window.setInterval(function () {
     index = (index + 1) % steps.length;
     var step = steps[index];
+    var next = hiddenLayer;
+    var prev = activeLayer;
 
-    kicker.style.background = step.color;
-    hiddenLayer.src = step.src;
-    hiddenLayer.classList.add("is-active");
-    activeLayer.classList.remove("is-active");
+    function swapIn() {
+      kicker.style.background = step.color;
+      next.classList.add("is-active");
+      prev.classList.remove("is-active");
+      activeLayer = next;
+      hiddenLayer = prev;
+    }
 
-    var swap = activeLayer;
-    activeLayer = hiddenLayer;
-    hiddenLayer = swap;
+    next.src = step.src;
+    // Espera o decode terminar antes de trocar — sem isso, em celulares mais
+    // fracos, a troca instantânea podia acontecer com o JPEG ainda decodificando
+    // (progressive scan), o que parecia a imagem "pulando"/cortando errado por
+    // uma fração de segundo.
+    if (next.decode) {
+      next.decode().then(swapIn).catch(swapIn);
+    } else {
+      swapIn();
+    }
   }, 2800);
 })();
 

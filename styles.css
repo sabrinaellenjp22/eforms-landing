@@ -56,8 +56,6 @@ a{text-decoration:none;color:inherit;}
   background:linear-gradient(135deg, #000000 0%, #000000 55%, #1e1f22 78%, #52545a 100%);
 }
 
-.hero .brand-shape{ display:none; }
-
 .hero-bg-tint{
   position:absolute;
   inset:0;
@@ -67,49 +65,35 @@ a{text-decoration:none;color:inherit;}
   background:linear-gradient(to bottom, rgba(82,84,90,0) 0%, rgba(82,84,90,0.25) 45%, rgba(82,84,90,0.8) 100%);
 }
 
-/* Decorative brand shapes echoing the elemento.svg pill — scoped per section, in the empty margins only */
-.brand-shape{
+.hero-noise-canvas{
   position:absolute;
-  z-index:1;
-  border-radius:20px;
-  background:rgba(255,255,255,0.3);
+  inset:0;
+  z-index:0;
+  width:100%;
+  height:100%;
+  display:block;
   pointer-events:none;
-}
-.shape-1{
-  width:120px; height:46px;
-  top:7%; right:3%;
-  transform:rotate(-18deg);
-  background:var(--orange);
-  opacity:0.425;
-  animation: shapeFloat1 14s ease-in-out infinite;
-}
-.shape-2{
-  width:70px; height:28px;
-  top:47%; left:2%;
-  background:var(--pink);
-  opacity:0.35;
-  animation: shapeFloat2 17s ease-in-out infinite;
-}
-.shape-3{
-  width:90px; height:34px;
-  bottom:5%; right:2%;
-  background:var(--gold);
-  opacity:0.275;
-  animation: shapeFloat3 20s ease-in-out infinite;
+  opacity:0;
+  transition:opacity 1.2s ease;
 }
 
-@keyframes shapeFloat1{
-  0%,100%{ transform: rotate(-18deg) translate(0,0); }
-  50%{ transform: rotate(-10deg) translate(-14px,16px); }
+/* Mesmo canvas de ruído, reaproveitado em outras sections. Precisa do mesmo
+   padrão da hero: canvas em z-index:0 + conteúdo em z-index:1 explícito
+   (ver .sec-customize/.sec-integrations abaixo) — só "position:relative" na
+   section, sem z-index nela mesma, não basta pra isolar o empilhamento, e um
+   z-index negativo aqui vazava pra raiz da página e ficava atrás de tudo. */
+.section-noise-canvas{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  width:100%;
+  height:100%;
+  display:block;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 1.2s ease;
 }
-@keyframes shapeFloat2{
-  0%,100%{ transform: rotate(6deg) translate(0,0); }
-  50%{ transform: rotate(-4deg) translate(10px,-14px); }
-}
-@keyframes shapeFloat3{
-  0%,100%{ transform: rotate(-8deg) translate(0,0); }
-  50%{ transform: rotate(4deg) translate(-12px,-10px); }
-}
+
 
 /* Navbar */
 .navbar{
@@ -158,7 +142,7 @@ a{text-decoration:none;color:inherit;}
 }
 .nav-pill a{
   opacity:0.9;
-  padding:7px 16px;
+  padding:12px 16px;
   border-radius:20px;
   color:rgba(255,255,255,0.85);
   transition:background .2s ease, color .2s ease, opacity .2s ease;
@@ -321,6 +305,11 @@ a{text-decoration:none;color:inherit;}
 }
 .btn-hero-primary {
   font-weight: 800;
+}
+.btn-hero-primary.btn-nav-white:hover{
+  background:var(--red);
+  color:#fff;
+  box-shadow:0 8px 20px rgba(200,30,30,0.35);
 }
 .btn-hero-secondary {
   font-weight: 500;
@@ -866,7 +855,6 @@ a{text-decoration:none;color:inherit;}
   }
   .hero-text h1{ font-size:34px; white-space:normal; }
   .hero-subtitle{ font-size:15px; margin-top:12px; }
-  .brand-shape{ display:none; }
   .hero-content{ margin-top:104px; }
   .hero-media{ margin-top:40px; }
   .hero-cta{ width:100%; flex-direction:column; align-items:center; margin-top:24px; }
@@ -878,29 +866,7 @@ a{text-decoration:none;color:inherit;}
   position:relative;
   padding:96px 156px 96px;
   overflow:hidden;
-  background:#ffffff;
-}
-
-.shape-p1{
-  width:70px; height:26px;
-  top:10%; left:3%;
-  background:var(--red);
-  opacity:0.25;
-  animation: shapeFloat2 16s ease-in-out infinite;
-}
-.shape-p2{
-  width:56px; height:22px;
-  bottom:12%; left:6%;
-  background:var(--purple);
-  opacity:0.225;
-  animation: shapeFloat3 19s ease-in-out infinite;
-}
-.shape-p3{
-  width:64px; height:24px;
-  top:48%; left:1%;
-  background:var(--gold);
-  opacity:0.2;
-  animation: shapeFloat1 15s ease-in-out infinite;
+  background:var(--dark);
 }
 
 .product-shell{
@@ -931,6 +897,15 @@ a{text-decoration:none;color:inherit;}
   transition:transform 5s ease;
 }
 .product-phone-slot:hover .product-phone-slot-img{ transform:scale(1.06); }
+.product-phone-slot.is-spinning{ animation:phoneSlotSpin .9s ease-out; }
+@keyframes phoneSlotSpin{
+  0%{ transform:perspective(800px) rotateY(0deg); }
+  20%{ transform:perspective(800px) rotateY(20deg); }
+  40%{ transform:perspective(800px) rotateY(-13deg); }
+  60%{ transform:perspective(800px) rotateY(7deg); }
+  80%{ transform:perspective(800px) rotateY(-3deg); }
+  100%{ transform:perspective(800px) rotateY(0deg); }
+}
 
 .product-card{
   position:relative;
@@ -1125,25 +1100,11 @@ a{text-decoration:none;color:inherit;}
   background:radial-gradient(circle, rgba(190,24,93,0.35), transparent 70%);
 }
 
-.product-heading{
+.product .sec-heading{
   position:relative;
   margin-bottom:18px;
 }
-.product-kicker{
-  display:inline-block;
-  color:#BFD3FF;
-  font-size:12px;
-  font-weight:700;
-  letter-spacing:0.6px;
-  text-transform:uppercase;
-  margin-bottom:6px;
-}
-.product-title{
-  color:#fff;
-  font-size:28px;
-  font-weight:800;
-  letter-spacing:-0.6px;
-}
+.product .sec-heading .sec-kicker{ background:#fff; border-color:#fff; color:#18181B; }
 
 .product-body{
   position:relative;
@@ -1341,6 +1302,16 @@ a{text-decoration:none;color:inherit;}
 .component-list-preview .mock-row{ padding:6px 8px; }
 .component-list-preview .mock-row-icon{ width:26px; height:26px; }
 .component-list-preview .mock-row-icon svg{ width:13px; height:13px; }
+.cl-topbar{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding-bottom:10px;
+  margin-bottom:2px;
+  border-bottom:1px solid #ECEEF3;
+}
+.cl-logo{ width:14px; height:14px; flex-shrink:0; }
+.cl-topbar .mock-rect{ height:6px; }
 
 /* ===== Records table preview (Gestão de Registros) ===== */
 .records-preview{
@@ -1372,6 +1343,7 @@ a{text-decoration:none;color:inherit;}
   background:#E5E7EB;
   margin-left:auto;
 }
+.rp-logo{ width:14px; height:14px; flex-shrink:0; }
 
 .rp-toolbar{
   display:flex;
@@ -1506,6 +1478,7 @@ a{text-decoration:none;color:inherit;}
   align-items:center;
   gap:10px;
 }
+.style-logo{ width:14px; height:14px; flex-shrink:0; margin-left:auto; opacity:0.5; }
 .style-icon{
   width:30px; height:30px;
   border-radius:20px;
@@ -1657,7 +1630,7 @@ a{text-decoration:none;color:inherit;}
 .sec-problematicas{
   position:relative;
   overflow:hidden;
-  padding:96px 156px 110px;
+  padding:56px 156px 70px;
 }
 .sec-problematicas .product-card{
   background:linear-gradient(90deg, #000000 0%, #3a3a3f 100%);
@@ -1852,7 +1825,6 @@ body.preview-modal-lock{ overflow:hidden; }
      os 4 cartões são curtos, não precisam de 1 coluna só. */
   .product-styles[data-panel="styles"]{ grid-template-columns:1fr 1fr; }
   .product-card{ padding:32px 24px; }
-  .product-title{ font-size:26px; }
   .product-phone-slot{ width:100%; height:auto; aspect-ratio:230/190; align-self:stretch; }
 }
 
@@ -1864,7 +1836,9 @@ body.preview-modal-lock{ overflow:hidden; }
   text-align:center;
 }
 .sec-integrations .sec-subtitle{ color:#E9D9F5; }
-.sec-integrations .inline-cta p{ color:#fff; }
+.sec-integrations .sec-heading,
+.sec-integrations .dock-nav,
+.sec-integrations .inline-cta{ position:relative; z-index:1; }
 /* --- Dock de ícones --- */
 .dock-nav{
   margin-top:56px;
@@ -1941,6 +1915,8 @@ body.preview-modal-lock{ overflow:hidden; }
   background:linear-gradient(90deg, #000000 0%, #057A55 100%);
 }
 .customize-grid{
+  position:relative;
+  z-index:1;
   display:grid;
   grid-template-columns:1fr 1.05fr;
   gap:48px;
@@ -2059,11 +2035,6 @@ body.preview-modal-lock{ overflow:hidden; }
   gap:20px;
   flex-wrap:wrap;
   text-align:center;
-}
-.inline-cta p{
-  font-size:16px;
-  font-weight:400;
-  color:var(--slate);
 }
 
 .sec-badge{
@@ -2200,7 +2171,7 @@ body.preview-modal-lock{ overflow:hidden; }
 .sec-features{
   position:relative;
   overflow:hidden;
-  padding:82px 156px 130px;
+  padding:42px 156px 90px;
   background:#F5F7FB;
   text-align:center;
 }
@@ -2274,18 +2245,15 @@ body.preview-modal-lock{ overflow:hidden; }
 .feature-tile[data-accent="green"]{ background:linear-gradient(135deg, var(--green) 0%, #000000 100%); }
 .feature-tile[data-accent="blue"]{ background:linear-gradient(135deg, var(--blue) 0%, #000000 100%); }
 .feature-tile[data-accent="orange"]{ background:linear-gradient(135deg, var(--orange) 0%, #000000 100%); }
-.shape-fe1{ width:88px; height:32px; top:7%; right:5%; transform:rotate(-12deg); background:var(--blue); opacity:0.26; animation: shapeFloat1 16s ease-in-out infinite; }
-.shape-fe2{ width:64px; height:24px; bottom:9%; left:4%; background:var(--pink); opacity:0.28; animation: shapeFloat2 19s ease-in-out infinite; }
-
 /* ============================================================
    Números — agora embutidos dentro do próprio why-card (ver .why-card-stat)
    ============================================================ */
 .why-card-stat{
   position:relative;
   display:flex;
-  align-items:center;
+  align-items:flex-start;
   gap:12px;
-  margin-top:16px;
+  margin-top:auto;
   padding-top:16px;
   border-top:1px solid rgba(255,255,255,0.16);
 }
@@ -2303,6 +2271,10 @@ body.preview-modal-lock{ overflow:hidden; }
   line-height:1.35;
   color:rgba(255,255,255,0.88);
 }
+/* Nos why-cards a legenda tem 1 ou 2 linhas dependendo do texto — reserva
+   sempre a altura de 2 linhas, senão a linha do ícone+número sobe ou desce
+   de card pra card conforme a legenda embaixo é mais curta ou mais longa. */
+.why-card-stat .social-stat-body span{ min-height:2.7em; }
 .social-logos-card{
   margin-top:96px;
   margin-bottom:-130px;
@@ -2354,6 +2326,9 @@ body.preview-modal-lock{ overflow:hidden; }
   text-align:center;
 }
 .sec-quotes .sec-subtitle{ color:#C7D6F5; max-width:760px; }
+.sec-quotes .sec-heading,
+.sec-quotes .quotes-grid,
+.sec-quotes .quotes-cta{ position:relative; z-index:1; }
 .quotes-grid{
   margin-top:40px;
   display:grid;
@@ -2405,9 +2380,6 @@ body.preview-modal-lock{ overflow:hidden; }
 .quote-person strong{ font-size:14px; font-weight:800; color:var(--slate); }
 .quote-person span{ font-size:12.5px; color:#6B7280; }
 .quotes-cta{ margin-top:32px; }
-.shape-q1{ width:84px; height:32px; top:9%; left:5%; transform:rotate(-10deg); background:var(--pink); opacity:0.28; animation: shapeFloat1 17s ease-in-out infinite; }
-.shape-q2{ width:64px; height:24px; bottom:10%; right:6%; background:var(--green); opacity:0.3; animation: shapeFloat3 15s ease-in-out infinite; }
-
 /* ============================================================
    Section 7 — Por que eForms
    ============================================================ */
@@ -2425,6 +2397,8 @@ body.preview-modal-lock{ overflow:hidden; }
   text-align:left;
 }
 .why-card{
+  display:flex;
+  flex-direction:column;
   border-radius:var(--radius-md);
   padding:20px 22px;
   box-shadow:var(--shadow-md);
@@ -2480,8 +2454,9 @@ body.preview-modal-lock{ overflow:hidden; }
 }
 .sec-faq .sec-subtitle{ max-width:680px; color:#C7D6F5; }
 .sec-faq .inline-cta{ text-align:center; margin-top:36px; position:relative; z-index:2; }
-.sec-faq .inline-cta p{ color:#fff; }
 .faq-shell{
+  position:relative;
+  z-index:1;
   display:grid;
   grid-template-columns:350px 1fr;
   gap:48px;
@@ -2867,7 +2842,7 @@ body.preview-modal-lock{ overflow:hidden; }
   /* Tag/título/subtítulo de section centralizados no mobile — conteúdo interno
      dos cards (bento, depoimentos, etc.) não é afetado por essas regras. */
   .sec-heading{ text-align:center; align-items:center; }
-  .customize-copy, .product-heading{ text-align:center; }
+  .customize-copy{ text-align:center; }
 
   /* Botões de CTA "solo" (não os pares lado a lado da hero) ganham a largura
      cheia do container no mobile, alinhados às mesmas margens do resto da LP. */
@@ -2900,17 +2875,8 @@ body.preview-modal-lock{ overflow:hidden; }
    Extra depth pass — floating shapes, blobs, animated mini-demos
    ============================================================ */
 .sec-problem{ position:relative; overflow:hidden; }
-.shape-pr1{ width:100px; height:38px; top:6%; right:4%; transform:rotate(-14deg); background:var(--gold); opacity:0.35; animation: shapeFloat1 15s ease-in-out infinite; }
-.shape-pr2{ width:60px; height:24px; bottom:8%; left:3%; background:var(--purple); opacity:0.3; animation: shapeFloat2 18s ease-in-out infinite; }
-
-.shape-of1{ width:70px; height:26px; top:12%; left:6%; background:var(--gold); opacity:0.4; animation: shapeFloat3 16s ease-in-out infinite; }
 
 .sec-customize{ position:relative; overflow:hidden; }
-.shape-cu1{ width:90px; height:34px; top:8%; left:4%; transform:rotate(10deg); background:#fff; opacity:0.3; animation: shapeFloat1 17s ease-in-out infinite; }
-.shape-cu2{ width:60px; height:24px; bottom:10%; right:5%; background:#fff; opacity:0.3; animation: shapeFloat2 14s ease-in-out infinite; }
-
-.shape-fq1{ width:80px; height:30px; top:6%; right:5%; transform:rotate(8deg); background:var(--purple); opacity:0.28; animation: shapeFloat1 18s ease-in-out infinite; }
-.shape-fq2{ width:60px; height:24px; bottom:8%; left:4%; background:var(--gold); opacity:0.3; animation: shapeFloat3 15s ease-in-out infinite; }
 
 
 /* Social proof — stat icon badges */
