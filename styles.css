@@ -65,34 +65,16 @@ a{text-decoration:none;color:inherit;}
   background:linear-gradient(to bottom, rgba(82,84,90,0) 0%, rgba(82,84,90,0.25) 45%, rgba(82,84,90,0.8) 100%);
 }
 
-.hero-noise-canvas{
+.hero-spotlight{
   position:absolute;
   inset:0;
   z-index:0;
-  width:100%;
-  height:100%;
-  display:block;
-  pointer-events:none;
   opacity:0;
-  transition:opacity 1.2s ease;
-}
-
-/* Mesmo canvas de ruído, reaproveitado em outras sections. Precisa do mesmo
-   padrão da hero: canvas em z-index:0 + conteúdo em z-index:1 explícito
-   (ver .sec-customize/.sec-integrations abaixo) — só "position:relative" na
-   section, sem z-index nela mesma, não basta pra isolar o empilhamento, e um
-   z-index negativo aqui vazava pra raiz da página e ficava atrás de tudo. */
-.section-noise-canvas{
-  position:absolute;
-  inset:0;
-  z-index:0;
-  width:100%;
-  height:100%;
-  display:block;
   pointer-events:none;
-  opacity:0;
-  transition:opacity 1.2s ease;
+  transition:opacity .4s ease;
+  background:radial-gradient(circle 650px at var(--sx,50%) var(--sy,50%), rgba(108,110,116,0.62), rgba(108,110,116,0.2) 55%, transparent 80%);
 }
+.hero-spotlight.is-active{ opacity:1; }
 
 
 /* Navbar */
@@ -1836,9 +1818,6 @@ body.preview-modal-lock{ overflow:hidden; }
   text-align:center;
 }
 .sec-integrations .sec-subtitle{ color:#E9D9F5; }
-.sec-integrations .sec-heading,
-.sec-integrations .dock-nav,
-.sec-integrations .inline-cta{ position:relative; z-index:1; }
 /* --- Dock de ícones --- */
 .dock-nav{
   margin-top:56px;
@@ -1915,8 +1894,6 @@ body.preview-modal-lock{ overflow:hidden; }
   background:linear-gradient(90deg, #000000 0%, #057A55 100%);
 }
 .customize-grid{
-  position:relative;
-  z-index:1;
   display:grid;
   grid-template-columns:1fr 1.05fr;
   gap:48px;
@@ -2275,15 +2252,25 @@ body.preview-modal-lock{ overflow:hidden; }
    sempre a altura de 2 linhas, senão a linha do ícone+número sobe ou desce
    de card pra card conforme a legenda embaixo é mais curta ou mais longa. */
 .why-card-stat .social-stat-body span{ min-height:2.7em; }
+/* Section própria só pra abrigar a faixa "Empresas que confiam", sempre
+   colada em .sec-quotes logo abaixo (sem padding-bottom aqui, sem margem na
+   section seguinte — as duas ficam com as bordas encostadas). Fundo preto
+   igual ao do card — o respiro do margin-top do card não pode "vazar" branco
+   nem em cima nem embaixo, então a section inteira já nasce preta.
+   overflow:hidden também evita o margin-top do card colapsar através dela. */
+.sec-social-logos{
+  padding:0 156px;
+  background:#000;
+  overflow:hidden;
+}
 .social-logos-card{
-  margin-top:96px;
-  margin-bottom:-130px;
+  margin-top:0;
   margin-left:-156px;
   margin-right:-156px;
   overflow:hidden;
   background:#000000;
   border-radius:0;
-  padding:36px 156px;
+  padding:28px 156px;
 }
 .social-logos-row{
   display:flex;
@@ -2316,6 +2303,48 @@ body.preview-modal-lock{ overflow:hidden; }
 }
 
 /* ============================================================
+   Banner comercial — slot reservado
+   ============================================================ */
+.sec-banner{
+  padding:0;
+  background:#fff;
+}
+.banner-slot{
+  min-height:440px;
+  background:linear-gradient(135deg, #F5F7FB 0%, #EEF3FE 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.banner-placeholder{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  color:#9CA3AF;
+}
+.banner-placeholder-icon{
+  width:44px; height:44px;
+  border-radius:14px;
+  background:#fff;
+  border:1px solid #E5EAF3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#B0B6C2;
+}
+.banner-placeholder-icon svg{ width:22px; height:22px; }
+.banner-placeholder-text{
+  font-size:12.5px;
+  font-weight:600;
+  letter-spacing:0.3px;
+}
+.banner-slot > img,
+.banner-slot > a,
+.banner-slot > picture{ width:100%; height:100%; display:block; object-fit:cover; }
+
+/* ============================================================
    Section 6.5 — Depoimentos
    ============================================================ */
 .sec-quotes{
@@ -2326,9 +2355,6 @@ body.preview-modal-lock{ overflow:hidden; }
   text-align:center;
 }
 .sec-quotes .sec-subtitle{ color:#C7D6F5; max-width:760px; }
-.sec-quotes .sec-heading,
-.sec-quotes .quotes-grid,
-.sec-quotes .quotes-cta{ position:relative; z-index:1; }
 .quotes-grid{
   margin-top:40px;
   display:grid;
@@ -2455,8 +2481,6 @@ body.preview-modal-lock{ overflow:hidden; }
 .sec-faq .sec-subtitle{ max-width:680px; color:#C7D6F5; }
 .sec-faq .inline-cta{ text-align:center; margin-top:36px; position:relative; z-index:2; }
 .faq-shell{
-  position:relative;
-  z-index:1;
   display:grid;
   grid-template-columns:350px 1fr;
   gap:48px;
@@ -2732,7 +2756,7 @@ body.preview-modal-lock{ overflow:hidden; }
 /* Cap content width on ultrawide screens so lines don't over-stretch (scoped — hero/product untouched) */
 @media (min-width: 1560px){
   .sec-problem, .sec-offline, .sec-customize, .sec-quotes, .sec-why, .sec-faq, .sec-footer,
-  .sec-features, .sec-subcta, .subpage-header{
+  .sec-features, .sec-social-logos, .sec-subcta, .subpage-header{
     padding-left:calc((100% - 1240px) / 2);
     padding-right:calc((100% - 1240px) / 2);
   }
@@ -2755,7 +2779,7 @@ body.preview-modal-lock{ overflow:hidden; }
 
 @media (max-width: 1200px){
   .sec-problem, .sec-offline, .sec-customize, .sec-quotes, .sec-why, .sec-faq,
-  .sec-features{ padding-left:40px; padding-right:40px; }
+  .sec-features, .sec-social-logos{ padding-left:40px; padding-right:40px; }
   .sec-subcta{ padding-left:40px; padding-right:40px; }
   .subpage-header{ padding-left:40px; padding-right:40px; }
   .sec-footer{ padding-left:40px; padding-right:40px; }
@@ -2829,8 +2853,10 @@ body.preview-modal-lock{ overflow:hidden; }
     transform:none;
   }
   .sec-customize{ padding-top:48px; padding-bottom:48px; }
-  .social-logos-card{ margin-left:-20px; margin-right:-20px; margin-bottom:-64px; padding-left:20px; padding-right:20px; }
+  .sec-social-logos{ padding-left:20px; padding-right:20px; }
+  .social-logos-card{ margin-left:-20px; margin-right:-20px; padding-left:20px; padding-right:20px; }
   .social-logos-set{ gap:28px; }
+  .banner-slot{ min-height:260px; }
   .social-stat-body strong{ font-size:28px; }
   .sec-footer{ padding:64px 20px 32px; }
   .sec-title{ font-size:32px; letter-spacing:-0.6px; }
