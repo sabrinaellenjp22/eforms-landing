@@ -2158,12 +2158,11 @@ body.preview-modal-lock{ overflow:hidden; }
   flex-direction:column;
   justify-content:center;
   gap:16px;
-  border:1px solid transparent;
   border-radius:var(--radius-md);
   padding:26px 24px;
   box-shadow:0 14px 34px rgba(0,0,0,0.4);
   overflow:hidden;
-  transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease, opacity .6s cubic-bezier(.2,.7,.3,1);
+  transition:transform .3s ease, box-shadow .3s ease, opacity .6s cubic-bezier(.2,.7,.3,1);
 }
 /* Wide tiles lay the icon beside the copy so the extra width carries content */
 .feature-tile-lg, .feature-tile-wide{
