@@ -2557,6 +2557,8 @@ body.preview-modal-lock{ overflow:hidden; }
 .faq-q-icon[data-color="green"]{ background:linear-gradient(135deg, var(--green) 0%, #000000 100%); }
 .faq-q-icon[data-color="gold"]{ background:linear-gradient(135deg, #8A6500 0%, #000000 100%); }
 .faq-q-icon[data-color="purple"]{ background:linear-gradient(135deg, var(--purple) 0%, #000000 100%); }
+.faq-q-icon[data-color="pink"]{ background:linear-gradient(135deg, var(--pink) 0%, #000000 100%); }
+.faq-q-icon[data-color="orange"]{ background:linear-gradient(135deg, var(--orange) 0%, #000000 100%); }
 .faq-toggle{
   flex-shrink:0;
   width:26px; height:26px;
@@ -2803,6 +2805,14 @@ body.preview-modal-lock{ overflow:hidden; }
   .sec-subcta{ padding:0 20px 64px; }
   .subpage-header{ padding:20px; }
   .subcta-card{ padding:32px 24px; }
+  /* Perguntas mais longas (ex: "É possível registrar fotos, localização e
+     assinatura...") quebravam em 3 linhas com o tamanho de desktop — encolhe
+     texto/ícones pra caber confortavelmente em 2 linhas na maioria dos casos. */
+  .faq-summary{ font-size:14px; gap:10px; }
+  .faq-q-icon{ width:26px; height:26px; }
+  .faq-q-icon svg{ width:13px; height:13px; }
+  .faq-toggle{ width:22px; height:22px; }
+  .faq-toggle svg{ width:12px; height:12px; }
   /* Carrossel de 1 card por vez, com sobreposição (crossfade) igual ao preview
      do notebook em "Personalize sua marca" — os 6 cards ficam empilhados no
      mesmo lugar, só o ativo fica visível e em fluxo normal (é ele quem define
