@@ -812,7 +812,7 @@ a{text-decoration:none;color:inherit;}
   .hero-text h1{ font-size:34px; white-space:normal; }
   .hero-subtitle{ font-size:15px; margin-top:12px; }
   .hero-content{ margin-top:104px; }
-  .hero-media{ margin-top:40px; }
+  .hero-media{ margin-top:104px; }
   .hero-cta{ width:100%; flex-direction:column; align-items:center; margin-top:24px; }
   .hero-cta .btn{ width:100%; }
 }
