@@ -2847,7 +2847,7 @@ body.preview-modal-lock{ overflow:hidden; }
   .social-stat-body strong{ font-size:28px; }
   .sec-footer{ padding:64px 20px 32px; }
   .sec-title{ font-size:32px; letter-spacing:-0.6px; }
-  .sec-features .sec-title{ font-size:16px; }
+  .sec-features .sec-title{ font-size:26px; }
   .sec-subtitle{ font-size:15px; }
   .split-media{ min-height:240px; }
   .split-points{ grid-template-columns:1fr; gap:20px; }
