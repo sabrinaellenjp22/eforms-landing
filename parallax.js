@@ -31,15 +31,22 @@
     io.observe(media);
   }
 
-  // Luz que segue o cursor no fundo da hero — só em telas com mouse de
-  // verdade (hover+pointer fine), sem efeito nenhum em touch.
-  function initSpotlight(containerSel, spotSel) {
-    var container = document.querySelector(containerSel);
-    var spot = document.querySelector(spotSel);
-    if (!container || !spot || container.dataset.spotlightInit) return;
+  // Luz que segue o cursor no fundo da hero + sections seguintes — só em
+  // telas com mouse de verdade (hover+pointer fine), sem efeito em touch.
+  // Um único listener global (em vez de um por section) trata as sections
+  // como uma faixa contínua: todas ficam ativas juntas enquanto o cursor
+  // estiver em qualquer ponto entre o topo da primeira e o fim da última,
+  // cada uma calculando sua posição relativa — assim o brilho vaza de uma
+  // pra outra em vez de sumir de repente na borda.
+  function initSpotlightGroup(containerSel, spotSel) {
+    var containers = Array.prototype.slice.call(document.querySelectorAll(containerSel));
+    var pairs = containers
+      .map(function (c) { return { container: c, spot: c.querySelector(spotSel) }; })
+      .filter(function (p) { return p.spot; });
+    if (!pairs.length || pairs[0].container.dataset.spotlightGroupInit) return;
     var canHover = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     if (!canHover) return;
-    container.dataset.spotlightInit = "1";
+    pairs[0].container.dataset.spotlightGroupInit = "1";
 
     var raf = null;
     var pending = null;
@@ -47,23 +54,28 @@
     function apply() {
       raf = null;
       if (!pending) return;
-      container.style.setProperty("--sx", pending.x + "px");
-      container.style.setProperty("--sy", pending.y + "px");
+      var x = pending.x, y = pending.y;
       pending = null;
+      var top = pairs[0].container.getBoundingClientRect().top;
+      var bottom = pairs[pairs.length - 1].container.getBoundingClientRect().bottom;
+      var active = y >= top && y <= bottom;
+      pairs.forEach(function (p) {
+        var rect = p.container.getBoundingClientRect();
+        p.spot.style.setProperty("--sx", (x - rect.left) + "px");
+        p.spot.style.setProperty("--sy", (y - rect.top) + "px");
+        p.spot.classList.toggle("is-active", active);
+      });
     }
 
-    container.addEventListener("mousemove", function (e) {
-      var rect = container.getBoundingClientRect();
-      pending = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    document.addEventListener("mousemove", function (e) {
+      pending = { x: e.clientX, y: e.clientY };
       if (!raf) raf = requestAnimationFrame(apply);
     });
-    container.addEventListener("mouseenter", function () { spot.classList.add("is-active"); });
-    container.addEventListener("mouseleave", function () { spot.classList.remove("is-active"); });
   }
 
   function init() {
     initMobileReveal();
-    initSpotlight(".hero", ".hero-spotlight");
+    initSpotlightGroup(".hero, .sec-features, .product", ".hero-spotlight");
 
     // Parallax (pin + fade do título) é só de desktop — no mobile o layout
     // fica todo empilhado normal, sem GSAP nenhum.
