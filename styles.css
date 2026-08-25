@@ -1965,6 +1965,10 @@ body.preview-modal-lock{ overflow:hidden; }
   width:55%;
   height:55%;
   object-fit:contain;
+}
+.dock-icon-pipefy{
+  width:75%;
+  height:75%;
   pointer-events:none;
 }
 .dock-tooltip{
