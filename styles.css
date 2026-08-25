@@ -124,7 +124,8 @@ a{text-decoration:none;color:inherit;}
 .nav-pill a:nth-child(2):hover{ opacity:1; background:linear-gradient(135deg, var(--purple) 0%, #000000 100%); color:#fff; }
 .nav-pill a:nth-child(3):hover{ opacity:1; background:linear-gradient(135deg, var(--green) 0%, #000000 100%); color:#fff; }
 .nav-pill a:nth-child(4):hover{ opacity:1; background:linear-gradient(135deg, #8A6500 0%, #000000 100%); color:#fff; }
-.nav-pill a:nth-child(5):hover{ opacity:1; background:linear-gradient(135deg, var(--pink) 0%, #000000 100%); color:#fff; }
+.nav-pill a:nth-child(5):hover{ opacity:1; background:linear-gradient(135deg, var(--red) 0%, #000000 100%); color:#fff; }
+.nav-pill a:nth-child(6):hover{ opacity:1; background:linear-gradient(135deg, var(--pink) 0%, #000000 100%); color:#fff; }
 
 .nav-actions{ display:flex; gap:10px; }
 
