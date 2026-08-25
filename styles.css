@@ -63,7 +63,7 @@ a{text-decoration:none;color:inherit;}
   opacity:0;
   pointer-events:none;
   transition:opacity .4s ease;
-  background:radial-gradient(circle 650px at var(--sx,50%) var(--sy,50%), rgba(108,110,116,0.62), rgba(108,110,116,0.2) 55%, transparent 80%);
+  background:radial-gradient(circle 455px at var(--sx,50%) var(--sy,50%), rgba(108,110,116,0.62), rgba(108,110,116,0.2) 55%, transparent 80%);
 }
 .hero-spotlight.is-active{ opacity:1; }
 
@@ -1107,11 +1107,13 @@ a{text-decoration:none;color:inherit;}
 }
 .product-nav-btn:hover{ background:var(--red); }
 .product-nav-btn svg{ width:16px; height:16px; }
+.mobile-carousel-nav{ display:none; }
 
 .product-features{
   flex:1.15;
   display:flex;
   flex-direction:column;
+  gap:8px;
 }
 .feature-row{
   display:flex;
@@ -2270,7 +2272,8 @@ body.preview-modal-lock{ overflow:hidden; }
   background:#000000;
   text-align:center;
 }
-.sec-features .sec-subtitle{ max-width:900px; color:rgba(255,255,255,0.7); }
+.sec-features .sec-subtitle{ max-width:none; color:rgba(255,255,255,0.7); font-size:16px; white-space:nowrap; }
+.feat2-title-break{ display:block; }
 .sec-features .sec-heading{ text-align:left; align-items:flex-start; }
 /* 4 columns × 2 rows. The two horizontal previews (Builder, Offline) take
    double width, so each row fills exactly: 2+1+1 and 1+2+1 — in DOM order. */
@@ -3022,6 +3025,8 @@ body.preview-modal-lock{ overflow:hidden; }
 @media (max-width: 1200px){
   .sec-problem, .sec-offline, .sec-customize, .sec-quotes, .sec-why, .sec-faq,
   .sec-features, .sec-social-logos{ padding-left:40px; padding-right:40px; }
+  .feat2-title-break{ display:none; }
+  .sec-features .sec-subtitle{ max-width:900px; font-size:16px; white-space:normal; }
   .sec-subcta{ padding-left:40px; padding-right:40px; }
   .sec-plans{ padding-left:40px; padding-right:40px; }
   .subpage-header{ padding-left:40px; padding-right:40px; }
@@ -3138,27 +3143,32 @@ body.preview-modal-lock{ overflow:hidden; }
      cheia do container no mobile, alinhados às mesmas margens do resto da LP. */
   .subcta-btn, .footer-cta, .inline-cta .btn{ width:100%; }
 
-  /* Carrossel automático: os 3 cards dividem a mesma célula do grid e se
-     revezam via fade, sem JS. Cada card ocupa 1/3 do ciclo de 12s. */
+  /* Carrossel: os 3 cards dividem a mesma célula do grid e se revezam via
+     fade, controlado por JS (script.js) pra permitir as setas manuais. */
   .quotes-grid{ display:grid; grid-template-columns:1fr; }
   .quote-card{
     grid-row:1; grid-column:1;
     opacity:0;
-    animation: quotesFade 12s ease-in-out infinite;
+    pointer-events:none;
+    transition:opacity .5s ease;
   }
-  .quote-card:nth-child(1){ animation-delay:0s; }
-  .quote-card:nth-child(2){ animation-delay:4s; }
-  .quote-card:nth-child(3){ animation-delay:8s; }
-}
-@keyframes quotesFade{
-  0%, 100%{ opacity:0; }
-  4%, 30%{ opacity:1; }
-  34%{ opacity:0; }
+  .quote-card.is-active{ opacity:1; pointer-events:auto; }
+
+  /* Mesmo botão circular do nav de setas do web (.product-nav-btn), só que
+     visível apenas no mobile, abaixo do carrossel ativo. */
+  .mobile-carousel-nav{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-top:20px;
+  }
 }
 /* Sem preferência por menos movimento: volta pra lista estática empilhada */
 @media (max-width:720px) and (prefers-reduced-motion: reduce){
   .quotes-grid{ display:flex; flex-direction:column; gap:16px; }
-  .quote-card{ position:static; grid-row:auto; grid-column:auto; opacity:1; animation:none; }
+  .quote-card{ position:static; grid-row:auto; grid-column:auto; opacity:1; }
+  .mobile-carousel-nav{ display:none; }
 }
 
 /* ============================================================

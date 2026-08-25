@@ -130,6 +130,7 @@
     var modalNext = modal && modal.querySelector(".preview-modal-next");
 
     var modalOpenerTab = null;
+    var hasOpenedModal = false;
 
     var nextIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>';
     var closeIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>';
@@ -153,6 +154,7 @@
     function openModal(tab) {
       var panel = panelFor(tab);
       if (!modal || !modalBody || !panel) return;
+      hasOpenedModal = true;
       modalBody.appendChild(panel);
       // Nas Problemáticas isso também traz a foto do item pra dentro do
       // modal, acima do texto (mesma função usada antes no modo inline).
@@ -277,25 +279,35 @@
       syncPanelHeight();
     }
 
-    tabs.forEach(function (tab) {
-      tab.addEventListener("click", function () {
-        var target = tab.getAttribute("data-tab");
+    function selectTab(tab) {
+      var target = tab.getAttribute("data-tab");
 
-        tabs.forEach(function (t) { t.classList.toggle("is-active", t === tab); });
-        panels.forEach(function (p) {
-          p.classList.toggle("is-active", p.getAttribute("data-panel") === target);
-        });
-        syncImage(tab);
-
-        if (isMobileLayout) {
-          if (useModal) {
-            openModal(tab);
-          } else {
-            placeInline(tab);
-            placeImageInline(tab);
-          }
-        }
+      tabs.forEach(function (t) { t.classList.toggle("is-active", t === tab); });
+      panels.forEach(function (p) {
+        p.classList.toggle("is-active", p.getAttribute("data-panel") === target);
       });
+      syncImage(tab);
+
+      if (isMobileLayout) {
+        if (useModal) {
+          openModal(tab);
+        } else {
+          placeInline(tab);
+          placeImageInline(tab);
+        }
+      }
+    }
+
+    // No web (mouse de verdade), passar o cursor pelo item já troca o painel —
+    // sem exigir clique. No mobile o hover não existe de verdade, então ali
+    // continua dependendo do toque (clique).
+    var canHover = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () { selectTab(tab); });
+      if (canHover) {
+        tab.addEventListener("mouseenter", function () { selectTab(tab); });
+      }
     });
 
     var navPrev = root.querySelector(".product-nav-prev");
@@ -320,6 +332,27 @@
       document.addEventListener("keydown", function (e) {
         if (e.key === "Escape") closeModal();
       });
+
+      // No mobile, quem rola até o fim da section sem abrir nenhum item manualmente
+      // ganha o modal aberto sozinho (com a aba já ativa) — evita que a pessoa passe
+      // reto sem perceber que aquele menu tem conteúdo interativo.
+      var sentinel = modalHost.querySelector(".section-end-sentinel");
+      if (sentinel && "IntersectionObserver" in window) {
+        var autoOpenIO = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            if (isMobileLayout && !hasOpenedModal) {
+              var activeTab = null;
+              for (var i = 0; i < tabs.length; i++) {
+                if (tabs[i].classList.contains("is-active")) { activeTab = tabs[i]; break; }
+              }
+              openModal(activeTab || tabs[0]);
+            }
+            autoOpenIO.disconnect();
+          });
+        }, { threshold: 0 });
+        autoOpenIO.observe(sentinel);
+      }
     }
 
     syncLayout();
@@ -466,6 +499,68 @@
     if (!mqMobile.matches || mqReduced.matches) return;
     timer = setInterval(function () { goTo(index + 1); }, 4500);
   }
+
+  function onBreakpointChange() {
+    index = 0;
+    render();
+    startAuto();
+  }
+  if (mqMobile.addEventListener) mqMobile.addEventListener("change", onBreakpointChange);
+
+  function manualGoTo(i) {
+    goTo(i);
+    startAuto(); // reinicia a contagem do timer pra não avançar de novo logo em seguida
+  }
+  var prevBtn = document.querySelector('[data-carousel-nav="bento"] .carousel-prev');
+  var nextBtn = document.querySelector('[data-carousel-nav="bento"] .carousel-next');
+  if (prevBtn) prevBtn.addEventListener("click", function () { manualGoTo(index - 1); });
+  if (nextBtn) nextBtn.addEventListener("click", function () { manualGoTo(index + 1); });
+
+  render();
+  startAuto();
+})();
+
+/* Carrossel de "Quem usa, aprova" no mobile — mesmo padrão do carrossel de
+   funcionalidades acima (fade automático + setas manuais). */
+(function () {
+  var track = document.querySelector(".quotes-grid");
+  var cards = document.querySelectorAll(".quote-card");
+  if (!track || !cards.length) return;
+
+  var mqMobile = window.matchMedia("(max-width: 720px)");
+  var mqReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var index = 0;
+  var timer = null;
+
+  function render() {
+    cards.forEach(function (card, i) { card.classList.toggle("is-active", i === index); });
+  }
+
+  function goTo(i) {
+    index = (i + cards.length) % cards.length;
+    render();
+  }
+
+  function stopAuto() {
+    if (timer) clearInterval(timer);
+    timer = null;
+  }
+
+  function startAuto() {
+    stopAuto();
+    if (!mqMobile.matches || mqReduced.matches) return;
+    timer = setInterval(function () { goTo(index + 1); }, 6000);
+  }
+
+  function manualGoTo(i) {
+    goTo(i);
+    startAuto();
+  }
+
+  var prevBtn = document.querySelector('[data-carousel-nav="quotes"] .carousel-prev');
+  var nextBtn = document.querySelector('[data-carousel-nav="quotes"] .carousel-next');
+  if (prevBtn) prevBtn.addEventListener("click", function () { manualGoTo(index - 1); });
+  if (nextBtn) nextBtn.addEventListener("click", function () { manualGoTo(index + 1); });
 
   function onBreakpointChange() {
     index = 0;
