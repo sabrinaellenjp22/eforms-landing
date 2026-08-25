@@ -1082,7 +1082,30 @@ a{text-decoration:none;color:inherit;}
    mobile vem depois, então ela continua vencendo lá). Menu ficou mais alto
    com o 5º item; centralizar o preview evita ele parecer pequeno/perdido. */
 :where(.product) .product-body{ align-items:center; }
-:where(.product) .product-styles.is-active{ min-height:400px; }
+:where(.product) .product-styles.is-active{ min-height:360px; }
+
+.product-nav{
+  order:2; /* garante que fica depois do painel .product-styles.is-active na coluna, mesmo que algo mais adiante mude a ordem no DOM */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin-top:24px;
+}
+.product-nav-btn{
+  width:36px; height:36px;
+  border-radius:50%;
+  border:none;
+  background:rgba(255,255,255,0.14);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:background .2s ease;
+}
+.product-nav-btn:hover{ background:var(--red); }
+.product-nav-btn svg{ width:16px; height:16px; }
 
 .product-features{
   flex:1.15;
@@ -1730,6 +1753,10 @@ a{text-decoration:none;color:inherit;}
 }
 .sec-problematicas .product-shell{ margin-top:40px; }
 .sec-problematicas .product-body{ align-items:stretch; }
+/* Com só uma linha de descrição por item, os 5 itens somados ficam mais
+   baixos que a coluna (que estica pra bater com o texto+nav do lado direito)
+   — centraliza o bloco inteiro em vez de deixar tudo colado no topo. */
+.sec-problematicas .product-features{ justify-content:center; }
 .sec-problematicas .product-right{ margin-top:0; }
 .sec-problematicas .feature-row{ align-items:center; }
 .sec-problematicas .feature-copy{ padding-top:0; }

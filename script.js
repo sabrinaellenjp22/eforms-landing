@@ -105,6 +105,7 @@
     var panels = root.querySelectorAll(".product-styles[data-panel]");
     var productRight = root.querySelector(".product-right");
     var productFeatures = root.querySelector(".product-features");
+    var productNav = root.querySelector(".product-nav");
     if (!tabs.length || !panels.length || !productRight) return;
 
     // Nas Problemáticas os textos de cada aba têm tamanhos diferentes; sem
@@ -241,11 +242,15 @@
       }
 
       if (!lockHeight) return;
-      var h = productFeatures.offsetHeight + "px";
-      productRight.style.height = h;
+      var menuHeight = productFeatures.offsetHeight;
+      // Reserva o espaço do nav de setas (altura + margin-top) fora da área
+      // de texto, senão o texto trava na altura cheia do menu e o nav
+      // transborda pra fora da caixa.
+      var navSpace = productNav ? productNav.offsetHeight + parseFloat(getComputedStyle(productNav).marginTop) : 0;
+      productRight.style.height = menuHeight + "px";
       panels.forEach(function (p) {
         var innerPanel = p.querySelector(".problem-panel");
-        if (innerPanel) innerPanel.style.height = h;
+        if (innerPanel) innerPanel.style.height = (menuHeight - navSpace) + "px";
       });
       if (phoneSlot) phoneSlot.style.height = root.offsetHeight + "px";
     }
@@ -292,6 +297,20 @@
         }
       });
     });
+
+    var navPrev = root.querySelector(".product-nav-prev");
+    var navNext = root.querySelector(".product-nav-next");
+    if (navPrev && navNext) {
+      var stepTab = function (dir) {
+        var current = 0;
+        for (var i = 0; i < tabs.length; i++) {
+          if (tabs[i].classList.contains("is-active")) { current = i; break; }
+        }
+        tabs[(current + dir + tabs.length) % tabs.length].click();
+      };
+      navPrev.addEventListener("click", function () { stepTab(-1); });
+      navNext.addEventListener("click", function () { stepTab(1); });
+    }
 
     if (modal) {
       var closeBtn = modal.querySelector(".preview-modal-close");
