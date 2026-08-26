@@ -1135,34 +1135,6 @@ a{text-decoration:none;color:inherit;}
 .feature-row:hover{
   background:rgba(255,255,255,0.08);
 }
-/* Teste B: botão circular indicando que o item abre algo ao tocar — mesmo
-   estilo do .product-nav-btn (círculo translúcido + seta), pra parecer parte
-   do design em vez de um traço solto no canto. Sem isso o menu não deixa
-   claro que é interativo, que é o problema que o teste tenta resolver. */
-.mobile-test-section:not(.is-inline-mobile) .feature-row{
-  position:relative;
-  padding-right:48px;
-}
-.mobile-test-section:not(.is-inline-mobile) .feature-row::after{
-  content:"";
-  position:absolute;
-  right:8px;
-  top:50%;
-  transform:translateY(-50%);
-  width:28px;
-  height:28px;
-  border-radius:50%;
-  background-color:rgba(255,255,255,0.14);
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;
-  background-position:center;
-  background-size:14px 14px;
-  transition:background-color .2s ease;
-}
-.mobile-test-section:not(.is-inline-mobile) .feature-row:hover::after,
-.mobile-test-section:not(.is-inline-mobile) .feature-row.is-active::after{
-  background-color:var(--red);
-}
 .feature-row.is-active{
   background:rgba(255,255,255,0.12);
 }
@@ -1816,101 +1788,6 @@ a{text-decoration:none;color:inherit;}
   margin-top:72px;
 }
 
-/* Modal de preview no mobile (Problemáticas e Produto e funcionamento, ver
-   script.js) — cada section tem sua própria instância (.preview-modal-pink /
-   .preview-modal-blue, só a cor de fundo muda). Só abre via JS, então não
-   precisa de media query aqui: no desktop o modal nunca ganha a classe
-   is-open. */
-.preview-modal{
-  position:fixed;
-  inset:0;
-  z-index:300;
-  display:none;
-  align-items:flex-end;
-  justify-content:center;
-}
-.preview-modal.is-open{ display:flex; }
-.preview-modal-backdrop{
-  position:absolute;
-  inset:0;
-  background:rgba(15,23,42,0.6);
-}
-.preview-modal-panel{
-  position:relative;
-  z-index:1;
-  width:100%;
-  max-height:82vh;
-  overflow-y:auto;
-  border-radius:24px 24px 0 0;
-  padding:20px 20px 28px;
-  box-shadow:0 -20px 50px rgba(0,0,0,0.35);
-}
-.preview-modal-blue .preview-modal-panel{ background:linear-gradient(90deg, #000000 0%, #3a3a3f 100%); }
-.preview-modal-pink .preview-modal-panel{ background:linear-gradient(90deg, #000000 0%, #3a3a3f 100%); }
-/* Problemáticas: altura fixa e igual pra todos os itens, calculada pra caber
-   o texto mais longo dos 5 SEM precisar rolar — exigir scroll só pra ler é
-   ruim de usar e machuca acessibilidade. A foto foi removida do modal no
-   mobile: era ela que tomava o espaço que devia ser do texto. */
-.preview-modal-pink .preview-modal-panel{ height:auto; max-height:92vh; }
-.preview-modal-pink .preview-modal-body .product-phone-slot{ display:none; }
-/* O balão "de vidro" (fundo translúcido, borda, padding grande) faz sentido
-   flutuando sobre o card rosa lá fora, mas dentro do modal — que já é rosa —
-   vira padding duplicado sem necessidade nenhuma; aqui é só o texto puro. */
-.preview-modal-pink .problem-panel{ background:none; border:none; padding:0; max-width:none; }
-/* Grid com coluna fantasma à esquerda (mesma largura do botão): centraliza o
-   título de verdade e, como não é mais posicionamento absoluto, o cabeçalho
-   cresce sozinho quando o título quebra em 2 linhas — sem sobrepor o botão. */
-.preview-modal-head{
-  position:relative;
-  display:grid;
-  grid-template-columns:32px 1fr 32px;
-  align-items:center;
-  gap:8px;
-  margin-bottom:16px;
-}
-.preview-modal-title{
-  grid-column:2;
-  text-align:center;
-  color:#fff;
-  font-size:16px;
-  font-weight:800;
-}
-.preview-modal-close{
-  grid-column:3;
-  width:32px; height:32px;
-  flex-shrink:0;
-  border-radius:50%;
-  background:rgba(255,255,255,0.14);
-  border:none;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-}
-.preview-modal-close svg{ width:16px; height:16px; }
-.preview-modal-next{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  width:100%;
-  margin-top:20px;
-  padding:14px;
-  border-radius:16px;
-  border:none;
-  background:rgba(255,255,255,0.16);
-  color:#fff;
-  font-size:14px;
-  font-weight:700;
-  cursor:pointer;
-}
-.preview-modal-next svg{ width:16px; height:16px; }
-/* Dentro do modal o painel ativo já é o único filho, então perde o piso
-   alto de altura pensado pra caber ao lado do menu no desktop. */
-.preview-modal-body .product-styles.is-active{ min-height:0; }
-body.preview-modal-lock{ overflow:hidden; }
-
 @media (max-width: 1200px){
   .product{ padding:56px 40px 96px; }
   .sec-problematicas{ padding:56px 40px 96px; }
@@ -1926,25 +1803,18 @@ body.preview-modal-lock{ overflow:hidden; }
   /* No mobile o script.js move o preview ativo pra dentro de .product-features,
      logo abaixo do row clicado — aqui só cuidamos do respiro dessa versão "inline". */
   .product-right{ margin-top:0; }
-  /* Nenhuma das duas sections usa mais essa coluna no mobile — os previews
-     abrem em modal (ver .preview-modal), então ela fica sem conteúdo visível.
-     Exceto a variante de teste .is-inline-mobile, que usa o modo sanfona. */
-  .product:not(.is-inline-mobile) .product-right, .sec-problematicas:not(.is-inline-mobile) .product-right{ display:none; }
-  /* A foto que troca por item também só aparece dentro do modal agora — sem
-     isso ela ficava solta abaixo do card inteiro antes de abrir qualquer item. */
+  /* A foto que troca por item some no mobile — o accordion abaixo já mostra
+     o texto de cada item, sem precisar da imagem de diagnóstico junto. */
   .sec-problematicas .product-shell > .product-phone-slot{ display:none; }
-  /* Regras de quando o preview ainda abria dentro do próprio menu (mantidas
-     sem uso agora que as duas sections usam modal — fica fácil reverter se
-     precisar no futuro). */
-  .product-features .product-styles.is-active{ margin:20px 0 24px; overflow-y:auto; min-height:0; }
-}
-
-/* Teste A/B mobile: cópias da seção Problemáticas só visíveis abaixo do
-   breakpoint do menu (mesmo MOBILE_BP do script.js), a original segue
-   intacta no desktop. */
-.mobile-test-section{ display:none; }
-@media (max-width: 1200px){
-  .mobile-test-section{ display:block; }
+  /* Preview abre "sanfona" logo abaixo do row clicado, dentro de .product-features.
+     Bleed de -10px nas laterais pra casar com o fundo arredondado do .feature-row
+     (que usa a mesma margem negativa) — sem isso o preview ficava mais estreito
+     que o menu, com margens visivelmente diferentes entre os dois. */
+  .product-features .product-styles.is-active{ margin:20px -10px 24px; overflow-y:auto; min-height:0; }
+  /* Setas prev/next só fazem sentido no desktop, onde o preview fica fixo ao
+     lado do menu — no accordion mobile cada item já abre com um toque direto
+     na própria linha, então as setas ficam redundantes. */
+  .product-nav{ display:none; }
 }
 
 @media (max-width: 900px){

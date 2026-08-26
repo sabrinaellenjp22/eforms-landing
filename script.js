@@ -112,74 +112,11 @@
     // travar a altura do painel direito na altura do menu (sempre com as
     // mesmas 5 linhas), o card inteiro cresce/encolhe ao trocar de aba.
     var lockHeight = root.closest(".sec-problematicas") !== null;
-    // Nas duas sections, os previews variam demais de altura entre as abas —
-    // em vez de tentar encaixar isso "sanfonado" dentro do menu (sempre
-    // sobrava ou cortava espaço), no mobile eles abrem num modal por cima,
-    // com altura livre e scroll próprio.
-    var modalHost = root.closest(".sec-problematicas") || root.closest(".product");
-    // Teste A/B: seção marcada com data-mobile-inline usa o modo antigo
-    // "sanfona" (painel abre embutido no menu) em vez do modal.
-    var useModal = modalHost !== null && !root.hasAttribute("data-mobile-inline");
 
     var isMobileLayout = null;
     var phoneSlot = root.parentElement && root.parentElement.querySelector(".product-phone-slot");
     var phoneSlotImg = phoneSlot && phoneSlot.querySelector("img");
     var hasTabImages = Array.prototype.some.call(tabs, function (t) { return t.hasAttribute("data-image"); });
-
-    var modal = useModal ? modalHost.querySelector(".preview-modal") : null;
-    var modalBody = modal && modal.querySelector(".preview-modal-body");
-    var modalTitle = modal && modal.querySelector(".preview-modal-title");
-    var modalNext = modal && modal.querySelector(".preview-modal-next");
-
-    var modalOpenerTab = null;
-
-    var nextIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>';
-    var closeIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>';
-
-    // No último item do menu, o botão "Próximo" vira "Fechar" (rótulo e ícone
-    // trocam de verdade, não só a função) — assim não fica um botão que faz
-    // coisas diferentes sem avisar visualmente.
-    function updateModalNext(tab) {
-      if (!modalNext) return;
-      var idx = Array.prototype.indexOf.call(tabs, tab);
-      var nextTab = tabs[idx + 1];
-      if (nextTab) {
-        modalNext.innerHTML = "Próximo " + nextIcon;
-        modalNext.onclick = function () { nextTab.click(); };
-      } else {
-        modalNext.innerHTML = "Fechar " + closeIcon;
-        modalNext.onclick = closeModal;
-      }
-    }
-
-    function openModal(tab) {
-      var panel = panelFor(tab);
-      if (!modal || !modalBody || !panel) return;
-      modalBody.appendChild(panel);
-      // Nas Problemáticas isso também traz a foto do item pra dentro do
-      // modal, acima do texto (mesma função usada antes no modo inline).
-      placeImageInline(tab);
-      var label = tab.querySelector(".feature-copy strong");
-      if (modalTitle) modalTitle.textContent = label ? label.textContent : "";
-      updateModalNext(tab);
-      modal.classList.add("is-open");
-      modal.setAttribute("aria-hidden", "false");
-      document.body.classList.add("preview-modal-lock");
-      modalOpenerTab = tab;
-      var closeBtn = modal.querySelector(".preview-modal-close");
-      if (closeBtn) closeBtn.focus();
-    }
-
-    function closeModal() {
-      if (!modal || !modal.classList.contains("is-open")) return;
-      modal.classList.remove("is-open");
-      modal.setAttribute("aria-hidden", "true");
-      document.body.classList.remove("preview-modal-lock");
-      if (modalOpenerTab) {
-        modalOpenerTab.focus();
-        modalOpenerTab = null;
-      }
-    }
 
     // Troca a imagem ao lado do card quando a aba clicada define data-image
     // (hoje só usado nas Problemáticas — nas outras abas o atributo não existe,
@@ -212,23 +149,12 @@
       if (panel) tab.insertAdjacentElement("afterend", panel);
     }
 
-    // Só nas Problemáticas (tabs com data-image): no mobile a foto entra
-    // dentro do próprio painel, acima do texto, logo abaixo do item clicado —
-    // assim a troca de imagem fica visível sem precisar rolar até o fim do menu.
-    function placeImageInline(tab) {
-      if (!hasTabImages || !phoneSlot) return;
-      var panel = panelFor(tab);
-      var innerPanel = panel && panel.querySelector(".problem-panel");
-      if (innerPanel) innerPanel.insertBefore(phoneSlot, innerPanel.firstChild);
-    }
-
     // Trava a altura direto na caixa de vidro (em vez de depender da cadeia de
     // porcentagem flex > grid > flex, que nem sempre propaga a altura entre
     // esses layouts encadeados) — assim ela sempre bate com o menu, e a foto
     // ao lado trava na altura total do card (não só do "stretch" do flex).
-    // Só roda no desktop — no mobile ninguém mais precisa de altura travada:
-    // Problemáticas fica com o texto no tamanho natural, e o Produto e
-    // funcionamento abre num modal com altura livre (ver useModal acima).
+    // Só roda no desktop — no mobile o preview abre "sanfona" com altura
+    // natural, sem precisar travar nada.
     function syncPanelHeight() {
       if (!productFeatures) return;
 
@@ -262,16 +188,10 @@
       if (shouldBeMobile !== isMobileLayout) {
         isMobileLayout = shouldBeMobile;
         if (isMobileLayout) {
-          if (!useModal) {
-            tabs.forEach(function (t) {
-              if (t.classList.contains("is-active")) {
-                placeInline(t);
-                placeImageInline(t);
-              }
-            });
-          }
+          tabs.forEach(function (t) {
+            if (t.classList.contains("is-active")) placeInline(t);
+          });
         } else {
-          closeModal();
           panels.forEach(function (p) { productRight.appendChild(p); });
           if (hasTabImages && phoneSlot) root.parentElement.appendChild(phoneSlot);
         }
@@ -288,14 +208,7 @@
       });
       syncImage(tab);
 
-      if (isMobileLayout) {
-        if (useModal) {
-          openModal(tab);
-        } else {
-          placeInline(tab);
-          placeImageInline(tab);
-        }
-      }
+      if (isMobileLayout) placeInline(tab);
     }
 
     // No web (mouse de verdade), passar o cursor pelo item já troca o painel —
@@ -322,16 +235,6 @@
       };
       navPrev.addEventListener("click", function () { stepTab(-1); });
       navNext.addEventListener("click", function () { stepTab(1); });
-    }
-
-    if (modal) {
-      var closeBtn = modal.querySelector(".preview-modal-close");
-      var backdrop = modal.querySelector(".preview-modal-backdrop");
-      if (closeBtn) closeBtn.addEventListener("click", closeModal);
-      if (backdrop) backdrop.addEventListener("click", closeModal);
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") closeModal();
-      });
     }
 
     syncLayout();
