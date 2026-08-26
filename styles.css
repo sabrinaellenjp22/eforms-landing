@@ -1135,6 +1135,34 @@ a{text-decoration:none;color:inherit;}
 .feature-row:hover{
   background:rgba(255,255,255,0.08);
 }
+/* Teste B: botão circular indicando que o item abre algo ao tocar — mesmo
+   estilo do .product-nav-btn (círculo translúcido + seta), pra parecer parte
+   do design em vez de um traço solto no canto. Sem isso o menu não deixa
+   claro que é interativo, que é o problema que o teste tenta resolver. */
+.mobile-test-section:not(.is-inline-mobile) .feature-row{
+  position:relative;
+  padding-right:48px;
+}
+.mobile-test-section:not(.is-inline-mobile) .feature-row::after{
+  content:"";
+  position:absolute;
+  right:8px;
+  top:50%;
+  transform:translateY(-50%);
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background-color:rgba(255,255,255,0.14);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:14px 14px;
+  transition:background-color .2s ease;
+}
+.mobile-test-section:not(.is-inline-mobile) .feature-row:hover::after,
+.mobile-test-section:not(.is-inline-mobile) .feature-row.is-active::after{
+  background-color:var(--red);
+}
 .feature-row.is-active{
   background:rgba(255,255,255,0.12);
 }
@@ -1899,8 +1927,9 @@ body.preview-modal-lock{ overflow:hidden; }
      logo abaixo do row clicado — aqui só cuidamos do respiro dessa versão "inline". */
   .product-right{ margin-top:0; }
   /* Nenhuma das duas sections usa mais essa coluna no mobile — os previews
-     abrem em modal (ver .preview-modal), então ela fica sem conteúdo visível. */
-  .product .product-right, .sec-problematicas .product-right{ display:none; }
+     abrem em modal (ver .preview-modal), então ela fica sem conteúdo visível.
+     Exceto a variante de teste .is-inline-mobile, que usa o modo sanfona. */
+  .product:not(.is-inline-mobile) .product-right, .sec-problematicas:not(.is-inline-mobile) .product-right{ display:none; }
   /* A foto que troca por item também só aparece dentro do modal agora — sem
      isso ela ficava solta abaixo do card inteiro antes de abrir qualquer item. */
   .sec-problematicas .product-shell > .product-phone-slot{ display:none; }
@@ -1908,6 +1937,14 @@ body.preview-modal-lock{ overflow:hidden; }
      sem uso agora que as duas sections usam modal — fica fácil reverter se
      precisar no futuro). */
   .product-features .product-styles.is-active{ margin:20px 0 24px; overflow-y:auto; min-height:0; }
+}
+
+/* Teste A/B mobile: cópias da seção Problemáticas só visíveis abaixo do
+   breakpoint do menu (mesmo MOBILE_BP do script.js), a original segue
+   intacta no desktop. */
+.mobile-test-section{ display:none; }
+@media (max-width: 1200px){
+  .mobile-test-section{ display:block; }
 }
 
 @media (max-width: 900px){

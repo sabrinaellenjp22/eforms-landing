@@ -117,7 +117,9 @@
     // sobrava ou cortava espaço), no mobile eles abrem num modal por cima,
     // com altura livre e scroll próprio.
     var modalHost = root.closest(".sec-problematicas") || root.closest(".product");
-    var useModal = modalHost !== null;
+    // Teste A/B: seção marcada com data-mobile-inline usa o modo antigo
+    // "sanfona" (painel abre embutido no menu) em vez do modal.
+    var useModal = modalHost !== null && !root.hasAttribute("data-mobile-inline");
 
     var isMobileLayout = null;
     var phoneSlot = root.parentElement && root.parentElement.querySelector(".product-phone-slot");
@@ -130,7 +132,6 @@
     var modalNext = modal && modal.querySelector(".preview-modal-next");
 
     var modalOpenerTab = null;
-    var hasOpenedModal = false;
 
     var nextIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>';
     var closeIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>';
@@ -154,7 +155,6 @@
     function openModal(tab) {
       var panel = panelFor(tab);
       if (!modal || !modalBody || !panel) return;
-      hasOpenedModal = true;
       modalBody.appendChild(panel);
       // Nas Problemáticas isso também traz a foto do item pra dentro do
       // modal, acima do texto (mesma função usada antes no modo inline).
@@ -332,27 +332,6 @@
       document.addEventListener("keydown", function (e) {
         if (e.key === "Escape") closeModal();
       });
-
-      // No mobile, quem rola até o fim da section sem abrir nenhum item manualmente
-      // ganha o modal aberto sozinho (com a aba já ativa) — evita que a pessoa passe
-      // reto sem perceber que aquele menu tem conteúdo interativo.
-      var sentinel = modalHost.querySelector(".section-end-sentinel");
-      if (sentinel && "IntersectionObserver" in window) {
-        var autoOpenIO = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (!entry.isIntersecting) return;
-            if (isMobileLayout && !hasOpenedModal) {
-              var activeTab = null;
-              for (var i = 0; i < tabs.length; i++) {
-                if (tabs[i].classList.contains("is-active")) { activeTab = tabs[i]; break; }
-              }
-              openModal(activeTab || tabs[0]);
-            }
-            autoOpenIO.disconnect();
-          });
-        }, { threshold: 0 });
-        autoOpenIO.observe(sentinel);
-      }
     }
 
     syncLayout();

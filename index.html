@@ -44,7 +44,7 @@
 
   <div class="hero-content">
     <div class="hero-text hero-stage-title">
-      <h1>Digitalize a coleta,<br><span class="text-accent">mesmo sem internet</span></h1>
+      <h1>Digitalize a coleta de dados,<br><span class="text-accent">mesmo sem internet</span></h1>
       <p class="hero-subtitle">Web ou mobile, online ou offline: seu formulário sempre no lugar certo.</p>
       <div class="hero-cta">
         <a href="https://wa.me/5583993378336?text=Quero%20saber%20mais%20sobre%20o%20eForms." class="btn btn-nav-white btn-hero-primary" target="_blank" rel="noopener">Falar com especialista
@@ -630,7 +630,764 @@
       <button type="button" class="preview-modal-next"></button>
     </div>
   </div>
-  <div class="section-end-sentinel" aria-hidden="true"></div>
+</section>
+
+<!-- Teste A/B (mobile only): mesma seção Como funciona/Passo a passo, duas
+     formas de abrir cada item do menu no mobile — comparar accordion (abre
+     no lugar) vs. modal (abre em pop-up). Remover as duas cópias abaixo (e a
+     regra CSS .mobile-test-section) quando o teste terminar. -->
+<section class="product mobile-test-section is-inline-mobile" id="como-usar-test-a">
+  <div class="hero-spotlight" aria-hidden="true"></div>
+
+  <div class="sec-heading sec-heading-center" data-reveal>
+    <span class="sec-kicker">🧪 Teste A — menu expande no lugar</span>
+  </div>
+
+  <div class="product-shell">
+  <div class="product-card" data-tabs-root data-mobile-inline data-reveal>
+    <span class="product-blob blob-a"></span>
+    <span class="product-blob blob-b"></span>
+
+    <div class="sec-heading">
+      <span class="sec-kicker">Passo a passo</span>
+      <h2 class="sec-title sec-title-light">Como funciona o produto?</h2>
+    </div>
+
+    <div class="product-body">
+      <div class="product-features">
+        <button type="button" class="feature-row is-active" data-color="purple" data-tab="builder">
+          <span class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="2"/><path d="M15 4l5 5M20 4l-5 5" stroke-dasharray="2 2"/><path d="M13 20l2-6 6-2-11-4 3 12z"/></svg>
+          </span>
+          <div class="feature-copy">
+            <strong>Construtor Dinâmico (Builder)</strong>
+            <span>Interface intuitiva de arrastar e soltar (drag-and-drop) para criar formulários personalizados.</span>
+          </div>
+        </button>
+        <button type="button" class="feature-row" data-color="pink" data-tab="components">
+          <span class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z"/><path d="M12 11L4 6.5M12 11v9M12 11l8-4.5"/></svg>
+          </span>
+          <div class="feature-copy">
+            <strong>Variedade de Componentes</strong>
+            <span>Inclusão de campos de texto, fotos, arquivos, localização GPS, data/hora e assinaturas digitais.</span>
+          </div>
+        </button>
+        <button type="button" class="feature-row" data-color="gold" data-tab="styles">
+          <span class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg>
+          </span>
+          <div class="feature-copy">
+            <strong>Estilos de Exibição</strong>
+            <span>Flexibilidade com modos Wizard (passo a passo), Página Única ou Slider para melhor experiência do usuário.</span>
+          </div>
+        </button>
+        <button type="button" class="feature-row" data-color="green" data-tab="records">
+          <span class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
+          </span>
+          <div class="feature-copy">
+            <strong>Gestão de Registros</strong>
+            <span>Acompanhamento centralizado das respostas com filtros inteligentes para auditoria em tempo real.</span>
+          </div>
+        </button>
+        <button type="button" class="feature-row" data-color="blue" data-tab="pdf-model">
+          <span class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><circle cx="12" cy="15" r="2.2"/><path d="M12 12.8v-1.3"/></svg>
+          </span>
+          <div class="feature-copy">
+            <strong>PDF Modelo</strong>
+            <span>Suba o PDF da sua empresa e arraste os campos direto sobre o layout. Toda resposta exportada já sai preenchida no seu modelo.</span>
+          </div>
+        </button>
+      </div>
+
+      <div class="product-right">
+        <div class="product-styles is-single is-active" data-panel="builder">
+          <div class="builder-preview">
+            <div class="bp-topbar">
+              <img src="assets/isotipo.svg" alt="" class="bp-logo">
+              <div class="bp-dots">
+                <span class="bp-dot"></span>
+                <span class="bp-dot is-active"></span>
+                <span class="bp-dot"></span>
+                <span class="bp-dot"></span>
+              </div>
+            </div>
+            <div class="bp-body">
+              <div class="bp-sidebar">
+                <div class="bp-chip" data-color="green">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l4-1 11-11-3-3L4 17l-1 4z"/></svg>
+                  <span class="mock-rect"></span>
+                </div>
+                <div class="bp-chip" data-color="purple">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+                  <span class="mock-rect"></span>
+                </div>
+                <div class="bp-chip" data-color="gold">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.1 7-11a7 7 0 10-14 0c0 4.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+                  <span class="mock-rect"></span>
+                </div>
+              </div>
+              <div class="bp-canvas">
+                <div class="mock-dropzone-area bp-dropzone">
+                  <svg class="mock-dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>
+                  <div class="mock-flying-chip bp-flying-chip">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l4-1 11-11-3-3L4 17l-1 4z"/></svg>
+                    <span class="mock-rect"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-styles is-single" data-panel="components">
+          <div class="component-list-preview">
+            <div class="cl-topbar">
+              <img src="assets/isotipo.svg" alt="" class="cl-logo">
+              <span class="mock-rect w1"></span>
+              <span class="mock-rect w1"></span>
+            </div>
+            <div class="mock-row" data-color="blue" style="--i:0">
+              <span class="mock-row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v13a1 1 0 01-1 1H6a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M14 3v4h4"/></svg></span>
+              <span class="mock-rect"></span>
+            </div>
+            <div class="mock-row" data-color="pink" style="--i:1">
+              <span class="mock-row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l4-1 11-11-3-3L4 17l-1 4z"/></svg></span>
+              <span class="mock-rect"></span>
+            </div>
+            <div class="mock-row" data-color="gold" style="--i:2">
+              <span class="mock-row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.1 7-11a7 7 0 10-14 0c0 4.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg></span>
+              <span class="mock-rect"></span>
+            </div>
+            <div class="mock-row" data-color="purple" style="--i:3">
+              <span class="mock-row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h13"/></svg></span>
+              <span class="mock-rect"></span>
+            </div>
+            <div class="mock-row" data-color="green" style="--i:4">
+              <span class="mock-row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></span>
+              <span class="mock-rect"></span>
+            </div>
+            <div class="mock-row" data-color="blue" style="--i:5">
+              <span class="mock-row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8.5 12l2.3 2.3L16 9"/></svg></span>
+              <span class="mock-rect"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-styles" data-panel="styles">
+          <div class="style-box" data-accent="blue">
+            <div class="style-top">
+              <span class="style-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span>
+              <strong>Página Única</strong>
+              <img src="assets/isotipo.svg" alt="" class="style-logo">
+            </div>
+            <div class="style-diagram diagram-single">
+              <span class="d-line"></span>
+              <span class="d-line"></span>
+              <span class="d-line"></span>
+              <span class="d-line short"></span>
+            </div>
+            <span class="style-desc">Exibe todos os campos do formulário em uma só página.</span>
+          </div>
+
+          <div class="style-box" data-accent="purple">
+            <div class="style-top">
+              <span class="style-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 6l3-3h5l2 3"/></svg></span>
+              <strong>Abas</strong>
+            </div>
+            <div class="style-diagram diagram-tabs">
+              <div class="d-tabbar">
+                <span class="d-tab"></span>
+                <span class="d-tab"></span>
+                <span class="d-tab"></span>
+              </div>
+              <span class="d-line"></span>
+              <span class="d-line short"></span>
+            </div>
+            <span class="style-desc">Organiza os campos em seções separadas por abas.</span>
+          </div>
+
+          <div class="style-box" data-accent="pink">
+            <div class="style-top">
+              <span class="style-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><path d="M7 12h3M14 12h3" stroke-dasharray="1 3"/></svg></span>
+              <strong>Passo a Passo</strong>
+            </div>
+            <div class="style-diagram diagram-steps">
+              <div class="d-stepper">
+                <span class="d-step">1</span>
+                <span class="d-connector"></span>
+                <span class="d-step">2</span>
+                <span class="d-connector"></span>
+                <span class="d-step">3</span>
+              </div>
+              <span class="d-line short center"></span>
+            </div>
+            <span class="style-desc">Mostra uma pergunta ou seção de cada vez.</span>
+          </div>
+
+          <div class="style-box" data-accent="green">
+            <div class="style-top">
+              <span class="style-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"/></svg></span>
+              <strong>Deslizante</strong>
+            </div>
+            <div class="style-diagram diagram-slider">
+              <svg class="d-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              <div class="d-cards">
+                <span class="d-card back"></span>
+                <span class="d-card mid"></span>
+                <span class="d-card front"></span>
+              </div>
+              <svg class="d-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
+            <span class="style-desc">Exibe um campo por vez, com navegação horizontal.</span>
+          </div>
+        </div>
+
+        <div class="product-styles is-single" data-panel="records">
+          <div class="records-preview">
+            <div class="rp-topbar">
+              <img src="assets/isotipo.svg" alt="" class="rp-logo">
+              <span class="mock-rect w1 is-active"></span>
+              <span class="mock-rect w1"></span>
+              <span class="mock-rect w1"></span>
+              <span class="rp-avatar"></span>
+            </div>
+            <div class="rp-toolbar">
+              <span class="rp-btn rp-btn-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg><span class="mock-rect"></span></span>
+              <span class="rp-btn rp-btn-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg><span class="mock-rect"></span></span>
+            </div>
+            <div class="rp-table">
+              <div class="rp-row rp-row-head">
+                <span class="mock-rect w1"></span>
+                <span class="mock-rect w2"></span>
+                <span class="mock-rect w1"></span>
+                <span class="mock-rect w1"></span>
+              </div>
+              <div class="rp-row" data-status="green" style="--i:0">
+                <span class="rp-person"><span class="rp-avatar-sm"></span><span class="mock-rect"></span></span>
+                <span class="mock-rect w2"></span>
+                <span class="rp-tag"></span>
+                <span class="rp-actions">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>
+                </span>
+              </div>
+              <div class="rp-row" data-status="gold" style="--i:1">
+                <span class="rp-person"><span class="rp-avatar-sm"></span><span class="mock-rect"></span></span>
+                <span class="mock-rect w2"></span>
+                <span class="rp-tag"></span>
+                <span class="rp-actions">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>
+                </span>
+              </div>
+              <div class="rp-row" data-status="purple" style="--i:2">
+                <span class="rp-person"><span class="rp-avatar-sm"></span><span class="mock-rect"></span></span>
+                <span class="mock-rect w2"></span>
+                <span class="rp-tag"></span>
+                <span class="rp-actions">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>
+                </span>
+              </div>
+              <div class="rp-row" data-status="green" style="--i:3">
+                <span class="rp-person"><span class="rp-avatar-sm"></span><span class="mock-rect"></span></span>
+                <span class="mock-rect w2"></span>
+                <span class="rp-tag"></span>
+                <span class="rp-actions">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-styles is-single" data-panel="pdf-model">
+          <div class="builder-preview">
+            <div class="bp-topbar">
+              <img src="assets/isotipo.svg" alt="" class="bp-logo">
+              <div class="bp-dots">
+                <span class="bp-dot"></span>
+                <span class="bp-dot is-active"></span>
+                <span class="bp-dot"></span>
+                <span class="bp-dot"></span>
+              </div>
+            </div>
+            <div class="bp-body">
+              <div class="bp-sidebar">
+                <div class="bp-chip" data-color="green">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+                  <span class="mock-rect"></span>
+                </div>
+                <div class="bp-chip" data-color="purple">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h13"/></svg>
+                  <span class="mock-rect"></span>
+                </div>
+                <div class="bp-chip" data-color="gold">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M5 12l7-7 7 7"/></svg>
+                  <span class="mock-rect"></span>
+                </div>
+              </div>
+              <div class="pm-canvas">
+                <div class="pm-toolbar">
+                  <span class="pm-select">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+                    <span class="mock-rect"></span>
+                  </span>
+                  <span class="pm-size">
+                    <span class="pm-size-value">Aa</span>
+                    <span class="pm-stepper">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                    </span>
+                  </span>
+                </div>
+                <div class="pm-table">
+                  <div class="pm-row" style="--i:0">
+                    <span class="mock-rect w1"></span>
+                    <span class="pm-cell is-filled">
+                      <span class="mock-flying-chip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+                        <span class="mock-rect"></span>
+                      </span>
+                    </span>
+                  </div>
+                  <div class="pm-row" style="--i:1">
+                    <span class="mock-rect w1"></span>
+                    <span class="pm-cell is-filled">
+                      <span class="mock-flying-chip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h13"/></svg>
+                        <span class="mock-rect"></span>
+                      </span>
+                    </span>
+                  </div>
+                  <div class="pm-row" style="--i:2">
+                    <span class="mock-rect w1"></span>
+                    <span class="pm-cell is-filled">
+                      <span class="mock-flying-chip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M5 12l7-7 7 7"/></svg>
+                        <span class="mock-rect"></span>
+                      </span>
+                    </span>
+                  </div>
+                  <div class="pm-row" style="--i:3">
+                    <span class="mock-rect w1"></span>
+                    <span class="pm-cell is-filled">
+                      <span class="mock-flying-chip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+                        <span class="mock-rect"></span>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-nav">
+          <button type="button" class="product-nav-btn product-nav-prev" aria-label="Item anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button type="button" class="product-nav-btn product-nav-next" aria-label="Próximo item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section class="product mobile-test-section" id="como-usar-test-b">
+  <div class="hero-spotlight" aria-hidden="true"></div>
+
+  <div class="sec-heading sec-heading-center" data-reveal>
+    <span class="sec-kicker">🧪 Teste B — menu abre em pop-up</span>
+  </div>
+
+  <div class="product-shell">
+  <div class="product-card" data-tabs-root data-reveal>
+    <span class="product-blob blob-a"></span>
+    <span class="product-blob blob-b"></span>
+
+    <div class="sec-heading">
+      <span class="sec-kicker">Passo a passo</span>
+      <h2 class="sec-title sec-title-light">Como funciona o produto?</h2>
+    </div>
+
+    <div class="product-body">
+      <div class="product-features">
+        <button type="button" class="feature-row is-active" data-color="purple" data-tab="builder">
+          <span class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="2"/><path d="M15 4l5 5M20 4l-5 5" stroke-dasharray="2 2"/><path d="M13 20l2-6 6-2-11-4 3 12z"/></svg>
+          </span>
+          <div class="feature-copy">
+            <strong>Construtor Dinâmico (Builder)</strong>
+            <span>Interface intuitiva de arrastar e soltar (drag-and-drop) para criar formulários personalizados.</span>
+          </div>
+        </button>
+        <button type="button" class="feature-row" data-color="pink" data-tab="components">
+          <span class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z"/><path d="M12 11L4 6.5M12 11v9M12 11l8-4.5"/></svg>
+          </span>
+          <div class="feature-copy">
+            <strong>Variedade de Componentes</strong>
+            <span>Inclusão de campos de texto, fotos, arquivos, localização GPS, data/hora e assinaturas digitais.</span>
+          </div>
+        </button>
+        <button type="button" class="feature-row" data-color="gold" data-tab="styles">
+          <span class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg>
+          </span>
+          <div class="feature-copy">
+            <strong>Estilos de Exibição</strong>
+            <span>Flexibilidade com modos Wizard (passo a passo), Página Única ou Slider para melhor experiência do usuário.</span>
+          </div>
+        </button>
+        <button type="button" class="feature-row" data-color="green" data-tab="records">
+          <span class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
+          </span>
+          <div class="feature-copy">
+            <strong>Gestão de Registros</strong>
+            <span>Acompanhamento centralizado das respostas com filtros inteligentes para auditoria em tempo real.</span>
+          </div>
+        </button>
+        <button type="button" class="feature-row" data-color="blue" data-tab="pdf-model">
+          <span class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><circle cx="12" cy="15" r="2.2"/><path d="M12 12.8v-1.3"/></svg>
+          </span>
+          <div class="feature-copy">
+            <strong>PDF Modelo</strong>
+            <span>Suba o PDF da sua empresa e arraste os campos direto sobre o layout. Toda resposta exportada já sai preenchida no seu modelo.</span>
+          </div>
+        </button>
+      </div>
+
+      <div class="product-right">
+        <div class="product-styles is-single is-active" data-panel="builder">
+          <div class="builder-preview">
+            <div class="bp-topbar">
+              <img src="assets/isotipo.svg" alt="" class="bp-logo">
+              <div class="bp-dots">
+                <span class="bp-dot"></span>
+                <span class="bp-dot is-active"></span>
+                <span class="bp-dot"></span>
+                <span class="bp-dot"></span>
+              </div>
+            </div>
+            <div class="bp-body">
+              <div class="bp-sidebar">
+                <div class="bp-chip" data-color="green">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l4-1 11-11-3-3L4 17l-1 4z"/></svg>
+                  <span class="mock-rect"></span>
+                </div>
+                <div class="bp-chip" data-color="purple">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+                  <span class="mock-rect"></span>
+                </div>
+                <div class="bp-chip" data-color="gold">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.1 7-11a7 7 0 10-14 0c0 4.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+                  <span class="mock-rect"></span>
+                </div>
+              </div>
+              <div class="bp-canvas">
+                <div class="mock-dropzone-area bp-dropzone">
+                  <svg class="mock-dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>
+                  <div class="mock-flying-chip bp-flying-chip">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l4-1 11-11-3-3L4 17l-1 4z"/></svg>
+                    <span class="mock-rect"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-styles is-single" data-panel="components">
+          <div class="component-list-preview">
+            <div class="cl-topbar">
+              <img src="assets/isotipo.svg" alt="" class="cl-logo">
+              <span class="mock-rect w1"></span>
+              <span class="mock-rect w1"></span>
+            </div>
+            <div class="mock-row" data-color="blue" style="--i:0">
+              <span class="mock-row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v13a1 1 0 01-1 1H6a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M14 3v4h4"/></svg></span>
+              <span class="mock-rect"></span>
+            </div>
+            <div class="mock-row" data-color="pink" style="--i:1">
+              <span class="mock-row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l4-1 11-11-3-3L4 17l-1 4z"/></svg></span>
+              <span class="mock-rect"></span>
+            </div>
+            <div class="mock-row" data-color="gold" style="--i:2">
+              <span class="mock-row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.1 7-11a7 7 0 10-14 0c0 4.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg></span>
+              <span class="mock-rect"></span>
+            </div>
+            <div class="mock-row" data-color="purple" style="--i:3">
+              <span class="mock-row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h13"/></svg></span>
+              <span class="mock-rect"></span>
+            </div>
+            <div class="mock-row" data-color="green" style="--i:4">
+              <span class="mock-row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></span>
+              <span class="mock-rect"></span>
+            </div>
+            <div class="mock-row" data-color="blue" style="--i:5">
+              <span class="mock-row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8.5 12l2.3 2.3L16 9"/></svg></span>
+              <span class="mock-rect"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-styles" data-panel="styles">
+          <div class="style-box" data-accent="blue">
+            <div class="style-top">
+              <span class="style-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span>
+              <strong>Página Única</strong>
+              <img src="assets/isotipo.svg" alt="" class="style-logo">
+            </div>
+            <div class="style-diagram diagram-single">
+              <span class="d-line"></span>
+              <span class="d-line"></span>
+              <span class="d-line"></span>
+              <span class="d-line short"></span>
+            </div>
+            <span class="style-desc">Exibe todos os campos do formulário em uma só página.</span>
+          </div>
+
+          <div class="style-box" data-accent="purple">
+            <div class="style-top">
+              <span class="style-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 6l3-3h5l2 3"/></svg></span>
+              <strong>Abas</strong>
+            </div>
+            <div class="style-diagram diagram-tabs">
+              <div class="d-tabbar">
+                <span class="d-tab"></span>
+                <span class="d-tab"></span>
+                <span class="d-tab"></span>
+              </div>
+              <span class="d-line"></span>
+              <span class="d-line short"></span>
+            </div>
+            <span class="style-desc">Organiza os campos em seções separadas por abas.</span>
+          </div>
+
+          <div class="style-box" data-accent="pink">
+            <div class="style-top">
+              <span class="style-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><path d="M7 12h3M14 12h3" stroke-dasharray="1 3"/></svg></span>
+              <strong>Passo a Passo</strong>
+            </div>
+            <div class="style-diagram diagram-steps">
+              <div class="d-stepper">
+                <span class="d-step">1</span>
+                <span class="d-connector"></span>
+                <span class="d-step">2</span>
+                <span class="d-connector"></span>
+                <span class="d-step">3</span>
+              </div>
+              <span class="d-line short center"></span>
+            </div>
+            <span class="style-desc">Mostra uma pergunta ou seção de cada vez.</span>
+          </div>
+
+          <div class="style-box" data-accent="green">
+            <div class="style-top">
+              <span class="style-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"/></svg></span>
+              <strong>Deslizante</strong>
+            </div>
+            <div class="style-diagram diagram-slider">
+              <svg class="d-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              <div class="d-cards">
+                <span class="d-card back"></span>
+                <span class="d-card mid"></span>
+                <span class="d-card front"></span>
+              </div>
+              <svg class="d-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
+            <span class="style-desc">Exibe um campo por vez, com navegação horizontal.</span>
+          </div>
+        </div>
+
+        <div class="product-styles is-single" data-panel="records">
+          <div class="records-preview">
+            <div class="rp-topbar">
+              <img src="assets/isotipo.svg" alt="" class="rp-logo">
+              <span class="mock-rect w1 is-active"></span>
+              <span class="mock-rect w1"></span>
+              <span class="mock-rect w1"></span>
+              <span class="rp-avatar"></span>
+            </div>
+            <div class="rp-toolbar">
+              <span class="rp-btn rp-btn-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg><span class="mock-rect"></span></span>
+              <span class="rp-btn rp-btn-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg><span class="mock-rect"></span></span>
+            </div>
+            <div class="rp-table">
+              <div class="rp-row rp-row-head">
+                <span class="mock-rect w1"></span>
+                <span class="mock-rect w2"></span>
+                <span class="mock-rect w1"></span>
+                <span class="mock-rect w1"></span>
+              </div>
+              <div class="rp-row" data-status="green" style="--i:0">
+                <span class="rp-person"><span class="rp-avatar-sm"></span><span class="mock-rect"></span></span>
+                <span class="mock-rect w2"></span>
+                <span class="rp-tag"></span>
+                <span class="rp-actions">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>
+                </span>
+              </div>
+              <div class="rp-row" data-status="gold" style="--i:1">
+                <span class="rp-person"><span class="rp-avatar-sm"></span><span class="mock-rect"></span></span>
+                <span class="mock-rect w2"></span>
+                <span class="rp-tag"></span>
+                <span class="rp-actions">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>
+                </span>
+              </div>
+              <div class="rp-row" data-status="purple" style="--i:2">
+                <span class="rp-person"><span class="rp-avatar-sm"></span><span class="mock-rect"></span></span>
+                <span class="mock-rect w2"></span>
+                <span class="rp-tag"></span>
+                <span class="rp-actions">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>
+                </span>
+              </div>
+              <div class="rp-row" data-status="green" style="--i:3">
+                <span class="rp-person"><span class="rp-avatar-sm"></span><span class="mock-rect"></span></span>
+                <span class="mock-rect w2"></span>
+                <span class="rp-tag"></span>
+                <span class="rp-actions">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-styles is-single" data-panel="pdf-model">
+          <div class="builder-preview">
+            <div class="bp-topbar">
+              <img src="assets/isotipo.svg" alt="" class="bp-logo">
+              <div class="bp-dots">
+                <span class="bp-dot"></span>
+                <span class="bp-dot is-active"></span>
+                <span class="bp-dot"></span>
+                <span class="bp-dot"></span>
+              </div>
+            </div>
+            <div class="bp-body">
+              <div class="bp-sidebar">
+                <div class="bp-chip" data-color="green">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+                  <span class="mock-rect"></span>
+                </div>
+                <div class="bp-chip" data-color="purple">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h13"/></svg>
+                  <span class="mock-rect"></span>
+                </div>
+                <div class="bp-chip" data-color="gold">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M5 12l7-7 7 7"/></svg>
+                  <span class="mock-rect"></span>
+                </div>
+              </div>
+              <div class="pm-canvas">
+                <div class="pm-toolbar">
+                  <span class="pm-select">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+                    <span class="mock-rect"></span>
+                  </span>
+                  <span class="pm-size">
+                    <span class="pm-size-value">Aa</span>
+                    <span class="pm-stepper">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                    </span>
+                  </span>
+                </div>
+                <div class="pm-table">
+                  <div class="pm-row" style="--i:0">
+                    <span class="mock-rect w1"></span>
+                    <span class="pm-cell is-filled">
+                      <span class="mock-flying-chip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+                        <span class="mock-rect"></span>
+                      </span>
+                    </span>
+                  </div>
+                  <div class="pm-row" style="--i:1">
+                    <span class="mock-rect w1"></span>
+                    <span class="pm-cell is-filled">
+                      <span class="mock-flying-chip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h13"/></svg>
+                        <span class="mock-rect"></span>
+                      </span>
+                    </span>
+                  </div>
+                  <div class="pm-row" style="--i:2">
+                    <span class="mock-rect w1"></span>
+                    <span class="pm-cell is-filled">
+                      <span class="mock-flying-chip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M5 12l7-7 7 7"/></svg>
+                        <span class="mock-rect"></span>
+                      </span>
+                    </span>
+                  </div>
+                  <div class="pm-row" style="--i:3">
+                    <span class="mock-rect w1"></span>
+                    <span class="pm-cell is-filled">
+                      <span class="mock-flying-chip">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+                        <span class="mock-rect"></span>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-nav">
+          <button type="button" class="product-nav-btn product-nav-prev" aria-label="Item anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button type="button" class="product-nav-btn product-nav-next" aria-label="Próximo item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="preview-modal preview-modal-blue" aria-hidden="true">
+    <div class="preview-modal-backdrop"></div>
+    <div class="preview-modal-panel" role="dialog" aria-modal="true">
+      <div class="preview-modal-head">
+        <strong class="preview-modal-title"></strong>
+        <button type="button" class="preview-modal-close" aria-label="Fechar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="preview-modal-body"></div>
+      <button type="button" class="preview-modal-next"></button>
+    </div>
+  </div>
 </section>
 
 <!-- Estático: poucos logos, não há necessidade de carrossel/marquee.
@@ -864,7 +1621,224 @@
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </div>
-  <div class="section-end-sentinel" aria-hidden="true"></div>
+</section>
+
+<!-- Teste A/B (mobile only): mesma seção Problemáticas, duas formas de abrir
+     cada item do menu no mobile — comparar accordion (abre no lugar) vs.
+     modal (abre em pop-up). Remover as duas cópias abaixo (e a regra CSS
+     .mobile-test-section) quando o teste terminar. -->
+<section class="sec-problematicas mobile-test-section is-inline-mobile" id="problematicas-test-a">
+
+  <div class="sec-heading sec-heading-center" data-reveal>
+    <span class="sec-kicker">🧪 Teste A — menu expande no lugar</span>
+  </div>
+
+  <div class="product-shell">
+  <div class="product-card" data-tabs-root data-mobile-inline data-reveal>
+    <span class="product-blob blob-a"></span>
+    <span class="product-blob blob-b"></span>
+
+    <div class="product-body">
+      <div class="product-features">
+        <button type="button" class="feature-row is-active" data-color="blue" data-tab="sinal" data-image="assets/problematicas-sinal.jpg" data-image-alt="Profissional de campo sem sinal de internet registrando dados pelo celular">
+          <span class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.9A7 7 0 1115.7 8h1.8a4.5 4.5 0 012.5 8.2"/><path d="M12 21v-8"/><path d="M8.5 16.5L12 13l3.5 3.5"/></svg>
+          </span>
+          <div class="feature-copy">
+            <strong>Sem sinal, seu sistema trava. O eForms não.</strong>
+          </div>
+        </button>
+        <button type="button" class="feature-row" data-color="purple" data-tab="prova" data-image="assets/problematicas-prova.jpg" data-image-alt="Profissional preenchendo registro com assinatura digital e geolocalização no tablet">
+          <span class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l4-1 11-11-3-3L4 17l-1 4z"/></svg>
+          </span>
+          <div class="feature-copy">
+            <strong>Registro sem prova não convence ninguém.</strong>
+          </div>
+        </button>
+        <button type="button" class="feature-row" data-color="gold" data-tab="padrao" data-image="assets/problematicas-padrao.jpg" data-image-alt="Equipe preenchendo formulário padronizado no tablet">
+          <span class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="2"/><path d="M15 4l5 5M20 4l-5 5" stroke-dasharray="2 2"/><path d="M13 20l2-6 6-2-11-4 3 12z"/></svg>
+          </span>
+          <div class="feature-copy">
+            <strong>Cada equipe no seu jeito? Isso não é padrão.</strong>
+          </div>
+        </button>
+        <button type="button" class="feature-row" data-color="green" data-tab="decisao" data-image="assets/problematicas-decisao.jpg" data-image-alt="Equipe analisando registros e relatórios juntos">
+          <span class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+          </span>
+          <div class="feature-copy">
+            <strong>Da coleta à decisão, quantos dias se perdem?</strong>
+          </div>
+        </button>
+        <button type="button" class="feature-row" data-color="red" data-tab="acesso" data-image="assets/problematicas-acesso.jpg" data-image-alt="Pessoa configurando acesso e permissões de usuário no notebook">
+          <span class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </span>
+          <div class="feature-copy">
+            <strong>Acesso sem controle é risco, não eficiência.</strong>
+          </div>
+        </button>
+      </div>
+
+      <div class="product-right">
+        <div class="product-styles is-single is-active" data-panel="sinal">
+          <div class="problem-panel">
+            <p>O eForms funciona 100% offline, mesmo em áreas sem cobertura. Cada formulário preenchido em campo fica salvo com segurança no dispositivo e sincroniza sozinho com a nuvem assim que o sinal voltar, sem perder um único registro.</p>
+          </div>
+        </div>
+        <div class="product-styles is-single" data-panel="prova">
+          <div class="problem-panel">
+            <p>Cada registro sai com assinatura digital nativa e geolocalização exata do momento da coleta: prova legal embutida, sem precisar de outra ferramenta. Quando a auditoria pedir comprovação, você já tem.</p>
+          </div>
+        </div>
+        <div class="product-styles is-single" data-panel="padrao">
+          <div class="problem-panel">
+            <p>Com o Construtor Dinâmico e os Estilos de Exibição padronizados, toda a equipe preenche formulários no mesmo fluxo, com a mesma estrutura, não importa quem está no campo. Menos retrabalho de padronização, mais dado confiável pra decisão.</p>
+          </div>
+        </div>
+        <div class="product-styles is-single" data-panel="decisao">
+          <div class="problem-panel">
+            <p>Os registros chegam centralizados no painel web em tempo real, com filtros inteligentes pra encontrar exatamente o que precisa. Exporte em PDF ou planilha na hora, sem esperar dias entre a coleta e o relatório.</p>
+          </div>
+        </div>
+        <div class="product-styles is-single" data-panel="acesso">
+          <div class="problem-panel">
+            <p>Organize usuários por categoria e setor (Administrativo, Operacional, Segurança e outros) com permissões específicas pra cada perfil. Você decide quem vê o quê, e pode ajustar isso a qualquer momento.</p>
+          </div>
+        </div>
+
+        <div class="product-nav">
+          <button type="button" class="product-nav-btn product-nav-prev" aria-label="Item anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button type="button" class="product-nav-btn product-nav-next" aria-label="Próximo item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-phone-slot" data-reveal>
+    <img src="assets/problematicas-sinal.jpg" alt="Profissional de campo sem sinal de internet registrando dados pelo celular" class="product-phone-slot-img">
+  </div>
+  </div>
+</section>
+
+<section class="sec-problematicas mobile-test-section" id="problematicas-test-b">
+
+  <div class="sec-heading sec-heading-center" data-reveal>
+    <span class="sec-kicker">🧪 Teste B — menu abre em pop-up</span>
+  </div>
+
+  <div class="product-shell">
+  <div class="product-card" data-tabs-root data-reveal>
+    <span class="product-blob blob-a"></span>
+    <span class="product-blob blob-b"></span>
+
+    <div class="product-body">
+      <div class="product-features">
+        <button type="button" class="feature-row is-active" data-color="blue" data-tab="sinal" data-image="assets/problematicas-sinal.jpg" data-image-alt="Profissional de campo sem sinal de internet registrando dados pelo celular">
+          <span class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.9A7 7 0 1115.7 8h1.8a4.5 4.5 0 012.5 8.2"/><path d="M12 21v-8"/><path d="M8.5 16.5L12 13l3.5 3.5"/></svg>
+          </span>
+          <div class="feature-copy">
+            <strong>Sem sinal, seu sistema trava. O eForms não.</strong>
+          </div>
+        </button>
+        <button type="button" class="feature-row" data-color="purple" data-tab="prova" data-image="assets/problematicas-prova.jpg" data-image-alt="Profissional preenchendo registro com assinatura digital e geolocalização no tablet">
+          <span class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l4-1 11-11-3-3L4 17l-1 4z"/></svg>
+          </span>
+          <div class="feature-copy">
+            <strong>Registro sem prova não convence ninguém.</strong>
+          </div>
+        </button>
+        <button type="button" class="feature-row" data-color="gold" data-tab="padrao" data-image="assets/problematicas-padrao.jpg" data-image-alt="Equipe preenchendo formulário padronizado no tablet">
+          <span class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="2"/><path d="M15 4l5 5M20 4l-5 5" stroke-dasharray="2 2"/><path d="M13 20l2-6 6-2-11-4 3 12z"/></svg>
+          </span>
+          <div class="feature-copy">
+            <strong>Cada equipe no seu jeito? Isso não é padrão.</strong>
+          </div>
+        </button>
+        <button type="button" class="feature-row" data-color="green" data-tab="decisao" data-image="assets/problematicas-decisao.jpg" data-image-alt="Equipe analisando registros e relatórios juntos">
+          <span class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+          </span>
+          <div class="feature-copy">
+            <strong>Da coleta à decisão, quantos dias se perdem?</strong>
+          </div>
+        </button>
+        <button type="button" class="feature-row" data-color="red" data-tab="acesso" data-image="assets/problematicas-acesso.jpg" data-image-alt="Pessoa configurando acesso e permissões de usuário no notebook">
+          <span class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </span>
+          <div class="feature-copy">
+            <strong>Acesso sem controle é risco, não eficiência.</strong>
+          </div>
+        </button>
+      </div>
+
+      <div class="product-right">
+        <div class="product-styles is-single is-active" data-panel="sinal">
+          <div class="problem-panel">
+            <p>O eForms funciona 100% offline, mesmo em áreas sem cobertura. Cada formulário preenchido em campo fica salvo com segurança no dispositivo e sincroniza sozinho com a nuvem assim que o sinal voltar, sem perder um único registro.</p>
+          </div>
+        </div>
+        <div class="product-styles is-single" data-panel="prova">
+          <div class="problem-panel">
+            <p>Cada registro sai com assinatura digital nativa e geolocalização exata do momento da coleta: prova legal embutida, sem precisar de outra ferramenta. Quando a auditoria pedir comprovação, você já tem.</p>
+          </div>
+        </div>
+        <div class="product-styles is-single" data-panel="padrao">
+          <div class="problem-panel">
+            <p>Com o Construtor Dinâmico e os Estilos de Exibição padronizados, toda a equipe preenche formulários no mesmo fluxo, com a mesma estrutura, não importa quem está no campo. Menos retrabalho de padronização, mais dado confiável pra decisão.</p>
+          </div>
+        </div>
+        <div class="product-styles is-single" data-panel="decisao">
+          <div class="problem-panel">
+            <p>Os registros chegam centralizados no painel web em tempo real, com filtros inteligentes pra encontrar exatamente o que precisa. Exporte em PDF ou planilha na hora, sem esperar dias entre a coleta e o relatório.</p>
+          </div>
+        </div>
+        <div class="product-styles is-single" data-panel="acesso">
+          <div class="problem-panel">
+            <p>Organize usuários por categoria e setor (Administrativo, Operacional, Segurança e outros) com permissões específicas pra cada perfil. Você decide quem vê o quê, e pode ajustar isso a qualquer momento.</p>
+          </div>
+        </div>
+
+        <div class="product-nav">
+          <button type="button" class="product-nav-btn product-nav-prev" aria-label="Item anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button type="button" class="product-nav-btn product-nav-next" aria-label="Próximo item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-phone-slot" data-reveal>
+    <img src="assets/problematicas-sinal.jpg" alt="Profissional de campo sem sinal de internet registrando dados pelo celular" class="product-phone-slot-img">
+  </div>
+  </div>
+
+  <div class="preview-modal preview-modal-pink" aria-hidden="true">
+    <div class="preview-modal-backdrop"></div>
+    <div class="preview-modal-panel" role="dialog" aria-modal="true">
+      <div class="preview-modal-head">
+        <strong class="preview-modal-title"></strong>
+        <button type="button" class="preview-modal-close" aria-label="Fechar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="preview-modal-body"></div>
+      <button type="button" class="preview-modal-next"></button>
+    </div>
+  </div>
 </section>
 
 <section class="sec-quotes">
