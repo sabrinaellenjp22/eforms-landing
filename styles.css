@@ -1119,7 +1119,6 @@ a{text-decoration:none;color:inherit;}
   display:flex;
   align-items:flex-start;
   gap:14px;
-  width:100%;
   padding:9px 10px;
   margin:0 -10px;
   border:none;
@@ -1791,7 +1790,7 @@ a{text-decoration:none;color:inherit;}
 @media (max-width: 1200px){
   .product{ padding:56px 40px 96px; }
   .sec-problematicas{ padding:56px 40px 96px; }
-  .product-card{ padding:44px 32px; max-width:none; }
+  .product-card{ padding:44px 32px; max-width:none; --card-pad-x:32px; }
   .product-body{ flex-direction:column; align-items:stretch; }
   .product-styles{ grid-template-columns:1fr 1fr; }
   .product-shell{ flex-direction:column; }
@@ -1808,13 +1807,14 @@ a{text-decoration:none;color:inherit;}
   .sec-problematicas .product-shell > .product-phone-slot{ display:none; }
   /* Distância do conteúdo até a borda do destaque (hover/active) padronizada
      em 16px nos dois eixos — antes era 9px/10px, inconsistente entre si. */
-  .feature-row{ padding:16px; margin:0 -16px; }
+  .feature-row{ padding:16px; margin:0 calc(16px - var(--card-pad-x)); }
   .feature-row:first-child{ padding-top:16px; }
   /* Preview abre "sanfona" logo abaixo do row clicado, dentro de .product-features.
-     Bleed de -16px nas laterais pra casar com o fundo arredondado do .feature-row
-     (que usa a mesma margem negativa) — sem isso o preview ficava mais estreito
-     que o menu, com margens visivelmente diferentes entre os dois. */
-  .product-features .product-styles.is-active{ margin:20px -16px 24px; overflow-y:auto; min-height:0; }
+     Mesmo bleed do .feature-row (16px de conteúdo até a borda do card, calculado
+     a partir do padding do card em cada breakpoint) — sem isso o preview ficava
+     com uma margem diferente da do menu, ou colada na borda quando o padding do
+     card encolhe no mobile pequeno. */
+  .product-features .product-styles.is-active{ margin:20px calc(16px - var(--card-pad-x)) 24px; overflow-y:auto; min-height:0; }
   /* Setas prev/next só fazem sentido no desktop, onde o preview fica fixo ao
      lado do menu — no accordion mobile cada item já abre com um toque direto
      na própria linha, então as setas ficam redundantes. */
@@ -1833,7 +1833,7 @@ a{text-decoration:none;color:inherit;}
   /* "Estilos de Exibição" continua em grade 2x2 mesmo em telas pequenas —
      os 4 cartões são curtos, não precisam de 1 coluna só. */
   .product-styles[data-panel="styles"]{ grid-template-columns:1fr 1fr; }
-  .product-card{ padding:32px 24px; }
+  .product-card{ padding:32px 24px; --card-pad-x:24px; }
   .product-phone-slot{ width:100%; height:auto; aspect-ratio:230/190; align-self:stretch; }
 }
 
