@@ -1806,11 +1806,15 @@ a{text-decoration:none;color:inherit;}
   /* A foto que troca por item some no mobile — o accordion abaixo já mostra
      o texto de cada item, sem precisar da imagem de diagnóstico junto. */
   .sec-problematicas .product-shell > .product-phone-slot{ display:none; }
+  /* Distância do conteúdo até a borda do destaque (hover/active) padronizada
+     em 16px nos dois eixos — antes era 9px/10px, inconsistente entre si. */
+  .feature-row{ padding:16px; margin:0 -16px; }
+  .feature-row:first-child{ padding-top:16px; }
   /* Preview abre "sanfona" logo abaixo do row clicado, dentro de .product-features.
-     Bleed de -10px nas laterais pra casar com o fundo arredondado do .feature-row
+     Bleed de -16px nas laterais pra casar com o fundo arredondado do .feature-row
      (que usa a mesma margem negativa) — sem isso o preview ficava mais estreito
      que o menu, com margens visivelmente diferentes entre os dois. */
-  .product-features .product-styles.is-active{ margin:20px -10px 24px; overflow-y:auto; min-height:0; }
+  .product-features .product-styles.is-active{ margin:20px -16px 24px; overflow-y:auto; min-height:0; }
   /* Setas prev/next só fazem sentido no desktop, onde o preview fica fixo ao
      lado do menu — no accordion mobile cada item já abre com um toque direto
      na própria linha, então as setas ficam redundantes. */
