@@ -1801,7 +1801,10 @@ a{text-decoration:none;color:inherit;}
   .product .product-shell{ gap:24px; }
   /* No mobile o script.js move o preview ativo pra dentro de .product-features,
      logo abaixo do row clicado — aqui só cuidamos do respiro dessa versão "inline". */
-  .product-right{ margin-top:0; }
+  /* Sem isso, o gap:40px do .product-body reservava espaço pro .product-right
+     mesmo vazio (só sobra painel inativo com display:none) — dava um respiro
+     enorme embaixo do preview quando o último item do accordion tava aberto. */
+  .product-right{ display:none; }
   /* A foto que troca por item some no mobile — o accordion abaixo já mostra
      o texto de cada item, sem precisar da imagem de diagnóstico junto. */
   .sec-problematicas .product-shell > .product-phone-slot{ display:none; }
@@ -1814,7 +1817,7 @@ a{text-decoration:none;color:inherit;}
      a partir do padding do card em cada breakpoint) — sem isso o preview ficava
      com uma margem diferente da do menu, ou colada na borda quando o padding do
      card encolhe no mobile pequeno. */
-  .product-features .product-styles.is-active{ margin:20px calc(16px - var(--card-pad-x)) 24px; overflow-y:auto; min-height:0; }
+  .product-features .product-styles.is-active{ margin:12px calc(16px - var(--card-pad-x)) 12px; overflow-y:auto; min-height:0; }
   /* Setas prev/next só fazem sentido no desktop, onde o preview fica fixo ao
      lado do menu — no accordion mobile cada item já abre com um toque direto
      na própria linha, então as setas ficam redundantes. */
