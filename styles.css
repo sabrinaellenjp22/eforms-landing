@@ -227,7 +227,7 @@ a{text-decoration:none;color:inherit;}
   white-space:nowrap;
   color:#fff;
 }
-.hero .text-accent{
+.hero .text-accent, .hero .text-accent-plain{
   color:#fff;
 }
 .text-accent.is-typing::after{
@@ -2447,6 +2447,7 @@ a{text-decoration:none;color:inherit;}
 }
 .sec-why .sec-subtitle{ max-width:780px; }
 .mobile-break{ display:none; }
+.hero-break-desktop{ display:inline; }
 .why-grid{
   margin-top:28px;
   display:grid;
@@ -3001,6 +3002,7 @@ a{text-decoration:none;color:inherit;}
      a altura do container). Nada de scroll/drag nativo. Avança sozinho e
      também pelos pontos. */
   .mobile-break{ display:inline; }
+  .hero-break-desktop{ display:none; }
   .features-carousel{ position:relative; }
   .features-bento{ display:block; position:relative; }
   /* Selector com ".features-carousel" na frente (em vez de só ".feature-tile")

@@ -23,30 +23,26 @@
 
 /* Efeito de "digitação" no título da hero — roda uma única vez ao carregar a página */
 (function () {
-  var els = document.querySelectorAll(".text-accent");
-  if (!els.length) return;
+  var el = document.querySelector(".text-accent");
+  if (!el) return;
   var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduced) return;
+  var text = el.textContent;
+  if (reduced || !text) return;
 
-  els.forEach(function (el) {
-    var text = el.textContent;
-    if (!text) return;
+  el.textContent = "";
+  el.classList.add("is-typing");
 
-    el.textContent = "";
-    el.classList.add("is-typing");
-
-    var i = 0;
-    function type() {
-      el.textContent = text.slice(0, i);
-      i++;
-      if (i <= text.length) {
-        setTimeout(type, 90);
-      } else {
-        el.classList.remove("is-typing");
-      }
+  var i = 0;
+  function type() {
+    el.textContent = text.slice(0, i);
+    i++;
+    if (i <= text.length) {
+      setTimeout(type, 90);
+    } else {
+      el.classList.remove("is-typing");
     }
-    type();
-  });
+  }
+  type();
 })();
 
 /* FAQ — accordion exclusivo: abrir uma pergunta fecha as outras para manter padrão de altura constante */
