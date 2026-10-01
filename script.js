@@ -252,7 +252,7 @@
   if (layers.length < 2) return;
 
   var steps = [
-    { color: "var(--blue)",   src: "assets/customize-preview.png" },
+    { color: "var(--blue)",   src: "assets/customize-preview.jpg" },
     { color: "var(--red)",    src: "assets/customize-preview-red.jpg" },
     { color: "var(--green)",  src: "assets/customize-preview-green.jpg" },
     { color: "var(--gold)",   src: "assets/customize-preview-gold.jpg" },
@@ -262,9 +262,6 @@
     { color: "var(--slate)",  src: "assets/customize-preview-slate.jpg" }
   ];
 
-  // Pré-carrega tudo uma vez, pra nenhuma troca depender de rede no meio do ciclo.
-  steps.forEach(function (s) { var im = new Image(); im.src = s.src; });
-
   var index = 0;
   var activeLayer = layers[0];
   var hiddenLayer = layers[1];
@@ -272,31 +269,50 @@
   // Estado inicial (azul) já é o que está nas duas camadas — só marca a cor da tag.
   kicker.style.background = steps[0].color;
 
-  window.setInterval(function () {
-    index = (index + 1) % steps.length;
-    var step = steps[index];
-    var next = hiddenLayer;
-    var prev = activeLayer;
+  function startCycle() {
+    // Pré-carrega o resto só agora, pra nenhuma troca depender de rede no
+    // meio do ciclo — mas sem baixar as 8 variações assim que a página abre,
+    // já que essa seção fica abaixo da dobra.
+    steps.forEach(function (s) { var im = new Image(); im.src = s.src; });
 
-    function swapIn() {
-      kicker.style.background = step.color;
-      next.classList.add("is-active");
-      prev.classList.remove("is-active");
-      activeLayer = next;
-      hiddenLayer = prev;
-    }
+    window.setInterval(function () {
+      index = (index + 1) % steps.length;
+      var step = steps[index];
+      var next = hiddenLayer;
+      var prev = activeLayer;
 
-    next.src = step.src;
-    // Espera o decode terminar antes de trocar — sem isso, em celulares mais
-    // fracos, a troca instantânea podia acontecer com o JPEG ainda decodificando
-    // (progressive scan), o que parecia a imagem "pulando"/cortando errado por
-    // uma fração de segundo.
-    if (next.decode) {
-      next.decode().then(swapIn).catch(swapIn);
-    } else {
-      swapIn();
-    }
-  }, 2800);
+      function swapIn() {
+        kicker.style.background = step.color;
+        next.classList.add("is-active");
+        prev.classList.remove("is-active");
+        activeLayer = next;
+        hiddenLayer = prev;
+      }
+
+      next.src = step.src;
+      // Espera o decode terminar antes de trocar — sem isso, em celulares mais
+      // fracos, a troca instantânea podia acontecer com o JPEG ainda decodificando
+      // (progressive scan), o que parecia a imagem "pulando"/cortando errado por
+      // uma fração de segundo.
+      if (next.decode) {
+        next.decode().then(swapIn).catch(swapIn);
+      } else {
+        swapIn();
+      }
+    }, 2800);
+  }
+
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) {
+        io.disconnect();
+        startCycle();
+      }
+    }, { rootMargin: "200px" });
+    io.observe(frame);
+  } else {
+    startCycle();
+  }
 })();
 
 /* Dock de ícones — aumenta o item sob o mouse e os vizinhos próximos
